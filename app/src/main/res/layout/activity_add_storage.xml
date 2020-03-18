@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorScreen"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddStorageActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/backarrow"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/ivBackArrowAddStorage"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Add Storage"
+        android:textColor="#344356"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"
+        android:id="@+id/tvAddStorage"
+        />
+
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Create new Storage to add related products in it "
+        android:textColor="#808A98"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_below="@+id/tvAddStorage"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvLoginDes"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_marginTop="60dp"
+        app:cardCornerRadius="15dp"
+        android:id="@+id/cvAddStorage"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLoginDes"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorWhite"
+        >
+        <RelativeLayout
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColorHint="@color/colorhintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:textStyle="bold"
+                android:hint="Storage Name"
+                android:textSize="20dp"
+                android:textColor="@color/colorBlack"
+                android:id="@+id/etStorageName"
+                />
+            <View
+                android:background="@color/colorScreen"
+                android:layout_below="@id/etStorageName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:id="@+id/vView"
+                />
+
+            <EditText
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:textColorHint="@color/colorhintText"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_below="@id/vView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:hint="Tagline(optional)"
+                android:textColor="@color/colorBlack"
+                android:id="@+id/etTagLine"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnAddStorage"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/cvAddStorage"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:text="Continue"
+        android:textSize="17dp"
+        />
+</RelativeLayout>
+</ScrollView>

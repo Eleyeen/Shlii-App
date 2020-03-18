@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorScreen"
+    tools:context=".Activities.CongratulationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="370dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/congratulationpic"
+        android:layout_alignParentBottom="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congratulations"
+        android:textSize="30dp"
+        android:textColor="#000"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/tvText1"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginRight="40dp"
+        android:layout_height="wrap_content"
+        android:text="On download Shli. before you head to the shops you will neww to invest a little time in setting up the App. This way you won't forget anything and you'll save time . It'll be worth it! "
+        android:textSize="20dp"
+        android:layout_below="@id/tvText1"
+        android:textColor="#808A98"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/tvTextDes"
+        />
+
+    <Button
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/button"
+        android:text="GET STARTED"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvTextDes"
+        />
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorScreen"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ProfileFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textSize="30dp"
+        android:textColor="#344356"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/tvProfile"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lorem ipsum dolor sit ament,  consectetur adipiscing"
+        android:textSize="18dp"
+        android:layout_below="@+id/tvProfile"
+        android:layout_marginRight="50dp"
+        android:textColor="#808A98"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/tvProfileDes"
+        android:textStyle="bold"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/civProfile"
+        android:layout_below="@id/tvProfileDes"
+        android:src="@drawable/profilepic"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/civProfile"
+        android:id="@+id/tvNameProfile"
+        android:text="Name"
+        android:textColor="#808A98"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNameProfile"
+        android:id="@+id/tvpProfileName"
+        android:text="Logan Wise"
+        android:textColor="#344356"
+        android:textSize="24dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvpProfileName"
+        android:id="@+id/tvEmailProfile"
+        android:text="Email"
+        android:textColor="#808A98"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEmailProfile"
+        android:id="@+id/tvpProfileEmail"
+        android:text="jparker@gmail.com"
+        android:textColor="#344356"
+        android:textSize="24dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvpProfileEmail"
+        android:id="@+id/tvPasswordProfile"
+        android:text="Password"
+        android:textColor="#808A98"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPasswordProfile"
+        android:id="@+id/tvProfilePassword"
+        android:text="********"
+        android:textColor="#344356"
+        android:textSize="24dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Change"
+        android:textColor="@color/colorBackground"
+        android:textSize="20dp"
+        android:layout_below="@id/tvPasswordProfile"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="4dp"
+        />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:layout_marginTop="30dp"
+        android:text="LogOut"
+        android:layout_below="@+id/tvProfilePassword"
+        android:textSize="17dp"
+        />
+
+</RelativeLayout>
+
+</ScrollView>

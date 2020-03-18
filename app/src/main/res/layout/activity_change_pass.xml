@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorScreen"
+    tools:context=".Activities.ChangePassActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tvChangePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Change Password"
+            android:textAllCaps="false"
+            android:textColor="#344356"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvChangePassDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:text="Enter The New Password"
+            android:layout_below="@id/tvChangePass"
+            android:textAllCaps="false"
+            android:textColor="#808A98"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="60dp"
+            app:cardCornerRadius="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/cvChangePassScreen"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvChangePass"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorWhite"
+            >
+            <RelativeLayout
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/colorhintText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13dp"
+                    android:textStyle="bold"
+                    android:hint="Enter Your Email"
+                    android:textSize="17dp"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/etEmailChangePass"
+                    />
+                <View
+                    android:background="@color/colorScreen"
+                    android:layout_below="@id/etEmailChangePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:id="@+id/vView"
+                    />
+
+                <EditText
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/colorhintText"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
+                    android:layout_below="@id/vView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13dp"
+                    android:hint="Enter a New Password"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/etNewPasswordChange"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/btnChangePassword"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/cvChangePassScreen"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button"
+            android:text="Save Password"
+            android:textSize="17dp"
+
+            />
+
+    </RelativeLayout>
+</ScrollView>

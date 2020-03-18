@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorScreen"
+    tools:context=".Activities.AllowLocationActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ivImageLocation"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/location"
+
+        />
+
+    <TextView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivImageLocation"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Find Out What  Locals saying Near Your location!"
+        android:textColor="#344356"
+        android:textSize="24dp"
+        android:id="@+id/tvLocationText"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLocationText"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:id="@+id/tvLocationDes"
+        android:text="Please allow app access to your location to find"
+        android:textColor="#808A98"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
+
+
+<Button
+    android:layout_width="280dp"
+    android:layout_height="50dp"
+    android:layout_below="@id/tvLocationDes"
+    android:background="@drawable/button"
+    android:text="Allow"
+    android:textSize="18dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="40dp"
+    android:id="@+id/btnAllow"
+    />
+
+
+    <TextView
+
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/btnAllow"
+        android:text="Don't Allow"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+</RelativeLayout>
+
+</ScrollView>
