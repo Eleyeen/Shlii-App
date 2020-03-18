@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +46,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     ImageView ivBackArrow;
 
     @BindView(R.id.spItemAddGrocery)
-    AutoCompleteTextView spItemAddGrocery;
+    AutoCompleteTextView dynamicSpinner;
     @BindView(R.id.etQtyAddGrocery)
     EditText etQtyAddGrocery;
 
@@ -50,8 +54,8 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     Button btnAddGrocery;
     private boolean valid = false;
     private String strItemAddGrocery, strQtyAddGrocery ,strUserID,strQuality;
-    AutoCompleteIngredientsAdapter autoCompleteIngredientsAdapter;
-    ArrayList<Datum> autoCompleteIngredientsArrayList =new ArrayList<>();
+    AutoCompleteIngredientsAdapter adapter;
+    ArrayList<Datum> listModels =new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -103,12 +107,10 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call<ItemRespones> call, Response<ItemRespones> response) {
                 if (response.isSuccessful()) {
-                    ItemRespones jobDataModels = response.body();
-                    autoCompleteIngredientsArrayList.addAll(response.body().getData());
-                    autoCompleteIngredientsAdapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, autoCompleteIngredientsArrayList);
-                    spItemAddGrocery.setAdapter(autoCompleteIngredientsAdapter);
+                    listModels.addAll(response.body().getData());
+                    adapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, listModels);
+                    dynamicSpinner.setAdapter(adapter);
 //                    alertDialog.dismiss();
-
                 }
 
             }
@@ -165,17 +167,17 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
 
         if (strItemAddGrocery.isEmpty() && strQtyAddGrocery.isEmpty()) {
-            spItemAddGrocery.setError("enter a Storage  ");
+//            spItemAddGrocery.setError("enter a Storage  ");
             etQtyAddGrocery.setError("enter a Tagline");
             valid = false;
         } else if (strItemAddGrocery.isEmpty()) {
-            spItemAddGrocery.setError("enter a Storage  ");
+//            spItemAddGrocery.setError("enter a Storage  ");
             valid = false;
         } else if (strQtyAddGrocery.isEmpty()) {
             etQtyAddGrocery.setError("enter a TagLine  ");
             valid = false;
         } else {
-            spItemAddGrocery.setError(null);
+//            spItemAddGrocery.setError(null);
             etQtyAddGrocery.setError(null);
         }
         return valid;

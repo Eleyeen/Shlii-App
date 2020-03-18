@@ -65,7 +65,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
 
         final DatumUnderSink item =  modelListP.get(position);
 
-        myViewHolder.tvItemName.setText(item.getItemId());
+        myViewHolder.tvItemName.setText(item.getMitemTitle());
         myViewHolder.tvQuantity.setText(item.getQuantity());
         viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getItemId());
 

@@ -126,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Change"
+        android:id="@+id/tvChange"
         android:textColor="@color/colorBackground"
         android:textSize="20dp"
         android:layout_below="@id/tvPasswordProfile"

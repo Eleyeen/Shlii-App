@@ -79,6 +79,7 @@
                     android:textStyle="bold"
                     android:paddingLeft="10dp"
                     tools:ignore="RtlSymmetry" />
+
                 <View
                     android:id="@+id/vView"
                     android:layout_width="match_parent"
@@ -87,6 +88,7 @@
                     android:background="@color/colorScreen" />
 
                 <EditText
+                    android:maxLength="5"
                     android:paddingLeft="10dp"
                     android:id="@+id/etQtyAddGrocery"
                     android:layout_width="match_parent"
@@ -94,7 +96,7 @@
                     android:layout_below="@id/vView"
                     android:hint="Qty"
                     android:imeOptions="actionDone"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorhintText"
                     android:textSize="20dp"

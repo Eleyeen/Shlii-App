@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -78,6 +79,18 @@ onBackPressed();
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
                 String userConfirmPassword = etConfirmPassword.getText().toString();
+//                SharedPreferences email = this.getSharedPreferences("email", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editoremail = email.edit();
+//                editoremail.putString("email", userEmail);
+//                editoremail.apply();
+//                SharedPreferences userName = this.getSharedPreferences("name", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editorName =userName.edit();
+//                editorName.putString("name", userFirstName+""+userLastName);
+//                editorName.apply();
+//                SharedPreferences pass = this.getSharedPreferences("password", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editorPass = pass.edit();
+//                editorPass.putString("Password", userEmail);
+//                editorPass.apply();
                 if (validateLogin( userFirstName, userLastName,userEmail,  userPassword ,userConfirmPassword)){
                     doLogin(userFirstName, userLastName,userEmail,  userPassword ,  userConfirmPassword);
                 }

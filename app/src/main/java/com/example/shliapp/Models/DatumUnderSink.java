@@ -7,6 +7,8 @@ public class DatumUnderSink {
 
     @SerializedName("created_at")
     private String mCreatedAt;
+    @SerializedName("item_title")
+    private String mitemTitle;
     @SerializedName("id")
     private String mId;
     @SerializedName("item_id")
@@ -20,6 +22,14 @@ public class DatumUnderSink {
 
     public String getCreatedAt() {
         return mCreatedAt;
+    }
+
+    public String getMitemTitle() {
+        return mitemTitle;
+    }
+
+    public void setMitemTitle(String mitemTitle) {
+        this.mitemTitle = mitemTitle;
     }
 
     public void setCreatedAt(String createdAt) {
