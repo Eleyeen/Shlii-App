@@ -69,7 +69,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
         rvShoppingList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvShoppingList.setHasFixedSize(true);
-//        getItem();
+        getItem();
 
     }
 
@@ -112,6 +112,5 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         });
 
     }
-
 
 }

@@ -8,7 +8,7 @@ public class DatumUnderSink {
     @SerializedName("created_at")
     private String mCreatedAt;
     @SerializedName("id")
-    private Long mId;
+    private String mId;
     @SerializedName("item_id")
     private String mItemId;
     @SerializedName("quantity")
@@ -26,11 +26,11 @@ public class DatumUnderSink {
         mCreatedAt = createdAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
     }
 

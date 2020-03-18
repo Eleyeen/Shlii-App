@@ -47,7 +47,7 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
         DatumStorage item = modelList.get(position);
 
         myViewHolder.tvStorageName.setText(item.getStorageName());
-//        myViewHolder.tvStorageItem.setText((Integer) item.getTagLine());
+        myViewHolder.tvStorageItem.setText(item.getTagLine());
 
         //        Glide.with(context).load(item.getImageStorage()).into(myViewHolder.civStorage);
 

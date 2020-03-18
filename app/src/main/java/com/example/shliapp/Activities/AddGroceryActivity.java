@@ -46,8 +46,6 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.etQtyAddGrocery)
     EditText etQtyAddGrocery;
 
-    @BindView(R.id.test)
-    TextView text;
     @BindView(R.id.btnAddGrocery)
     Button btnAddGrocery;
     private boolean valid = false;
@@ -80,7 +78,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.ivBackArrowUnderSink:
+            case R.id.ivBackArrowAddGrocery:
                 onBackPressed();
                 break;
 

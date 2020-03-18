@@ -14,10 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.UnderSinkActivity;
 import com.example.shliapp.Models.Datum;
+import com.example.shliapp.Models.DeleteModel;
+import com.example.shliapp.Models.GetStorageModel;
+import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.R;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.shliapp.Network.BaseNetworking.services;
 
 public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.MyviewHolder> {
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
@@ -62,14 +73,13 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
         myViewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "test delete layoutAdapter", Toast.LENGTH_SHORT).show();
+                DeleteItem(item.getId());
             }
         });
-        SharedPreferences sharedPreferences = context.getSharedPreferences("abc", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("deleteItem", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("id", item.getStartId());
+        editor.putString("deleteitemId", item.getId());
         editor.apply();
-
     }
 
 
@@ -96,6 +106,26 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
         }
     }
 
+    private void DeleteItem(String id ){
+
+        Call<DeleteModel> call = services.deleteItem(id);
+        call.enqueue(new Callback<DeleteModel>() {
+            @Override
+            public void onResponse(Call<DeleteModel> call, Response<DeleteModel> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DeleteModel> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 

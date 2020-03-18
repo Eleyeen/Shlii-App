@@ -109,15 +109,12 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
 
 
 
-        if (strStorageName.isEmpty() && strTagLine.isEmpty()) {
+        if (strStorageName.isEmpty() ) {
             etStorageName.setError("enter a Storage  ");
-            etTagLine.setError("enter a Tagline");
+//            etTagLine.setError("enter a Tagline");
             valid = false;
         } else if (strStorageName.isEmpty()) {
             etStorageName.setError("enter a Storage  ");
-            valid = false;
-        } else if (strTagLine.isEmpty()) {
-            etTagLine.setError("enter a TagLine  ");
             valid = false;
         } else {
             etStorageName.setError(null);
