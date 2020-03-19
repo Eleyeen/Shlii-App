@@ -37,7 +37,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     Button btnAddStorage;
 
     private boolean valid = false;
-    private String strStorageName, strTagLine,strTagLinee;
+    private String strStorageName, strTagLinee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,8 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddStorage() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddStorageModel> addStorage = services.getAddStoragePost(strStorageName, strTagLinee);
+        Call<AddStorageModel> addStorage = services.getAddStoragePost(strStorageName,
+                strTagLinee);
         addStorage.enqueue(new Callback<AddStorageModel>() {
             @Override
             public void onResponse(Call<AddStorageModel> call, Response<AddStorageModel> response) {
@@ -103,7 +104,6 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
         valid = true;
 
         strStorageName = etStorageName.getText().toString();
-        strTagLine = etTagLine.getText().toString();
          strTagLinee= GeneralUtills.getSharedPreferences(AddStorageActivity.this).getString("userId" , "");
 
 

@@ -145,7 +145,7 @@ onBackPressed();
                         Boolean statusLockedP= prefsd.edit().putBoolean("lockedP", true).commit();
                         prefsd.edit().putBoolean("lockedP", true).apply();
 
-                        Intent intent = new Intent(SignUpActivity.this, StartBottomActivity.class);
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
                         Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
 

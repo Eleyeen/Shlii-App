@@ -41,7 +41,6 @@ import static com.example.shliapp.Network.BaseNetworking.services;
 
 public class AddGroceryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String[] arrayLis;
     @BindView(R.id.ivBackArrowAddGrocery)
     ImageView ivBackArrow;
 
@@ -72,7 +71,6 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     private void initUI(){
         ButterKnife.bind(this);
         ivBackArrow.setOnClickListener(this);
-//        spItemAddGrocery.setOnItemClickListener((AdapterView.OnItemClickListener) this);
         btnAddGrocery.setOnClickListener(this);
         getItem();
     }

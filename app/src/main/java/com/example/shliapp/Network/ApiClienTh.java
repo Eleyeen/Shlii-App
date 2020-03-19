@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClienTh {
     ApiClienTh context = this;
-    public static final String BASE_URL = "http://www.dahawwalur.org/staging/ShliApp/public/api/";
+    public static final String BASE_URL = "https://shli.ie/api/";
     static Retrofit retrofit = null;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
