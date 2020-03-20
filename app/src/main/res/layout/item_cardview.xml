@@ -22,6 +22,7 @@
             android:layout_height="70dp"
             android:orientation="horizontal">
             <TextView
+                android:textStyle="bold"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -38,6 +39,7 @@
                 android:background="@android:color/holo_red_dark"
                 android:textColor="@android:color/white"
                 android:text="Delete"
+                android:textStyle="bold"
                 android:id="@+id/tvDelete"
                 android:onClick="deleteOnClick"/>
         </LinearLayout>
