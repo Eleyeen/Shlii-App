@@ -8,6 +8,7 @@ import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.GetStorageModel;
 import com.example.shliapp.Models.ItemRespones;
 import com.example.shliapp.Models.LoginResponse;
+import com.example.shliapp.Models.ProfileModels.GetProfileModel;
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 
@@ -78,11 +79,15 @@ public interface ApiInterface {
     Call<DeleteModel> deleteItem(
             @Path("id") String groupId
     );
+
     @GET("getStorages/{id}")
     Call<GetStorageModel> getStorage(@Path("id") String groupId);
 
     @GET("getGrocerry/{id}")
     Call<GetGroceryModel> getAddGrocery(@Path("id") String groupId);
+
+    @GET("getProfile/{id}")
+    Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
 
 }

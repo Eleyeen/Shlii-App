@@ -18,10 +18,25 @@ import androidx.fragment.app.Fragment;
 import com.example.shliapp.Activities.ForGotPasswordActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Activities.HomeScreenActivity;
+import com.example.shliapp.Activities.UnderSinkActivity;
+import com.example.shliapp.Adapter.UnderSinkAdapterItem;
+import com.example.shliapp.Models.DatumUnderSink;
+import com.example.shliapp.Models.GetGroceryModel;
+import com.example.shliapp.Models.ProfileModels.Datum;
+import com.example.shliapp.Models.ProfileModels.GetProfileModel;
+import com.example.shliapp.Network.ApiClienTh;
+import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.shliapp.Network.BaseNetworking.services;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     View view;
@@ -36,7 +51,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     TextView tvPassword;
     @BindView(R.id.btnLogout)
     Button btnLogout;
+    ArrayList<Datum> itemModels;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,13 +67,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initUI() {
         ButterKnife.bind(this, view);
         btnLogout.setOnClickListener(this);
         tvChangePass.setOnClickListener(this);
-//        Toast.makeText(getContext(), "" + b, Toast.LENGTH_SHORT).show();
-//        tvEmail.setText(strUserEmail);
-//        tvName.setText(strUserNameFirst + "" + strUserNameLast);
+        itemModels= new ArrayList<Datum>();
+
+        getProfile();
     }
 
 
@@ -72,6 +91,45 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void getProfile() {
+        services = ApiClienTh.getApiClient().create(ApiInterface.class);
+
+        String strUserID= GeneralUtills.getSharedPreferences(getContext()).getString("userId" , "");
+
+
+        Call<GetProfileModel> call = services.getProfile(strUserID);
+
+        call.enqueue(new Callback<GetProfileModel>() {
+            @Override
+            public void onResponse(Call<GetProfileModel> call, Response<GetProfileModel> response) {
+                if (response.isSuccessful()) {
+
+                    itemModels.addAll(response.body().getData());
+                   String email= response.body().getData().get(0).getEmail();
+                   String firstName= response.body().getData().get(0).getFirstName();
+                   String lastName= response.body().getData().get(0).getLastName();
+                    Toast.makeText(getContext(),email+":"+firstName+""+lastName , Toast.LENGTH_SHORT).show();
+
+                   tvEmail.setText(email);
+                   tvName.setText(firstName +""+lastName);
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GetProfileModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void LOGOUT() {

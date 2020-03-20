@@ -15,7 +15,8 @@
         android:layout_margin="10dp"
 
         app:mode="normal"
-        app:dragEdge="right">
+        app:dragEdge="right"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,6 +31,24 @@
                 android:textColor="@android:color/white"
                 android:text="Delete"
                 android:id="@+id/tvDelete"
+                android:onClick="deleteOnClick"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+
+            android:orientation="horizontal"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@android:color/holo_red_dark"
+                android:textColor="@android:color/white"
+                android:text="Delete"
+                android:id="@+id/tvaddShop"
                 android:onClick="deleteOnClick"/>
         </LinearLayout>
 

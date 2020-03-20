@@ -9,11 +9,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="280dp"
+        android:padding="15dp"
+        android:paddingBottom="10dp"
         android:layout_height="200dp"
         android:background="@color/colorWhite"
         app:cardCornerRadius="20dp"
         >
         <RelativeLayout
+            android:padding="15dp"
             android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -27,12 +30,13 @@
                 android:textStyle="bold"
                 android:text="Add items to ShopList"
                 android:textColor="@color/colorBackground"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:id="@+id/tvText"
+                android:gravity="center"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_below="@+id/tvText"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -40,28 +44,26 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:text="Broccoli"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorText"
+                    android:textSize="16dp"
                     android:gravity="center"
                     tools:ignore="Suspicious0dp" />
 
 
-                <TextView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:text="-"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    tools:ignore="Suspicious0dp" />
+                    android:src="@mipmap/minus"
+                    android:background="@color/colorplusbackground"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
@@ -70,29 +72,28 @@
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:text="5"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="20dp"
+
+                    android:textColor="@color/colorText"
+                    android:textSize="15dp"
                     android:gravity="center"
                     tools:ignore="Suspicious0dp" />
 
-                <TextView
+                <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:text="+"
-                    android:textColor="@color/colorBackground"
-                    android:textSize="20dp"
                     android:gravity="center"
-                    tools:ignore="Suspicious0dp" />
+                    android:src="@mipmap/plus"
+                    android:background="@color/colorplusbackground"
+                    />
 
 
             </LinearLayout>
 
             <Button
                 android:layout_width="200dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/button"
                 android:layout_alignParentBottom="true"
