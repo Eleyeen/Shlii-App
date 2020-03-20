@@ -124,7 +124,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddGrocery() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddGrocery> addGrocery = services.getAddGroceryPost(strItemAddGrocery,strUserID, strQtyAddGrocery);
+        Call<AddGrocery> addGrocery = services.AddGroceryPost(strItemAddGrocery,strUserID, strQtyAddGrocery);
         addGrocery.enqueue(new Callback<AddGrocery>() {
             @Override
             public void onResponse(Call<AddGrocery> call, Response<AddGrocery> response) {

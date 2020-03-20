@@ -44,7 +44,7 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_under_sink);
-   initUI();
+        initUI();
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initUI(){
@@ -63,18 +63,13 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
 
         String strUserID= GeneralUtills.getSharedPreferences(UnderSinkActivity.this).getString("userId" , "");
-
-
         Call<GetGroceryModel> call = services.getAddGrocery(strUserID);
-
         call.enqueue(new Callback<GetGroceryModel>() {
             @Override
             public void onResponse(Call<GetGroceryModel> call, Response<GetGroceryModel> response) {
                 if (response.isSuccessful()) {
 
                     itemModels.addAll(response.body().getData());
-
-
                     adapter = new UnderSinkAdapterItem(UnderSinkActivity.this,  itemModels);
                     rvUnderSink.setAdapter(adapter);
 
@@ -88,7 +83,6 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
 
             }
         });
-
     }
 
 

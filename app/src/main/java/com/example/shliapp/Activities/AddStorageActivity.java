@@ -71,7 +71,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddStorage() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddStorageModel> addStorage = services.getAddStoragePost(strStorageName,
+        Call<AddStorageModel> addStorage = services.AddStoragePost(strStorageName,
                 strTagLinee);
         addStorage.enqueue(new Callback<AddStorageModel>() {
             @Override

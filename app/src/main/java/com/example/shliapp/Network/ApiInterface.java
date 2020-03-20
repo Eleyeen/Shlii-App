@@ -9,6 +9,8 @@ import com.example.shliapp.Models.GetStorageModel;
 import com.example.shliapp.Models.ItemRespones;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
+import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingListModel;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 
@@ -59,13 +61,19 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("AddStorage")
-    Call<AddStorageModel> getAddStoragePost(
+    Call<AddStorageModel> AddStoragePost(
             @Field("storage_name") String strStorageName,
             @Field("user_id") String userID);
 
     @FormUrlEncoded
     @POST("AddGrocery")
-    Call<AddGrocery> getAddGroceryPost(
+    Call<AddGrocery> AddGroceryPost(
+            @Field("item_id") String item_id,
+            @Field("user_id") String user_id,
+            @Field("quantity") String quantity);
+    @FormUrlEncoded
+    @POST("AddShopping")
+    Call<AddShopingListModel> AddShopListPost(
             @Field("item_id") String item_id,
             @Field("user_id") String user_id,
             @Field("quantity") String quantity);
@@ -89,5 +97,7 @@ public interface ApiInterface {
     @GET("getProfile/{id}")
     Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
+    @GET("shopping/{id}")
+    Call<GetShoppingList> getShoppingList(@Path("id") String groupId);
 
 }
