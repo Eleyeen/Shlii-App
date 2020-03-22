@@ -17,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shliapp.Activities.ChooseStoreActivity;
+import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ProductItemAdapter;
+import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Models.ItemRespones;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -88,16 +91,17 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
+        String strUserID= GeneralUtills.getSharedPreferences(getContext()).getString("userId" , "");
 
 
-        Call<ItemRespones> call = services.getItem();
+        Call<GetShoppingList> call = services.getShoppingList(strUserID);
 
-        call.enqueue(new Callback<ItemRespones>() {
+        call.enqueue(new Callback<GetShoppingList>() {
             @Override
-            public void onResponse(Call<ItemRespones> call, Response<ItemRespones> response) {
+            public void onResponse(Call<GetShoppingList> call, Response<GetShoppingList> response) {
                 if (response.isSuccessful()) {
-                    ItemRespones jobDataModels = response.body();
-                    ProductItemAdapter adapter = new ProductItemAdapter(getActivity(), jobDataModels.getData());
+                    GetShoppingList jobDataModels = response.body();
+                    ShopListAdapter adapter = new ShopListAdapter(getActivity(), jobDataModels.getData());
                     rvShoppingList.setAdapter(adapter);
 
 
@@ -106,7 +110,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<ItemRespones> call, Throwable t) {
+            public void onFailure(Call<GetShoppingList> call, Throwable t) {
 
             }
         });

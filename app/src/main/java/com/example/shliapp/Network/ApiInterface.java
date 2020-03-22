@@ -74,8 +74,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("AddShopping")
     Call<AddShopingListModel> AddShopListPost(
-            @Field("item_id") String item_id,
             @Field("user_id") String user_id,
+            @Field("item_title") String item_title,
             @Field("quantity") String quantity);
 
 

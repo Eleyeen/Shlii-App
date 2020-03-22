@@ -59,7 +59,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="0dp"
-                    android:id="@+id/ivPlusShopList"
+                    android:id="@+id/ivMinusShopList"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -74,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:text="5"
-
+                    android:text="0"
+                    android:id="@+id/tvValue"
                     android:textColor="@color/colorText"
                     android:textSize="15dp"
                     android:gravity="center"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:id="@+id/ivMinusShopList"
+                    android:id="@+id/ivPlusShopList"
                     android:src="@mipmap/plus"
                     android:background="@color/colorplusbackground"
                     />
