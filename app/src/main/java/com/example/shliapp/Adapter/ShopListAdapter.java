@@ -27,7 +27,7 @@ import static com.example.shliapp.Network.BaseNetworking.services;
 
 public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.MyviewHolder>{
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
-
+    View view;
     private Context context;
     private List<Datum> modelListP ;
     private List<Datum>  listItemsP;
@@ -42,8 +42,10 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     @NonNull
     @Override
     public ShopListAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.shop_cardview, parent , false) ;
+        
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_cardview, parent , false) ;
+
+
         return new ShopListAdapter.MyviewHolder(view);    }
 
 
