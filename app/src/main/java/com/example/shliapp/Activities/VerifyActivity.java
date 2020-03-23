@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
     Button btnVerify;
     private String strVerifycode;
     String strVerifyCode;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,15 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
         et_num2.addTextChangedListener(genraltextWatcher);
         et_num3.addTextChangedListener(genraltextWatcher);
         et_num4.addTextChangedListener(genraltextWatcher);
-       }
+        progressDialog  = new ProgressDialog(VerifyActivity.this);
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apicallVerification(String strForgotEmail) {
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Wait");
+        progressDialog.show();
 
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
         Call<VerifyResponseModel> userVerify = services.userVerification(strVerifycode,strForgotEmail);
@@ -69,6 +76,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         Toast.makeText(VerifyActivity.this, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     } catch (Exception e) {
 
                     }
@@ -83,6 +91,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
             public void onFailure(Call<VerifyResponseModel> call, Throwable t) {
 //                alertDialog.dismiss();
                 Toast.makeText(VerifyActivity.this,"OnFailure"+ t.getMessage(), Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             }
         });
     }
@@ -103,6 +112,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
 
                 if (strVerifycode.equals("")) {
                     Toast.makeText(VerifyActivity.this, "Please enter a valid code", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
                 } else {
                     Bundle bundle = getIntent().getExtras();
                     if(bundle!=null){

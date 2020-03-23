@@ -21,26 +21,12 @@
         android:textStyle="bold"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lorem ipsum dolor sit ament,  consectetur adipiscing"
-        android:textSize="18dp"
-        android:layout_below="@+id/tvProfile"
-        android:layout_marginRight="50dp"
-        android:textColor="#808A98"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/tvProfileDes"
-        android:textStyle="bold"
-        />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/civProfile"
-        android:layout_below="@id/tvProfileDes"
-        android:src="@drawable/profilepic"
+        android:layout_below="@id/tvProfile"
+        android:src="@drawable/profile"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         />

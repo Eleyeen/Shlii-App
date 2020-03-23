@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.btnChangePassword)
     Button btnChangePassword;
 
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,8 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
     private void initUI(){
         ButterKnife.bind(this);
         btnChangePassword.setOnClickListener(this);
+        progressDialog  = new ProgressDialog(ChangePassActivity.this);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -50,6 +54,9 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()){
             case R.id.btnChangePassword:
                 ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
 
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
@@ -64,12 +71,12 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
 
     private boolean validateLogin(String userEmail, String userPassword) {
 
-        if (userEmail == null || userEmail.trim().length() == 0) {
+        if (userEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
             Toast.makeText(this, "User Email is Required", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (userPassword == null || userPassword.trim().length() == 0) {
+        if (userPassword.isEmpty() || userPassword.length() < 4 || userPassword.length() > 10) {
             Toast.makeText(this, "User Password is Required", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -86,6 +93,7 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<ChangePasswordModel> call, Response<ChangePasswordModel> response) {
                 if (response.body() == null) {
                     Toast.makeText(ChangePassActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(ChangePassActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -93,12 +101,14 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
                     startActivity(intent);
                 } else {
                     Toast.makeText(ChangePassActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<ChangePasswordModel> call, Throwable t) {
                 Toast.makeText(ChangePassActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             }
         });
     }

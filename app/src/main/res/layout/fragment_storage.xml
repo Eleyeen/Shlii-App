@@ -19,19 +19,6 @@
         android:textStyle="bold"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lorem ipsum dolor sit ament,  consectetur adipiscing"
-        android:textSize="18dp"
-        android:layout_below="@+id/tvStorage"
-        android:layout_marginRight="50dp"
-        android:textColor="#808A98"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/tvStorageDes"
-        android:textStyle="bold"
-        />
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
@@ -45,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rvStorage"
-        android:layout_below="@id/tvStorageDes"
+        android:layout_below="@id/tvStorage"
         />
 
 </RelativeLayout>

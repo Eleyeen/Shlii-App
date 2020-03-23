@@ -1,5 +1,6 @@
 package com.example.shliapp.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText etPassword;
     @BindView(R.id.btnContinueLogin)
     Button btnContinue;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ivBackArrow.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
+        progressDialog  = new ProgressDialog(LoginActivity.this);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -62,6 +65,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tvForGotPassword:
                 Intent intent12 = new Intent(LoginActivity.this, ForGotPasswordActivity.class);
                 startActivity(intent12);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
+
 
                 break;
             case R.id.ivBackArrow:
@@ -69,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnContinueLogin:
                 ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
 
                 String userEmail = etEmail.getText().toString();
                 String userPassword = etPassword.getText().toString();
@@ -91,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("enter a valid email address");
+            progressDialog.dismiss();
             valid = false;
         } else {
             etEmail.setError(null);
@@ -98,6 +109,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             etPassword.setError("between 4 and 10 alphanumeric characters");
+            progressDialog.dismiss();
+
             valid = false;
         } else {
             etPassword.setError(null);
@@ -135,12 +148,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     } else {
                         Toast.makeText(LoginActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
                     }
 
                 } else {
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
-
+                    progressDialog.dismiss();
                 }
             }
 
@@ -150,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d("response", "error " + t.getMessage());
 
                 Toast.makeText(LoginActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                progressDialog.dismiss();
             }
 
 

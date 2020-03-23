@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
 
     @BindView(R.id.btnSendCode)
     Button btnSendCode;
+    ProgressDialog progressDialog;
 
     private boolean valid = false;
     private String strEmail;
@@ -43,6 +45,7 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
     private void initUI() {
         ButterKnife.bind(this);
         btnSendCode.setOnClickListener(this);
+        progressDialog  = new ProgressDialog(ForGotPasswordActivity.this);
 
     }
 
@@ -62,6 +65,10 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiCallForgotPassword() {
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Wait");
+        progressDialog.show();
+
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
         Call<ForgotPasswordModel> userLogin = services.resetPassword(strEmail);
         userLogin.enqueue(new Callback<ForgotPasswordModel>() {
@@ -81,6 +88,7 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
 
                 } else {
                     Toast.makeText(ForGotPasswordActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -88,6 +96,7 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
             public void onFailure(Call<ForgotPasswordModel> call, Throwable t) {
                 Log.d("response","error "+t.getMessage());
                 Toast.makeText(ForGotPasswordActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
         });
     }
@@ -100,9 +109,9 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
 
 
         GeneralUtills.putStringValueInEditor(ForGotPasswordActivity.this,"forgot_email",strEmail);
-
-        if (strEmail.isEmpty()) {
+        if (strEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
             etEmail.setError("enter a valid email address");
+            progressDialog.dismiss();
             valid = false;
         } else {
             etEmail.setError(null);

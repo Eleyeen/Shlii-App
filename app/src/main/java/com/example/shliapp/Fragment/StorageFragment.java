@@ -1,5 +1,6 @@
 package com.example.shliapp.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 
 import com.example.shliapp.Activities.AddStorageActivity;
 import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.LoginActivity;
 import com.example.shliapp.Activities.UnderSinkActivity;
 import com.example.shliapp.Adapter.StorageAdapter;
 
@@ -47,7 +49,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     RecyclerView rvShoppingList;
 
     private ArrayList<DatumStorage> itemLists;
-
+    ProgressDialog progressDialog;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,10 +67,12 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initUI(){
+        progressDialog  = new ProgressDialog(getContext());
         ivPlusIcon.setOnClickListener(this);
         rvShoppingList.setLayoutManager(new GridLayoutManager(getActivity(),2));
         rvShoppingList.setHasFixedSize(true);
         itemLists = new ArrayList<DatumStorage>() ;
+
         getStorage();
 
     }

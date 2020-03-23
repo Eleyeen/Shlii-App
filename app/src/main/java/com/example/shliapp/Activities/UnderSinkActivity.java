@@ -117,4 +117,11 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
             adapter.restoreStates(savedInstanceState);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(UnderSinkActivity.this,StartBottomActivity.class);
+        startActivity(intent);
+    }
 }

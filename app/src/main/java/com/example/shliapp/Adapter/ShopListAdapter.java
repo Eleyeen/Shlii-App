@@ -42,7 +42,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     @NonNull
     @Override
     public ShopListAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        
+
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_cardview, parent , false) ;
 
 

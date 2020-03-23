@@ -181,4 +181,12 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
         return valid;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(AddGroceryActivity.this,UnderSinkActivity.class);
+        startActivity(intent);
+    }
 }

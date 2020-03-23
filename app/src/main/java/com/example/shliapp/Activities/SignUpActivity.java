@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,8 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
 
     @BindView(R.id.btnContinueSignUp)
     Button btnContinue;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,8 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         ivBackArrow.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
         tvSkip.setOnClickListener(this);
+        progressDialog  = new ProgressDialog(SignUpActivity.this);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -73,6 +78,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
 onBackPressed();
                 break;
             case R.id.btnContinueSignUp:
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
 
                 String userFirstName = etFirstName.getText().toString();
                 String userLastName = etLastName.getText().toString();
@@ -99,28 +107,52 @@ onBackPressed();
             case    R.id.tvSkip:
                 Intent intent = new Intent(SignUpActivity.this,StartBottomActivity.class);
                 startActivity(intent);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
 
                 break;
         }
     }
     private boolean validateLogin(String userFirstName,String userLastName,String userEmail, String userPassword , String userConfirmPassword) {
+        boolean valid = true;
 
-        if (userEmail == null || userEmail.trim().length() == 0) {
-            Toast.makeText(this, "User Email is Required", Toast.LENGTH_SHORT).show();
-            return false;
+
+        if (userEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+            etEmail.setError("enter a valid email address");
+            progressDialog.dismiss();
+            valid = false;
+        } else {
+            etEmail.setError(null);
         }
 
-        if (userPassword == null || userPassword.trim().length() == 0) {
-            Toast.makeText(this, "User Password is Required", Toast.LENGTH_SHORT).show();
-            return false;
+        if (userPassword.isEmpty() || userPassword.length() < 4 || userPassword.length() > 10) {
+            etPassword.setError("between 4 and 10 alphanumeric characters");
+            progressDialog.dismiss();
+
+            valid = false;
+        } else {
+            etPassword.setError(null);
         }
-        if (userConfirmPassword == null || userConfirmPassword.trim().length() == 0) {
-            Toast.makeText(this, "User  Confirm Password is Required", Toast.LENGTH_SHORT).show();
-            return false;
-        }if (userFirstName == null || userFirstName.trim().length() == 0) {
+
+        if (userConfirmPassword.isEmpty() || userConfirmPassword.length() < 4 || userConfirmPassword.length() > 10) {
+            etPassword.setError("between 4 and 10 alphanumeric characters");
+            progressDialog.dismiss();
+
+            valid = false;
+        } else {
+            etPassword.setError(null);
+        }
+
+
+
+        if (userFirstName == null || userFirstName.trim().length() == 0) {
             Toast.makeText(this, "User First Name is Required", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             return false;
-        }if (userLastName == null || userLastName.trim().length() == 0) {
+        }
+        if (userLastName == null || userLastName.trim().length() == 0) {
+            progressDialog.dismiss();
             Toast.makeText(this, "User Last Name is Required", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -151,12 +183,12 @@ onBackPressed();
 
                     } else {
                         Toast.makeText(SignUpActivity.this, "Empty", Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
                     }
 
                 } else {
                     Toast.makeText(SignUpActivity.this, "Error", Toast.LENGTH_SHORT).show();
-
+                    progressDialog.dismiss();
                 }
             }
 
@@ -166,7 +198,7 @@ onBackPressed();
                 Log.d("response","error "+t.getMessage());
 
                 Toast.makeText(SignUpActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                progressDialog.dismiss();
             }
 
 
