@@ -183,6 +183,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                         context.startActivity(new Intent(context, UnderSinkActivity.class));
+                        _counter = 0;
 
                     } else {
                         Toast.makeText(context, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();

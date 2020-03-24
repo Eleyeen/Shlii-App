@@ -88,7 +88,7 @@
                     android:background="@color/colorScreen" />
 
                 <EditText
-                    android:maxLength="5"
+                    android:maxLength="3"
                     android:paddingLeft="10dp"
                     android:id="@+id/etQtyAddGrocery"
                     android:layout_width="match_parent"

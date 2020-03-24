@@ -43,8 +43,6 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.tvGateWay)
     TextView tvGateWay;
 
-    @BindView(R.id.ivPlusIconShopping)
-    ImageView ivPlusIcon;
     @BindView(R.id.rvShoppingList)
     RecyclerView rvShoppingList;
     ApiInterface services;

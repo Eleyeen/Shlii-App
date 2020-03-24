@@ -111,7 +111,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                    String email= response.body().getData().get(0).getEmail();
                    String firstName= response.body().getData().get(0).getFirstName();
                    String lastName= response.body().getData().get(0).getLastName();
-                    Toast.makeText(getContext(),email+":"+firstName+""+lastName , Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),email+":"+firstName+""+lastName , Toast.LENGTH_SHORT).show();
 
                    tvEmail.setText(email);
                    tvName.setText(firstName +""+lastName);
