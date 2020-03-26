@@ -20,6 +20,7 @@
         android:id="@+id/ivBackArrow"
         />
     <TextView
+        android:fontFamily="@font/roboto_bolditalic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -42,6 +43,7 @@
         android:gravity="center"
         android:layout_below="@+id/tvLogin"
         android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
         android:layout_marginTop="10dp"
         android:id="@+id/tvLoginDes"
         />
@@ -66,6 +68,7 @@
             <EditText
 
                 android:imeOptions="actionNext"
+                android:fontFamily="@font/roboto"
                 android:inputType="text"
                 android:textColorHint="@color/colorhintText"
                 android:layout_width="match_parent"
@@ -86,6 +89,7 @@
                 />
 
             <EditText
+                android:fontFamily="@font/roboto"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:textColorHint="@color/colorhintText"
@@ -104,6 +108,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:layout_centerHorizontal="true"
         android:text="Forgot Password"
         android:textColor="#808A98"
@@ -120,6 +125,7 @@
 
     <Button
         android:id="@+id/btnContinueLogin"
+        android:fontFamily="@font/roboto"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/tvForGotPassword"

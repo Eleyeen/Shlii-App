@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:padding="15dp"
     android:background="@color/colorWhite"
     android:layout_height="wrap_content">
 
     <TextView
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="find Foods"
         android:textColor="@color/colorBlack"
+        android:fontFamily="@font/roboto_bolditalic"
         android:textSize="20dp"
         android:id="@+id/tvFindFood"
-        android:textStyle="bold"
-        tools:ignore="Suspicious0dp" />
+        android:textStyle="bold"/>
 
 
     <TextView
+        android:paddingLeft="15dp"
         android:id="@+id/tvGateWay"
         android:layout_below="@id/tvFindFood"
+        android:fontFamily="@font/roboto_bolditalic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5766 Mario Gateway"
         android:textColor="#808A98"
         android:textSize="18dp"
-        android:textStyle="bold"
-        tools:ignore="Suspicious0dp" />
+        android:textStyle="bold"/>
 
 
     <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:src="@mipmap/findpath"
         android:padding="10dp"
+        android:id="@+id/iconChooseStores"
+
         />
     <View
-        android:layout_below="@+id/tvQuantity"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/iconChooseStores"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#E2EBF6"

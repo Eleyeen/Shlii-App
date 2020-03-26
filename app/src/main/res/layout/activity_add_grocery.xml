@@ -22,6 +22,7 @@
 
         <TextView
             android:id="@+id/tvAddGrocery"
+            android:fontFamily="@font/roboto_bolditalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -36,6 +37,7 @@
             android:id="@+id/tvLoginDes"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:layout_below="@+id/tvAddGrocery"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -69,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto"
                     android:completionThreshold="1"
                     android:textColorHint="@color/colorhintText"
 
@@ -91,6 +94,7 @@
                     android:maxLength="3"
                     android:paddingLeft="10dp"
                     android:id="@+id/etQtyAddGrocery"
+                    android:fontFamily="@font/roboto_regular"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_below="@id/vView"
@@ -105,6 +109,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:fontFamily="@font/roboto"
             android:id="@+id/btnAddGrocery"
             android:layout_width="300dp"
             android:layout_height="50dp"

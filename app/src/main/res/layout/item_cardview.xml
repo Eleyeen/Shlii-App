@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:background="#FFD600"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:textColor="@android:color/white"
                 android:text="Add to Shop"
                 android:id="@+id/tvaddShop"
@@ -39,6 +40,7 @@
                 android:background="@android:color/holo_red_dark"
                 android:textColor="@android:color/white"
                 android:text="Delete"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:textStyle="bold"
                 android:id="@+id/tvDelete"
                 android:onClick="deleteOnClick"/>
@@ -54,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:layout_width="2dp"
                     android:layout_height="2dp"
                     android:id="@+id/startId"
@@ -66,6 +69,7 @@
                 android:text="Broccoli"
                 android:textColor="@color/colorBlack"
                 android:textSize="20dp"
+                    android:fontFamily="@font/roboto_bolditalic"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:padding="7dp"
@@ -76,6 +80,7 @@
             <TextView
 
                 android:layout_width="70dp"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="20dp"

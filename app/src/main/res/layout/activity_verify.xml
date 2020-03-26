@@ -11,6 +11,7 @@
             android:id="@+id/verify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bolditalic"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Verify"
@@ -22,6 +23,7 @@
     <TextView
         android:gravity="center"
         android:id="@+id/verifyDes"
+        android:fontFamily="@font/roboto_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -51,6 +53,7 @@
         <EditText
             android:id="@+id/et_code_num1"
             android:layout_width="0dp"
+            android:fontFamily="@font/roboto_bolditalic"
             android:layout_height="80dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
@@ -66,6 +69,7 @@
         <EditText
             android:imeOptions="actionNext"
             android:id="@+id/et_code_num2"
+            android:fontFamily="@font/roboto_bolditalic"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginRight="10dp"
@@ -88,6 +92,7 @@
             android:background="@color/colorWhite"
             android:ems="10"
             android:inputType="phone"
+            android:fontFamily="@font/roboto_bolditalic"
             android:textAlignment="center"
             android:maxLines="1"
             android:maxLength="1"
@@ -101,6 +106,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/colorWhite"
+            android:fontFamily="@font/roboto_bolditalic"
             android:ems="10"
             android:inputType="phone"
             android:textAlignment="center"
@@ -113,6 +119,7 @@
 
             <Button
                 android:id="@+id/btn_verify"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

@@ -6,6 +6,7 @@ import com.example.shliapp.Models.DeleteModel;
 import com.example.shliapp.Models.ForgotPasswordModel;
 import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.GetStorageModel;
+import com.example.shliapp.Models.GetStoresModels.GetStoresModel;
 import com.example.shliapp.Models.ItemRespones;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
@@ -99,5 +100,9 @@ public interface ApiInterface {
 
     @GET("shopping/{id}")
     Call<GetShoppingList> getShoppingList(@Path("id") String groupId);
+
+
+    @GET("getStores")
+    Call<GetStoresModel> getStores();
 
 }

@@ -20,6 +20,7 @@
             tools:ignore="UseCompoundDrawables">
 
             <TextView
+                android:fontFamily="@font/roboto_bolditalic"
                 android:id="@+id/tv_autocoplete_item_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

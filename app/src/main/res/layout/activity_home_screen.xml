@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/shli"
+        android:fontFamily="@font/roboto_bolditalic"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="120dp"
         android:textSize="45sp"
@@ -26,6 +27,7 @@
         />
 
     <TextView
+        android:fontFamily="@font/roboto_regular"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
             >
 
             <TextView
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="22dp"
                 android:layout_width="wrap_content"
@@ -67,6 +70,7 @@
 
             <TextView
                 android:layout_marginLeft="30dp"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SIGN UP"
@@ -99,6 +103,7 @@
 
             <TextView
                 android:layout_marginLeft="30dp"
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_marginTop="32dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,6 +114,7 @@
                 />
 
             <TextView
+                android:fontFamily="@font/roboto_bolditalic"
                 android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

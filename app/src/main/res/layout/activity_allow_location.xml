@@ -18,6 +18,7 @@
         />
 
     <TextView
+        android:fontFamily="@font/roboto_blackitalic"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivImageLocation"
@@ -31,7 +32,7 @@
         />
 
     <TextView
-
+        android:fontFamily="@font/roboto_bolditalic"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvLocationText"
@@ -48,6 +49,7 @@
 
 <Button
     android:layout_width="280dp"
+    android:fontFamily="@font/roboto_bolditalic"
     android:layout_height="50dp"
     android:layout_below="@id/tvLocationDes"
     android:background="@drawable/button"
@@ -62,6 +64,7 @@
     <TextView
 
         android:layout_width="280dp"
+        android:fontFamily="@font/roboto_bolditalic"
         android:layout_height="50dp"
         android:layout_below="@id/btnAllow"
         android:text="Don't Allow"
