@@ -8,6 +8,7 @@ import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.GetStorageModel;
 import com.example.shliapp.Models.GetStoresModels.GetStoresModel;
 import com.example.shliapp.Models.ItemRespones;
+import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
 import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingListModel;
@@ -79,6 +80,12 @@ public interface ApiInterface {
             @Field("item_title") String item_title,
             @Field("quantity") String quantity);
 
+    @FormUrlEncoded
+    @POST("location")
+    Call<LocationNearStoreModels> AddLocation(
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude);
+
 
 
     @GET("ItemsList")
@@ -104,5 +111,7 @@ public interface ApiInterface {
 
     @GET("getStores")
     Call<GetStoresModel> getStores();
+
+
 
 }

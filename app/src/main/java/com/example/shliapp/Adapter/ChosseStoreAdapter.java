@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Models.GetStoresModels.Datum;
 import com.example.shliapp.R;
 
@@ -43,6 +44,8 @@ public class ChosseStoreAdapter extends RecyclerView.Adapter<ChosseStoreAdapter.
         final Datum item = modelListP.get(position);
 
         myViewHolder.tvStoreName.setText(item.getStoreName());
+        GeneralUtills.putStringValueInEditor(context, "itemTitle", item.getStoreName());
+
     }
 
 

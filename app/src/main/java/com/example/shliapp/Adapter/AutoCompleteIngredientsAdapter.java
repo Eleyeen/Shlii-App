@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
             
         }
         TextView textViewName = convertView.findViewById(R.id.tv_autocoplete_item_name);
+        LinearLayout linearrow = convertView.findViewById(R.id.linearrow);
 
         Datum countryItem = getItem(position);
         if (countryItem != null) {

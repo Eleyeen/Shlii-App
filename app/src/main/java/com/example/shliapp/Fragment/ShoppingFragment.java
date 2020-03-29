@@ -1,6 +1,8 @@
 package com.example.shliapp.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
@@ -32,6 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.shliapp.Activities.GeneralUtills.getSharedPreferences;
+
 public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
     View view;
@@ -40,6 +45,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     CardView cvFindFood;
     @BindView(R.id.tvFindFood)
     TextView tvFindFood;
+
     @BindView(R.id.tvGateWay)
     TextView tvGateWay;
 
@@ -70,9 +76,15 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
         rvShoppingList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvShoppingList.setHasFixedSize(true);
+
+
+
+        tvFindFood.setText(GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle" , ""));
         getItem();
 
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -89,7 +101,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        String strUserID= GeneralUtills.getSharedPreferences(getContext()).getString("userId" , "");
+        String strUserID= getSharedPreferences(getContext()).getString("userId" , "");
 
 
         Call<GetShoppingList> call = services.getShoppingList(strUserID);

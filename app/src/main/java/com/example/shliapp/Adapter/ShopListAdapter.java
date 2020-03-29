@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.LoginActivity;
 import com.example.shliapp.Models.DeleteModel;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
 import com.example.shliapp.R;
@@ -56,6 +58,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
 
         myViewHolder.tvItemName.setText(item.getItemTitle());
         myViewHolder.tvQuantity.setText(item.getQuantity());
+
 
     }
 
