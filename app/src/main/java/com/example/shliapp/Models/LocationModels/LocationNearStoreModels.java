@@ -6,37 +6,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class LocationNearStoreModels {
 
-    @SerializedName("code")
-    private Long mCode;
-    @SerializedName("data")
-    private List<Datum> mData;
-    @SerializedName("message")
-    private String mMessage;
+    @SerializedName("msg")
+    private String mMsg;
+    @SerializedName("Shopping List")
+    private List<ShoppingList> mShoppingList;
     @SerializedName("status")
     private Boolean mStatus;
+    @SerializedName("Stores")
+    private List<Store> mStores;
 
-    public Long getCode() {
-        return mCode;
+    public String getMsg() {
+        return mMsg;
     }
 
-    public void setCode(Long code) {
-        mCode = code;
+    public void setMsg(String msg) {
+        mMsg = msg;
     }
 
-    public List<Datum> getData() {
-        return mData;
+    public List<ShoppingList> getShoppingList() {
+        return mShoppingList;
     }
 
-    public void setData(List<Datum> data) {
-        mData = data;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public void setMessage(String message) {
-        mMessage = message;
+    public void setShoppingList(List<ShoppingList> shoppingList) {
+        mShoppingList = shoppingList;
     }
 
     public Boolean getStatus() {
@@ -45,6 +37,14 @@ public class LocationNearStoreModels {
 
     public void setStatus(Boolean status) {
         mStatus = status;
+    }
+
+    public List<Store> getStores() {
+        return mStores;
+    }
+
+    public void setStores(List<Store> stores) {
+        mStores = stores;
     }
 
 }

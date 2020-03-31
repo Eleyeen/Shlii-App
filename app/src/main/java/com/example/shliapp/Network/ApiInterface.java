@@ -23,7 +23,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ApiInterface {
     @FormUrlEncoded
@@ -83,6 +82,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("location")
     Call<LocationNearStoreModels> AddLocation(
+            @Field("user_id") String user_id,
             @Field("latitude") String latitude,
             @Field("longitude") String longitude);
 

@@ -3,7 +3,7 @@ package com.example.shliapp.Models.LocationModels;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class Store {
 
     @SerializedName("distance")
     private String mDistance;
