@@ -66,17 +66,17 @@
                         tools:ignore="Suspicious0dp" />
 
 
-                    <TextView
-                        android:id="@+id/tvGateWay"
-                        android:layout_below="@id/tvFindFood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5766 Mario Gateway"
-                        android:textColor="#808A98"
-                        android:fontFamily="@font/roboto_bolditalic"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        tools:ignore="Suspicious0dp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvGateWay"-->
+<!--                        android:layout_below="@id/tvFindFood"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="5766 Mario Gateway"-->
+<!--                        android:textColor="#808A98"-->
+<!--                        android:fontFamily="@font/roboto_bolditalic"-->
+<!--                        android:textSize="16dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:ignore="Suspicious0dp" />-->
 
                 </RelativeLayout>
 

@@ -4,104 +4,153 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
-        android:layout_marginTop="5dp"
-        app:cardCornerRadius="25dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:background="@color/colorWhite"
-            android:layout_width="wrap_content"
-            android:paddingBottom="10dp"
-            android:layout_height="wrap_content">
-        <RelativeLayout
-            android:background="#F12D55"
-        android:layout_width="match_parent"
-        android:id="@+id/relative1"
-        android:layout_height="wrap_content">
-    <TextView
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_marginLeft="20dp"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Broccoli"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:padding="7dp"
-        android:textStyle="bold"
-        android:id="@+id/tvItems"
-        />
 
-    <TextView
-
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:padding="7dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:text="39"
-        android:textColor="@color/colorWhite"
-        android:textSize="17dp"
-        android:textStyle="bold"
-        android:id="@+id/tvQuantity"
-        />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginTop="10dp"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relative2"
-        android:paddingLeft="30dp"
-        android:layout_below="@+id/relative1"
+        android:layout_margin="10dp"
+        app:mode="normal"
+        app:dragEdge="right"
         >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:paddingTop="28dp"
+            android:paddingBottom="28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="#F40E3D"
+                android:textColor="@android:color/white"
+                android:text="Delete"
+                android:fontFamily="@font/roboto_bolditalic"
+                android:textStyle="bold"
+                android:id="@+id/tvDelete"
+                android:onClick="deleteOnClick"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="item Locuation"
-            android:fontFamily="@font/roboto_bolditalic"
-            android:id="@+id/itemLocution"
-            android:textSize="17dp"
-            android:textColor="@color/colorText"
-            />
+            android:background="@color/colorWhite"
+            android:onClick="layoutOneOnClick">
 
-        <TextView
-            android:layout_below="@+id/itemLocution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Row 5: Vegetable Row"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/roboto_bolditalic"
-            android:textColor="@color/colorBlack"
-            android:id="@+id/tvRow"
-            android:layout_marginTop="10dp"
-            />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_below="@+id/tvRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bolditalic"
-            android:text="Third Column"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            />
+                <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="25dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:background="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:background="#F12D55"
+                        android:layout_width="match_parent"
+                        android:id="@+id/relative1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Broccoli"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:padding="7dp"
+                            android:textStyle="bold"
+                            android:id="@+id/tvItems"
+                            />
 
-    </RelativeLayout>
-        </RelativeLayout>
+                        <TextView
 
-    </androidx.cardview.widget.CardView>
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:padding="7dp"
+                            android:layout_marginRight="20dp"
+                            android:gravity="center"
+                            android:text="39"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:id="@+id/tvQuantity"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/relative2"
+                        android:paddingLeft="30dp"
+                        android:layout_below="@+id/relative1"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="item Locuation"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:id="@+id/itemLocution"
+                            android:textSize="17dp"
+                            android:textColor="@color/colorText"
+                            />
+
+                        <TextView
+                            android:layout_below="@+id/itemLocution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Row 5: Vegetable Row"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:textColor="@color/colorBlack"
+                            android:id="@+id/tvRow"
+                            android:layout_marginTop="10dp"
+                            />
+
+                        <TextView
+                            android:layout_below="@+id/tvRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:text="Third Column"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+                            />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+
+        </FrameLayout>
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+
 
 </RelativeLayout>

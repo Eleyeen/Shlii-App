@@ -3,11 +3,20 @@ package com.example.shliapp.Models.ShppingListModel.GetShopingList;
 
 import com.google.gson.annotations.SerializedName;
 public class Datum {
+    String startId;
+
+    public String getStartId() {
+        return startId;
+    }
+
+    public void setStartId(String startId) {
+        this.startId = startId;
+    }
 
     @SerializedName("created_at")
     private String mCreatedAt;
     @SerializedName("id")
-    private Long mId;
+    private String mId;
     @SerializedName("item_title")
     private String mItemTitle;
     @SerializedName("quantity")
@@ -25,11 +34,11 @@ public class Datum {
         mCreatedAt = createdAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
     }
 

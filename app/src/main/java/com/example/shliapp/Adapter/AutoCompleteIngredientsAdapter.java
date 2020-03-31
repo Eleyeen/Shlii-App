@@ -43,20 +43,12 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
         Datum countryItem = getItem(position);
         if (countryItem != null) {
             textViewName.setText(countryItem.getItemTitle());
+            SharedPreferences sharedPreferences = context.getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("itemID", countryItem.getId());
+            editor.apply();
 
         }
-
-        textViewName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SharedPreferences sharedPreferences = context.getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("itemID", countryItem.getId());
-                editor.apply();
-
-            }
-        });
 
 
         return convertView;

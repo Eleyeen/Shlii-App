@@ -1,6 +1,7 @@
 package com.example.shliapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,9 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Activities.LoginActivity;
+import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Models.DeleteModel;
+import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
 import com.example.shliapp.R;
 
@@ -58,7 +61,15 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
 
         myViewHolder.tvItemName.setText(item.getItemTitle());
         myViewHolder.tvQuantity.setText(item.getQuantity());
-
+        viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getId());
+        myViewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteItem(item.getId());
+                Intent intent = new Intent(context, StartBottomActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -70,17 +81,46 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
 
     public class MyviewHolder extends RecyclerView.ViewHolder {
         private TextView tvQuantity;
+        private SwipeRevealLayout swipeRevealLayout;
         private TextView tvItemName;
+        private TextView tvDelete;
+
 
 
 
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
+            swipeRevealLayout=itemView.findViewById(R.id.swipe_layout_1);
             tvItemName =itemView.findViewById(R.id.tvItems);
             tvQuantity=itemView.findViewById(R.id.tvQuantity);
+            tvDelete=itemView.findViewById(R.id.tvDelete);
+
         }
     }
+
+    private void DeleteItem(String id ){
+
+        Call<DeleteShopList> call = services.deleteShopingList(id);
+        call.enqueue(new Callback<DeleteShopList>() {
+            @Override
+            public void onResponse(Call<DeleteShopList> call, Response<DeleteShopList> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DeleteShopList> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
+
 
 
 

@@ -45,9 +45,9 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     CardView cvFindFood;
     @BindView(R.id.tvFindFood)
     TextView tvFindFood;
-
-    @BindView(R.id.tvGateWay)
-    TextView tvGateWay;
+//
+//    @BindView(R.id.tvGateWay)
+//    TextView tvGateWay;
 
     @BindView(R.id.rvShoppingList)
     RecyclerView rvShoppingList;
@@ -78,8 +78,14 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         rvShoppingList.setHasFixedSize(true);
 
 
+        String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle" , "");
 
-        tvFindFood.setText(GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle" , ""));
+        if(strStores.equals("")){
+            tvFindFood.setText("not near by store ");
+
+        }else {
+            tvFindFood.setText(strStores);
+        }
         getItem();
 
     }

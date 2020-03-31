@@ -3,6 +3,7 @@ package com.example.shliapp.Network;
 import com.example.shliapp.Models.AddGrocery;
 import com.example.shliapp.Models.ChangePasswordModel;
 import com.example.shliapp.Models.DeleteModel;
+import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
 import com.example.shliapp.Models.ForgotPasswordModel;
 import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.GetStorageModel;
@@ -93,6 +94,11 @@ public interface ApiInterface {
 
     @DELETE("deleteGrocerry/{id}")
     Call<DeleteModel> deleteItem(
+            @Path("id") String groupId
+    );
+
+    @DELETE("deleteShoppingList/{id}")
+    Call<DeleteShopList> deleteShopingList(
             @Path("id") String groupId
     );
 

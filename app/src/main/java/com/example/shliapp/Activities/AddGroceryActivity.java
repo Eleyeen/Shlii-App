@@ -156,9 +156,13 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
         String ids = sharedPreferences.getString("itemID" ,"");
         Toast.makeText(this, "text :::"+ids, Toast.LENGTH_LONG).show();
 
+
+
         strItemAddGrocery = ids;
         strQtyAddGrocery = etQtyAddGrocery.getText().toString();
+
         strUserID= GeneralUtills.getSharedPreferences(AddGroceryActivity.this).getString("userId" , "");
+
 
 
 

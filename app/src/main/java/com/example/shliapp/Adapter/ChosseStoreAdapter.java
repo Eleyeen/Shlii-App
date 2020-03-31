@@ -59,7 +59,7 @@ public class ChosseStoreAdapter extends RecyclerView.Adapter<ChosseStoreAdapter.
 
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
-            tvLocation = itemView.findViewById(R.id.tvGateWay);
+//            tvLocation = itemView.findViewById(R.id.tvGateWay);
             tvStoreName =itemView.findViewById(R.id.tvFindFood);
 
         }
