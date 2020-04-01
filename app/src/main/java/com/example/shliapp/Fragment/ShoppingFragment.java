@@ -1,5 +1,6 @@
 package com.example.shliapp.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.LoginActivity;
 import com.example.shliapp.Adapter.ProductItemAdapter;
 import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Models.ItemRespones;
@@ -52,6 +54,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.rvShoppingList)
     RecyclerView rvShoppingList;
     ApiInterface services;
+    ProgressDialog progressDialog;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -77,11 +80,15 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         rvShoppingList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvShoppingList.setHasFixedSize(true);
 
+        progressDialog  = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Wait");
+        progressDialog.show();
 
         String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle" , "");
 
         if(strStores.equals("")){
-            tvFindFood.setText("not near by store ");
+            tvFindFood.setText("No Near by Store ");
 
         }else {
             tvFindFood.setText(strStores);
@@ -119,15 +126,14 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                     GetShoppingList jobDataModels = response.body();
                     ShopListAdapter adapter = new ShopListAdapter(getActivity(), jobDataModels.getData());
                     rvShoppingList.setAdapter(adapter);
-
-
+                    progressDialog.dismiss();
                 }
 
             }
 
             @Override
             public void onFailure(Call<GetShoppingList> call, Throwable t) {
-
+progressDialog.dismiss();
             }
         });
 

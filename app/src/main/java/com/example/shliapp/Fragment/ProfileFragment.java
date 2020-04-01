@@ -1,5 +1,6 @@
 package com.example.shliapp.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -18,10 +18,6 @@ import androidx.fragment.app.Fragment;
 import com.example.shliapp.Activities.ForGotPasswordActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Activities.HomeScreenActivity;
-import com.example.shliapp.Activities.UnderSinkActivity;
-import com.example.shliapp.Adapter.UnderSinkAdapterItem;
-import com.example.shliapp.Models.DatumUnderSink;
-import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.ProfileModels.Datum;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
 import com.example.shliapp.Network.ApiClienTh;
@@ -52,6 +48,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btnLogout)
     Button btnLogout;
     ArrayList<Datum> itemModels;
+    ProgressDialog progressDialog;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -72,7 +69,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         btnLogout.setOnClickListener(this);
         tvChangePass.setOnClickListener(this);
-        itemModels= new ArrayList<Datum>();
+        itemModels = new ArrayList<Datum>();
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Wait");
+        progressDialog.show();
 
         getProfile();
     }
@@ -97,7 +98,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void getProfile() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
 
-        String strUserID= GeneralUtills.getSharedPreferences(getContext()).getString("userId" , "");
+        String strUserID = GeneralUtills.getSharedPreferences(getContext()).getString("userId", "");
 
 
         Call<GetProfileModel> call = services.getProfile(strUserID);
@@ -108,27 +109,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (response.isSuccessful()) {
 
                     itemModels.addAll(response.body().getData());
-                   String email= response.body().getData().get(0).getEmail();
-                   String firstName= response.body().getData().get(0).getFirstName();
-                   String lastName= response.body().getData().get(0).getLastName();
+                    String email = response.body().getData().get(0).getEmail();
+                    String firstName = response.body().getData().get(0).getFirstName();
+                    String lastName = response.body().getData().get(0).getLastName();
 //                    Toast.makeText(getContext(),email+":"+firstName+""+lastName , Toast.LENGTH_SHORT).show();
 
-                   tvEmail.setText(email);
-                   tvName.setText(firstName +""+lastName);
+                    tvEmail.setText(email);
+                    tvName.setText(firstName + "" + lastName);
 
-
+                    progressDialog.dismiss();
                 }
 
             }
 
             @Override
             public void onFailure(Call<GetProfileModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

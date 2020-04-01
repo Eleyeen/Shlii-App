@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.shliapp.Adapter.UnderSinkAdapterItem;
 import com.example.shliapp.Models.DatumUnderSink;
@@ -35,10 +38,13 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
     ImageView ivBackArrow;
     @BindView(R.id.ivPlusIconUnderSink)
     ImageView ivPlusIcon;
+    @BindView(R.id.tvUnderSink)
+    TextView tvTitle;
     @BindView(R.id.rvUnderSink)
     RecyclerView rvUnderSink;
     UnderSinkAdapterItem adapter;
     ArrayList<DatumUnderSink> itemModels;
+    ProgressDialog progressDialog;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,13 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
         rvUnderSink.setLayoutManager(new LinearLayoutManager(this));
         rvUnderSink.setHasFixedSize(true);
         itemModels= new ArrayList<DatumUnderSink>();
+        progressDialog  = new ProgressDialog(UnderSinkActivity.this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Wait");
+        progressDialog.show();
+
+        String strStorage = GeneralUtills.getSharedPreferences(this).getString("storageItem" , "");
+        tvTitle.setText(strStorage);
         getItem();
 
     }
@@ -72,15 +85,14 @@ public class UnderSinkActivity extends AppCompatActivity  implements View.OnClic
                     itemModels.addAll(response.body().getData());
                     adapter = new UnderSinkAdapterItem(UnderSinkActivity.this,  itemModels);
                     rvUnderSink.setAdapter(adapter);
-
-
+                    progressDialog.dismiss();
                 }
 
             }
 
             @Override
             public void onFailure(Call<GetGroceryModel> call, Throwable t) {
-
+progressDialog.dismiss();
             }
         });
     }

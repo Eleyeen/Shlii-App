@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Activities.UnderSinkActivity;
 
 
@@ -52,6 +54,7 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
         //        Glide.with(context).load(item.getImageStorage()).into(myViewHolder.civStorage);
 
         myViewHolder.cvStorage.setOnClickListener(v -> {
+            GeneralUtills.putStringValueInEditor(context, "storageItem", item.getStorageName());
             Intent  intent = new Intent(context, UnderSinkActivity.class);
             context.startActivity(intent);
         });

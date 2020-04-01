@@ -1,5 +1,6 @@
 package com.example.shliapp.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     EditText etStorageName;
     @BindView(R.id.btnAddStorage)
     Button btnAddStorage;
-
+    ProgressDialog progressDialog;
     private boolean valid = false;
     private String strStorageName, strTagLinee;
 
@@ -63,6 +64,11 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             case R.id.btnAddStorage:
                 if (validate()) {
                     apiAddStorage();
+                    progressDialog  = new ProgressDialog(AddStorageActivity.this);
+                    progressDialog.setTitle("Loading...");
+                    progressDialog.setMessage("Wait");
+                    progressDialog.show();
+
                 }
                 break;
         }
@@ -79,15 +85,16 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
 
                 if (response.body() == null) {
                     Toast.makeText(AddStorageActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
-
+progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddStorageActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(AddStorageActivity.this, StartBottomActivity.class));
-
+progressDialog.dismiss();
 
                 } else {
                     Toast.makeText(AddStorageActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
                 }
             }
 
@@ -95,6 +102,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             public void onFailure(Call<AddStorageModel> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
                 Toast.makeText(AddStorageActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
         });
     }

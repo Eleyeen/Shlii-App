@@ -3,6 +3,7 @@ package com.example.shliapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,7 +56,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     private String strItemAddGrocery, strQtyAddGrocery ,strUserID,strQuality;
     AutoCompleteIngredientsAdapter adapter;
     ArrayList<Datum> listModels =new ArrayList<>();
-
+    ProgressDialog progressDialog;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +86,14 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.btnAddGrocery:
+                progressDialog  = new ProgressDialog(AddGroceryActivity.this);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
 
                 if (validate()) {
                     apiAddGrocery();
+
                 }
 
         }
@@ -108,14 +114,13 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                     listModels.addAll(response.body().getData());
                     adapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, listModels);
                     dynamicSpinner.setAdapter(adapter);
-//                    alertDialog.dismiss();
                 }
 
             }
 
             @Override
             public void onFailure(Call<ItemRespones> call, Throwable t) {
-
+progressDialog.dismiss();
             }
         });
 
@@ -131,15 +136,16 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
                 if (response.body() == null) {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
-
+progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddGroceryActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(AddGroceryActivity.this, UnderSinkActivity.class));
-
+progressDialog.dismiss();
 
                 } else {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
                 }
             }
 
@@ -147,6 +153,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             public void onFailure(Call<AddGrocery> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
                 Toast.makeText(AddGroceryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
             }
         });
     }

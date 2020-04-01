@@ -54,6 +54,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnContinue.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
         progressDialog  = new ProgressDialog(LoginActivity.this);
+//        progressDialog.setTitle("Loading...");
+//        progressDialog.setMessage("Wait");
+//        progressDialog.show();
 
     }
 

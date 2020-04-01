@@ -106,5 +106,8 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
+
 }
 
