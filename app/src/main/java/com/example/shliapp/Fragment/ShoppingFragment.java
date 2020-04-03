@@ -1,11 +1,13 @@
 package com.example.shliapp.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
@@ -13,19 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
-import com.example.shliapp.Activities.LoginActivity;
-import com.example.shliapp.Adapter.ProductItemAdapter;
 import com.example.shliapp.Adapter.ShopListAdapter;
-import com.example.shliapp.Models.ItemRespones;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
@@ -62,7 +54,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_shopping, container, false);
+        view = inflater.inflate(R.layout.fragment_shopping, container, false);
         initListeners();
         initUI();
         return view;
@@ -73,24 +65,25 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void initUI(){
+    private void initUI() {
         cvFindFood.setOnClickListener(this);
 
         rvShoppingList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvShoppingList.setHasFixedSize(true);
 
-        progressDialog  = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Wait");
         progressDialog.show();
 
-        String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle" , "");
+        String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle", "");
 
-        if(strStores.equals("")){
+        if (strStores.equals("")) {
             tvFindFood.setText("No Near by Store ");
 
-        }else {
+        } else {
             tvFindFood.setText(strStores);
         }
         getItem();
@@ -98,12 +91,10 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.cvFindFood:
                 Intent intent = new Intent(getContext(), ChooseStoreActivity.class);
                 startActivity(intent);
@@ -114,7 +105,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        String strUserID= getSharedPreferences(getContext()).getString("userId" , "");
+        String strUserID = getSharedPreferences(getContext()).getString("userId", "");
 
 
         Call<GetShoppingList> call = services.getShoppingList(strUserID);
@@ -133,7 +124,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<GetShoppingList> call, Throwable t) {
-progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -31,6 +32,7 @@ import com.example.shliapp.Models.LocationModels.Store;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -86,6 +88,7 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
 
 //        getStores();
 //        getLastLocation();
+        getUpdatedLocation();
         addLocation();
 
 
@@ -100,7 +103,34 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void getUpdatedLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        Criteria locationCritera = new Criteria();
+        locationCritera.setAccuracy(Criteria.ACCURACY_FINE);
+        locationCritera.setAltitudeRequired(false);
+        locationCritera.setBearingRequired(false);
+        locationCritera.setCostAllowed(true);
+        locationCritera.setPowerRequirement(Criteria.NO_REQUIREMENT);
+
+        String providerName = locationManager.getBestProvider(locationCritera, true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location location = locationManager.getLastKnownLocation(providerName);
+
+        Log.i("zma Latitude", "" + location.getLatitude());
+        Log.i("zma Longitude", "" + location.getLongitude());
+        AppRepository.mPutValue(this).putString("lat", String.valueOf(location.getLatitude())).commit();
+        AppRepository.mPutValue(this).putString("lng", String.valueOf(location.getLongitude())).commit();
+    }
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getStores() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
@@ -129,16 +159,12 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void addLocation() {
-        SharedPreferences sharedPreferencesmLatitude = getSharedPreferences("Latitude", Context.MODE_PRIVATE);
-        String mLatitude = sharedPreferencesmLatitude.getString("getLatitude", "");
-        SharedPreferences sharedPreferencesmLongitude = getSharedPreferences("Longitude", Context.MODE_PRIVATE);
-        String mLongitude = sharedPreferencesmLongitude.getString("getLongitude", "");
 
         String strUserID = GeneralUtills.getSharedPreferences(ChooseStoreActivity.this).getString("userId", "");
 
 
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<LocationNearStoreModels> addLocation = services.AddLocation(strUserID,mLatitude, mLongitude);
+        Call<LocationNearStoreModels> addLocation = services.AddLocation(strUserID, AppRepository.mLat(this), AppRepository.mLng(this));
         addLocation.enqueue(new Callback<LocationNearStoreModels>() {
             @Override
             public void onResponse(Call<LocationNearStoreModels> call, Response<LocationNearStoreModels> response) {
