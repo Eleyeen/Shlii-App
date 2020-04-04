@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ShopListAdapter;
+import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,16 +83,45 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
         String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle", "");
 
-        if (strStores.equals("")) {
-            tvFindFood.setText("No Near by Store ");
-
-        } else {
-            tvFindFood.setText(strStores);
-        }
+//        if (strStores.equals("")) {
+//            tvFindFood.setText("No Near by Store ");
+//
+//        } else {
+//            tvFindFood.setText(strStores);
+//        }
+        addLocation();
         getItem();
 
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void addLocation() {
+
+        String strUserID = GeneralUtills.getSharedPreferences(getActivity()).getString("userId", "");
+
+
+        ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
+        Call<LocationNearStoreModels> addLocation = services.AddLocation(AppRepository.mUserID(getActivity()), AppRepository.mLat(getActivity()), AppRepository.mLng(getActivity()));
+        addLocation.enqueue(new Callback<LocationNearStoreModels>() {
+            @Override
+            public void onResponse(Call<LocationNearStoreModels> call, Response<LocationNearStoreModels> response) {
+
+                if (response.isSuccessful()) {
+                    tvFindFood.setText(response.body().getStores().get(0).getStoreName());
+                    progressDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LocationNearStoreModels> call, Throwable t) {
+                Log.d("response", "error " + t.getMessage());
+                progressDialog.dismiss();
+            }
+        });
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override

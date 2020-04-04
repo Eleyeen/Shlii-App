@@ -34,7 +34,6 @@ import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
 import com.example.shliapp.utils.GPSTracker;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
@@ -101,12 +100,16 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+//        GPSTracker gpsTracker = new GPSTracker(getActivity());
+//        Log.d("zma Latitude", "" + gpsTracker.getLatitude());
+//        Log.d("zma Longitude", "" + gpsTracker.getLongitude());
         Location location = locationManager.getLastKnownLocation(providerName);
-
-        Log.i("zma Latitude", "" + location.getLatitude());
-        Log.i("zma Longitude", "" + location.getLongitude());
-        AppRepository.mPutValue(getActivity()).putString("lat", String.valueOf(location.getLatitude())).commit();
-        AppRepository.mPutValue(getActivity()).putString("lng", String.valueOf(location.getLongitude())).commit();
+        if (location != null) {
+            if (AppRepository.mLat(getActivity()).length() < 1) {
+                AppRepository.mPutValue(getActivity()).putString("lat", String.valueOf(location.getLatitude())).commit();
+                AppRepository.mPutValue(getActivity()).putString("lng", String.valueOf(location.getLongitude())).commit();
+            }
+        }
     }
 
 

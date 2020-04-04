@@ -12,7 +12,7 @@ public class Data {
     @SerializedName("first_name")
     private String mFirstName;
     @SerializedName("id")
-    private Long mId;
+    private String mId;
     @SerializedName("last_name")
     private String mLastName;
     @SerializedName("updated_at")
@@ -42,11 +42,11 @@ public class Data {
         mFirstName = firstName;
     }
 
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
     }
 

@@ -21,6 +21,7 @@ import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,6 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         prefs.edit().putBoolean("locked", true).apply();
 
                         response.body().getData().getId();
+                        AppRepository.mPutValue(LoginActivity.this).putString("userID", response.body().getData().getId()).commit();
                         GeneralUtills.putStringValueInEditor(LoginActivity.this, "userId", response.body().getData().getId().toString());
 //                        Log.d("abcd", "abc" + response.body().getData().getId());
 

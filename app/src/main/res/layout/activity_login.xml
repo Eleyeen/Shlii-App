@@ -6,136 +6,136 @@
     android:layout_height="match_parent"
     android:background="@color/colorScreen"
     tools:context=".Activities.LoginActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/backarrow"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/ivBackArrow"
-        />
-    <TextView
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Log In"
-        android:textColor="#344356"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginTop="28dp"
-        android:id="@+id/tvLogin"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBackArrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:src="@mipmap/backarrow" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Log In"
+            android:textColor="#344356"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Enter Your Login Details to access Your account"
-        android:textColor="#808A98"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_below="@+id/tvLogin"
-        android:textStyle="bold"
-        android:fontFamily="@font/roboto_regular"
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvLoginDes"
-        />
+        <TextView
+            android:id="@+id/tvLoginDes"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Enter Your Login Details to access Your account"
+            android:textColor="#808A98"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_marginTop="60dp"
-        app:cardCornerRadius="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:id="@+id/cvLoginScreen"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLoginDes"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorWhite"
-        >
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLoginScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLoginDes"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
             android:background="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            app:cardCornerRadius="15dp">
 
-            <EditText
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite">
 
-                android:imeOptions="actionNext"
-                android:fontFamily="@font/roboto"
-                android:inputType="text"
-                android:textColorHint="@color/colorhintText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:textStyle="bold"
-                android:hint="Enter Your Email"
-                android:textSize="17dp"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etEmailLogin"
-                />
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etEmailLogin"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView"
-                />
+                <EditText
 
-            <EditText
-                android:fontFamily="@font/roboto"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:layout_below="@id/vView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Enter Your Password"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etPasswordLogin"
-                />
+                    android:id="@+id/etEmailLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Enter Your Email"
+
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorhintText"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/vView"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/etEmailLogin"
+                    android:background="@color/colorScreen" />
+
+                <EditText
+                    android:id="@+id/etPasswordLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vView"
+                    android:layout_margin="13dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Enter Your Password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorhintText"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
             </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:layout_centerHorizontal="true"
-        android:text="Forgot Password"
-        android:textColor="#808A98"
-        android:textSize="20dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:layout_below="@+id/cvLoginScreen"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvForGotPassword"
-        />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvForGotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cvLoginScreen"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Forgot Password"
+            android:textColor="#808A98"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
-    <Button
-        android:id="@+id/btnContinueLogin"
-        android:fontFamily="@font/roboto"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/tvForGotPassword"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
-        android:text="Continue"
-        android:textSize="17dp"
+        <Button
+            android:id="@+id/btnContinueLogin"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/tvForGotPassword"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/roboto"
+            android:text="Continue"
+            android:textSize="17dp"
 
-        />
-</RelativeLayout>
+            />
+    </RelativeLayout>
 </ScrollView>

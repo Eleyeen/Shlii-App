@@ -3,118 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorScreen"
     android:layout_height="match_parent"
+    android:background="@color/colorScreen"
     tools:context=".Activities.AddStorageActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/backarrow"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/ivBackArrowAddStorage"
-        />
-    <TextView
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Add Storage"
-        android:textColor="#344356"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginTop="28dp"
-        android:id="@+id/tvAddStorage"
-        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBackArrowAddStorage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:src="@mipmap/backarrow" />
+
+        <TextView
+            android:id="@+id/tvAddStorage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Add Storage"
+            android:textColor="#344356"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Create new Storage to add related products in it "
-        android:textColor="#808A98"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_below="@+id/tvAddStorage"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvLoginDes"
-        />
+        <TextView
+            android:id="@+id/tvLoginDes"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAddStorage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Create new Storage to add related products in it "
+            android:textColor="#808A98"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_marginTop="60dp"
-        app:cardCornerRadius="15dp"
-        android:id="@+id/cvAddStorage"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLoginDes"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorWhite"
-        >
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAddStorage"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLoginDes"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
             android:background="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            app:cardCornerRadius="15dp">
 
-            <EditText
-
-                android:fontFamily="@font/roboto"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:textColorHint="@color/colorhintText"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:textStyle="bold"
-                android:hint="Storage Name"
-                android:textSize="20dp"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etStorageName"
-                />
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etStorageName"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView"
-                />
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite">
 
-            <EditText
-                android:imeOptions="actionDone"
-                android:fontFamily="@font/roboto"
-                android:inputType="text"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_below="@id/vView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Tagline(optional)"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etTagLine"
-                />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <EditText
 
-    <Button
-        android:id="@+id/btnAddStorage"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/cvAddStorage"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:text="Continue"
-        android:textSize="17dp"
-        />
-</RelativeLayout>
+                    android:id="@+id/etStorageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Storage Name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorhintText"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/vView"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/etStorageName"
+                    android:background="@color/colorScreen" />
+
+                <EditText
+                    android:id="@+id/etTagLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vView"
+                    android:layout_margin="13dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Tagline(optional)"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorhintText"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnAddStorage"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/cvAddStorage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Continue"
+            android:textSize="17dp" />
+    </RelativeLayout>
 </ScrollView>

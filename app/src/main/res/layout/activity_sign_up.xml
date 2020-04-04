@@ -3,250 +3,244 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorScreen"
     android:layout_height="match_parent"
+    android:background="@color/colorScreen"
     tools:context=".Activities.SignUpActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
         <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/backarrow"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/ivBackArrowSignUp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="New Account"
-        android:textColor="#344356"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginTop="28dp"
-        android:id="@+id/tvSignUp"
-        />
+            android:id="@+id/ivBackArrowSignUp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:src="@mipmap/backarrow" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:text="Skip"
-        android:textColor="#344356"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:textSize="20dp"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:layout_marginTop="25dp"
-        android:id="@+id/tvSkip"
-        />
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="New Account"
+            android:textColor="#344356"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:padding="10dp"
+            android:text="Skip"
+            android:textColor="#344356"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:fontFamily="@font/roboto_regular"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Start  by  entering  your email address below "
-        android:textColor="#808A98"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_below="@+id/tvSignUp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:id="@+id/tvSignUpDes"
-        />
+        <TextView
+            android:id="@+id/tvSignUpDes"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSignUp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Start  by  entering  your email address below "
+            android:textColor="#808A98"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tvSignUpDes"
-
-        >
-
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvSignUpDes"
 
+            >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_marginTop="60dp"
-        app:cardCornerRadius="15dp"
-        android:id="@+id/cvLoginScreen"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorWhite"
-        >
-        <RelativeLayout
-            android:background="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:fontFamily="@font/roboto_bolditalic"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:textStyle="bold"
-                android:hint="First Name"
-                android:textColorHint="@color/colorhintText"
-                android:textSize="17dp"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etFirstNameSignUp"
-                />
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etFirstNameSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView"
-                />
-
-            <EditText
-                android:imeOptions="actionNext"
-                android:fontFamily="@font/roboto_bolditalic"
-                android:inputType="text"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:layout_below="@id/vView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Last Name"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etLastNameSignUp"
-                />
-
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etLastNameSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView1"
-                />
-
-            <EditText
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:fontFamily="@font/roboto_bolditalic"
-                android:textSize="17dp"
-                android:layout_below="@id/vView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Email"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etEmailSignUp"
-                />
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etEmailSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView2"
-                />
-
-            <EditText
-                android:imeOptions="actionNext"
-                android:fontFamily="@font/roboto_bolditalic"
-                android:inputType="textPassword"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:layout_below="@id/vView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Enter Your Password"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etPasswordSignUp"
-                />
-            <View
-                android:background="@color/colorScreen"
-                android:layout_below="@id/etPasswordSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:id="@+id/vView3"
-                />
-
-            <EditText
-                android:imeOptions="actionDone"
-                android:fontFamily="@font/roboto_bolditalic"
-                android:inputType="textPassword"
-                android:textColorHint="@color/colorhintText"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:layout_below="@id/etPasswordSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="13dp"
-                android:hint="Enter Your Confirm Password"
-                android:textColor="@color/colorBlack"
-                android:id="@+id/etConfirmPasswordLogin"
-                />
+                android:layout_height="wrap_content">
 
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvLoginScreen"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:background="@color/colorWhite"
+                    app:cardCornerRadius="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorWhite">
+
+                        <EditText
+                            android:id="@+id/etFirstNameSignUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="13dp"
+                            android:backgroundTint="@color/colorWhite"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:hint="First Name"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorhintText"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/vView"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/etFirstNameSignUp"
+                            android:background="@color/colorScreen" />
+
+                        <EditText
+                            android:id="@+id/etLastNameSignUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/vView"
+                            android:layout_margin="13dp"
+                            android:backgroundTint="@color/colorWhite"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:hint="Last Name"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorhintText"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/vView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/etLastNameSignUp"
+                            android:background="@color/colorScreen" />
+
+                        <EditText
+                            android:id="@+id/etEmailSignUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/vView1"
+                            android:layout_margin="13dp"
+                            android:backgroundTint="@color/colorWhite"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:hint="Email"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorhintText"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/vView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/etEmailSignUp"
+                            android:background="@color/colorScreen" />
+
+                        <EditText
+                            android:id="@+id/etPasswordSignUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/vView2"
+                            android:layout_margin="13dp"
+                            android:backgroundTint="@color/colorWhite"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:hint="Enter Your Password"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPassword"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorhintText"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/vView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/etPasswordSignUp"
+                            android:background="@color/colorScreen" />
+
+                        <EditText
+                            android:id="@+id/etConfirmPasswordLogin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/etPasswordSignUp"
+                            android:layout_margin="13dp"
+                            android:backgroundTint="@color/colorWhite"
+                            android:fontFamily="@font/roboto_bolditalic"
+                            android:hint="Enter Your Confirm Password"
+                            android:imeOptions="actionDone"
+                            android:inputType="textPassword"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorhintText"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
 
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-    <TextView
+                <TextView
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already have an account?"
-        android:textColor="#808A98"
-        android:fontFamily="@font/roboto_regular"
-        android:id="@+id/alreadyLogin"
-        android:layout_below="@+id/cvLoginScreen"
-        android:layout_centerHorizontal="true"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        />
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tvSignIn"
-        android:layout_below="@+id/alreadyLogin"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SIGN IN"
-        android:textColor="@color/colorBackground"
-        android:textSize="20dp"
-        android:textStyle="bold"
+                    android:id="@+id/alreadyLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cvLoginScreen"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Already have an account?"
+                    android:textColor="#808A98"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
-        />
+                <TextView
+                    android:id="@+id/tvSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/alreadyLogin"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/roboto_bolditalic"
+                    android:text="SIGN IN"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
 
-    <Button
-        android:id="@+id/btnContinueSignUp"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvSignIn"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
-        android:text="Continue"
-        android:textSize="17dp"
-        />
+                    />
 
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-</RelativeLayout>
+                <Button
+                    android:id="@+id/btnContinueSignUp"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvSignIn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button"
+                    android:fontFamily="@font/roboto_bolditalic"
+                    android:text="Continue"
+                    android:textSize="17dp" />
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 </ScrollView>
