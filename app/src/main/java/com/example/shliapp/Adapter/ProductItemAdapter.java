@@ -14,12 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Activities.GeneralUtills;
-import com.example.shliapp.Activities.UnderSinkActivity;
-import com.example.shliapp.Models.Datum;
 import com.example.shliapp.Models.DeleteModel;
-import com.example.shliapp.Models.GetStorageModel;
-import com.example.shliapp.Network.ApiClienTh;
+import com.example.shliapp.Models.addGroceries.Datum;
 import com.example.shliapp.R;
 
 import java.util.List;
@@ -34,9 +30,9 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
     private Context context;
-    private List<Datum> modelListP ;
-    private List<Datum>  listItemsP;
-    private  Context mContext;
+    private List<Datum> modelListP;
+    private List<Datum> listItemsP;
+    private Context mContext;
 
     public ProductItemAdapter(Context context, List<Datum> modelListP) {
         this.context = context;
@@ -57,8 +53,9 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
     @Override
     public MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_cardview, parent , false) ;
-        return new ProductItemAdapter.MyviewHolder(view);    }
+                .inflate(R.layout.item_cardview, parent, false);
+        return new ProductItemAdapter.MyviewHolder(view);
+    }
 
 
     @Override
@@ -97,16 +94,16 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
 
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
-            tvStrtId = (TextView) itemView.findViewById(R.id.startId);
-            tvItemName =itemView.findViewById(R.id.tvItems);
-            tvQuantity=itemView.findViewById(R.id.tvQuantity);
-            swipeRevealLayout=itemView.findViewById(R.id.swipe_layout_1);
-            tvDelete=itemView.findViewById(R.id.tvDelete);
+            tvStrtId = itemView.findViewById(R.id.startId);
+            tvItemName = itemView.findViewById(R.id.tvItems);
+            tvQuantity = itemView.findViewById(R.id.tvQuantity);
+            swipeRevealLayout = itemView.findViewById(R.id.swipe_layout_1);
+            tvDelete = itemView.findViewById(R.id.tvDelete);
 
         }
     }
 
-    private void DeleteItem(String id ){
+    private void DeleteItem(String id) {
 
         Call<DeleteModel> call = services.deleteItem(id);
         call.enqueue(new Callback<DeleteModel>() {
@@ -126,7 +123,6 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
             }
         });
     }
-
 
 
 }

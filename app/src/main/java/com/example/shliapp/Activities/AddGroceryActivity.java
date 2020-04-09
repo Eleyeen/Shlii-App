@@ -1,34 +1,29 @@
 package com.example.shliapp.Activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.shliapp.Adapter.AutoCompleteIngredientsAdapter;
-import com.example.shliapp.Models.AddGrocery;
-import com.example.shliapp.Models.Datum;
 import com.example.shliapp.Models.ItemRespones;
+import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
+import com.example.shliapp.Models.addGroceries.Datum;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.interfaces.GroceryItemID;
+import com.example.shliapp.utils.AppRepository;
 
 import java.util.ArrayList;
 
@@ -40,7 +35,7 @@ import retrofit2.Response;
 
 import static com.example.shliapp.Network.BaseNetworking.services;
 
-public class AddGroceryActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddGroceryActivity extends AppCompatActivity implements View.OnClickListener, GroceryItemID {
 
     @BindView(R.id.ivBackArrowAddGrocery)
     ImageView ivBackArrow;
@@ -53,10 +48,11 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.btnAddGrocery)
     Button btnAddGrocery;
     private boolean valid = false;
-    private String strItemAddGrocery, strQtyAddGrocery ,strUserID,strQuality;
+    private String strItemAddGrocery, strQtyAddGrocery, strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
-    ArrayList<Datum> listModels =new ArrayList<>();
+    ArrayList<Datum> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void initUI(){
+    private void initUI() {
         ButterKnife.bind(this);
         ivBackArrow.setOnClickListener(this);
         btnAddGrocery.setOnClickListener(this);
@@ -79,14 +75,13 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.ivBackArrowAddGrocery:
                 onBackPressed();
                 break;
 
             case R.id.btnAddGrocery:
-                progressDialog  = new ProgressDialog(AddGroceryActivity.this);
+                progressDialog = new ProgressDialog(AddGroceryActivity.this);
                 progressDialog.setTitle("Loading...");
                 progressDialog.setMessage("Wait");
                 progressDialog.show();
@@ -95,7 +90,6 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                     apiAddGrocery();
 
                 }
-
         }
 
     }
@@ -112,7 +106,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<ItemRespones> call, Response<ItemRespones> response) {
                 if (response.isSuccessful()) {
                     listModels.addAll(response.body().getData());
-                    adapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, listModels);
+                    adapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, listModels, AddGroceryActivity.this);
                     dynamicSpinner.setAdapter(adapter);
                 }
 
@@ -120,7 +114,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onFailure(Call<ItemRespones> call, Throwable t) {
-progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 
@@ -129,50 +123,44 @@ progressDialog.dismiss();
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddGrocery() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddGrocery> addGrocery = services.AddGroceryPost(strItemAddGrocery,strUserID, strQtyAddGrocery);
-        addGrocery.enqueue(new Callback<AddGrocery>() {
+        Call<AddGroceryResponse> addGrocery = services.AddGroceryPost(strItemAddGrocery, AppRepository.mUserID(this), strQtyAddGrocery);
+        addGrocery.enqueue(new Callback<AddGroceryResponse>() {
             @Override
-            public void onResponse(Call<AddGrocery> call, Response<AddGrocery> response) {
+            public void onResponse(Call<AddGroceryResponse> call, Response<AddGroceryResponse> response) {
 
                 if (response.body() == null) {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
-progressDialog.dismiss();
+                    progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddGroceryActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(AddGroceryActivity.this, UnderSinkActivity.class));
-progressDialog.dismiss();
+                    progressDialog.dismiss();
 
                 } else {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                    progressDialog.dismiss();
                 }
             }
 
             @Override
-            public void onFailure(Call<AddGrocery> call, Throwable t) {
+            public void onFailure(Call<AddGroceryResponse> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
                 Toast.makeText(AddGroceryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
     }
+
     private boolean validate() {
         valid = true;
-        SharedPreferences sharedPreferences = getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);
-        String ids = sharedPreferences.getString("itemID" ,"");
-        Toast.makeText(this, "text :::"+ids, Toast.LENGTH_LONG).show();
+//        SharedPreferences sharedPreferences = getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);
+//        String ids = sharedPreferences.getString("itemID", "");
+//        Toast.makeText(this, "text :::" + ids, Toast.LENGTH_LONG).show();
 
 
-
-        strItemAddGrocery = ids;
+//        strItemAddGrocery = ids;
         strQtyAddGrocery = etQtyAddGrocery.getText().toString();
-
-        strUserID= GeneralUtills.getSharedPreferences(AddGroceryActivity.this).getString("userId" , "");
-
-
-
-
 
 
         if (strItemAddGrocery.isEmpty() && strQtyAddGrocery.isEmpty()) {
@@ -197,7 +185,13 @@ progressDialog.dismiss();
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(AddGroceryActivity.this,UnderSinkActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(AddGroceryActivity.this, UnderSinkActivity.class);
+//        startActivity(intent);
+    }
+
+    @Override
+    public void groceryItem(String id) {
+        strItemAddGrocery = id;
+        Log.d("zma selected item id", id);
     }
 }

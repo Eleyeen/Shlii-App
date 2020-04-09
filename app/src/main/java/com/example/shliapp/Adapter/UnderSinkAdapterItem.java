@@ -1,6 +1,5 @@
 package com.example.shliapp.Adapter;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,10 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Activities.AddGroceryActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Activities.UnderSinkActivity;
-import com.example.shliapp.Models.AddGrocery;
 import com.example.shliapp.Models.DatumUnderSink;
 import com.example.shliapp.Models.DeleteModel;
 import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingListModel;

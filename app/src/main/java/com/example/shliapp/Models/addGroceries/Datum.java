@@ -1,18 +1,10 @@
 
-package com.example.shliapp.Models;
+package com.example.shliapp.Models.addGroceries;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Datum {
-    String startId;
-
-    public String getStartId() {
-        return startId;
-    }
-
-    public void setStartId(String startId) {
-        this.startId = startId;
-    }
 
     @SerializedName("id")
     private String mId;

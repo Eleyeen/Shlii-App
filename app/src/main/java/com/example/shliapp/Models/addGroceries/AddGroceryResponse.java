@@ -1,10 +1,11 @@
 
-package com.example.shliapp.Models;
+package com.example.shliapp.Models.addGroceries;
 
 import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
-public class AddGrocery {
+
+@SuppressWarnings("unused")
+public class AddGroceryResponse {
 
     @SerializedName("code")
     private Long mCode;

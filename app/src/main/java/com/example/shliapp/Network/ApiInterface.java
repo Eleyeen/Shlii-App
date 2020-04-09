@@ -1,6 +1,5 @@
 package com.example.shliapp.Network;
 
-import com.example.shliapp.Models.AddGrocery;
 import com.example.shliapp.Models.ChangePasswordModel;
 import com.example.shliapp.Models.DeleteModel;
 import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
@@ -16,6 +15,7 @@ import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingList
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
+import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -69,7 +69,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("AddGrocery")
-    Call<AddGrocery> AddGroceryPost(
+    Call<AddGroceryResponse> AddGroceryPost(
             @Field("item_id") String item_id,
             @Field("user_id") String user_id,
             @Field("quantity") String quantity);

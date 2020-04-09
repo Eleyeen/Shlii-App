@@ -133,7 +133,7 @@ progressDialog.dismiss();
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(UnderSinkActivity.this,StartBottomActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(UnderSinkActivity.this,StartBottomActivity.class);
+//        startActivity(intent);
     }
 }

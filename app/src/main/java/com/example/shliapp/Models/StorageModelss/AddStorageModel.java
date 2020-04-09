@@ -2,7 +2,7 @@ package com.example.shliapp.Models.StorageModelss;
 
 import java.util.List;
 
-import com.example.shliapp.Models.Datum;
+import com.example.shliapp.Models.addGroceries.Datum;
 import com.google.gson.annotations.SerializedName;
 
 public class AddStorageModel {
