@@ -118,7 +118,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         progressDialog = new ProgressDialog(getContext());
         ivPlusIcon.setOnClickListener(this);
-        rvShoppingList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvShoppingList.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         rvShoppingList.setHasFixedSize(true);
         itemLists = new ArrayList<DatumStorage>();
         progressDialog = new ProgressDialog(getActivity());

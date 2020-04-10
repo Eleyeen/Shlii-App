@@ -1,24 +1,18 @@
 package com.example.shliapp.utils;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 public class AppRepository {
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
     public static String mConfig = "com.techease.ultimateSavings";
-
-
     public static SharedPreferences mGetValue(Context context) {
         sharedPreferences = context.getSharedPreferences(mConfig, Context.MODE_PRIVATE);
         return sharedPreferences;
     }
-
     public static SharedPreferences.Editor mPutValue(Context context) {
         sharedPreferences = context.getSharedPreferences(mConfig, Context.MODE_PRIVATE);
         return editor = sharedPreferences.edit();
     }
-
     public static String mAPIToken(Context context) {
         return mGetValue(context).getString("auth_token", "");
     }
@@ -49,7 +43,6 @@ public class AppRepository {
     public static String mStartDate(Context context) {
         return mGetValue(context).getString("startDate", "");
     }
-
     public static String mEndDate(Context context) {
         return mGetValue(context).getString("endDate", "");
     }
@@ -64,10 +57,8 @@ public class AppRepository {
     }
     public static boolean isLoggedIn(Context context) {
         return mGetValue(context).getBoolean("loggedIn", false);
-
     }
     public static boolean isProUser(Context context) {
         return mGetValue(context).getBoolean("isPro", false);
-
     }
 }

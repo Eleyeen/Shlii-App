@@ -74,8 +74,7 @@
                     android:fontFamily="@font/roboto"
                     android:completionThreshold="1"
                     android:textColorHint="@color/colorhintText"
-
-                    android:hint="Choose Item"
+                    android:hint="Add Item"
                     android:imeOptions="actionDone"
                     android:textSize="20dp"
                     android:textColor="#000"

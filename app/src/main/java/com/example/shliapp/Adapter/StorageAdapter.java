@@ -49,7 +49,6 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
         DatumStorage item = modelList.get(position);
 
         myViewHolder.tvStorageName.setText(item.getStorageName());
-        myViewHolder.tvStorageItem.setText(item.getTagLine());
 
         //        Glide.with(context).load(item.getImageStorage()).into(myViewHolder.civStorage);
 
@@ -77,7 +76,6 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
             super(itemView);
             civStorage = itemView.findViewById(R.id.civCardView);
             tvStorageName = itemView.findViewById(R.id.tvCardViewName);
-            tvStorageItem = itemView.findViewById(R.id.tvStorageItemCardView);
             cvStorage=itemView.findViewById(R.id.cvStorage);
         }
     }
