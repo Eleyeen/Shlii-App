@@ -24,6 +24,7 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.shliapp.Activities.AddGroceryActivity;
 import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Activities.UnderSinkActivity;
 import com.example.shliapp.Models.DatumUnderSink;
 import com.example.shliapp.Models.DeleteModel;
@@ -95,6 +96,15 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
             _counter++;
             _stringVal = Integer.toString(_counter);
             myViewHolder.tvValue.setText(_stringVal);
+            new CountDownTimer(5000, 500){
+                public void onTick(long millisUntilFinished){
+
+                }
+                public  void onFinish(){
+
+                    AddShopList(item.getMitemTitle());
+                }
+            }.start();
 
         });
 
@@ -102,6 +112,16 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
             _counter --;
             _stringVal = Integer.toString(_counter);
             myViewHolder.tvValue.setText(_stringVal);
+            new CountDownTimer(5000, 500){
+                public void onTick(long millisUntilFinished){
+
+                }
+                public  void onFinish(){
+                    AddShopList(item.getMitemTitle());
+
+                }
+            }.start();
+
 
         });
 
@@ -205,18 +225,9 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         });
     }
 
+     public void onClick(View v) {
 
-    public void onClick(View v) {
-        new CountDownTimer(30000, 1000){
-            public void onTick(long millisUntilFinished){
+     }
 
-            }
-            public  void onFinish(){
-
-
-            }
-        }.start();
-
-    }
 
 }
