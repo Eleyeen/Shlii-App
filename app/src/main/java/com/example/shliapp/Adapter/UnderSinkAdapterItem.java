@@ -121,12 +121,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
 
                 }
             }.start();
-
-
         });
-
-
-
     }
 
 

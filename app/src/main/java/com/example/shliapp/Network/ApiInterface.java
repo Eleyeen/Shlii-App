@@ -74,7 +74,7 @@ public interface ApiInterface {
             @Field("user_id") String user_id,
             @Field("quantity") String quantity);
     @FormUrlEncoded
-    @POST("AddShopping")
+    @POST("GenerateShopping")
     Call<AddShopingListModel> AddShopListPost(
             @Field("user_id") String user_id,
             @Field("item_title") String item_title,
@@ -111,7 +111,7 @@ public interface ApiInterface {
     @GET("getProfile/{id}")
     Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
-    @GET("shopping/{id}")
+    @GET("getShoppingList/{id}")
     Call<GetShoppingList> getShoppingList(@Path("id") String groupId);
 
 
