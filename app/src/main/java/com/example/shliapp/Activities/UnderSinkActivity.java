@@ -5,33 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Process;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.shliapp.Adapter.UnderSinkAdapterItem;
 import com.example.shliapp.Models.DatumUnderSink;
 import com.example.shliapp.Models.GetGroceryModel;
-import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingListModel;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

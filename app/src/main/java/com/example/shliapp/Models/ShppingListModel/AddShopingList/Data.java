@@ -3,6 +3,7 @@ package com.example.shliapp.Models.ShppingListModel.AddShopingList;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Data {
 
     @SerializedName("created_at")

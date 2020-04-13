@@ -20,7 +20,7 @@ import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.shliapp.Activities.GeneralUtills.getSharedPreferences;
 
 public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
@@ -97,10 +95,6 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addLocation() {
-
-        String strUserID = GeneralUtills.getSharedPreferences(getActivity()).getString("userId", "");
-
-
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
         Call<LocationNearStoreModels> addLocation = services.AddLocation(AppRepository.mUserID(getActivity()), AppRepository.mLat(getActivity()), AppRepository.mLng(getActivity()));
         addLocation.enqueue(new Callback<LocationNearStoreModels>() {
@@ -137,16 +131,13 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        String strUserID = getSharedPreferences(getContext()).getString("userId", "");
+        Call<GetShoppingListResponse> call = services.getShoppingList(AppRepository.mUserID(getActivity()));
 
-
-        Call<GetShoppingList> call = services.getShoppingList(strUserID);
-
-        call.enqueue(new Callback<GetShoppingList>() {
+        call.enqueue(new Callback<GetShoppingListResponse>() {
             @Override
-            public void onResponse(Call<GetShoppingList> call, Response<GetShoppingList> response) {
+            public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
                 if (response.isSuccessful()) {
-                    GetShoppingList jobDataModels = response.body();
+                    GetShoppingListResponse jobDataModels = response.body();
                     ShopListAdapter adapter = new ShopListAdapter(getActivity(), jobDataModels.getData());
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
@@ -155,7 +146,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<GetShoppingList> call, Throwable t) {
+            public void onFailure(Call<GetShoppingListResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });

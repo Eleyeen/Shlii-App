@@ -2,16 +2,9 @@
 package com.example.shliapp.Models.ShppingListModel.GetShopingList;
 
 import com.google.gson.annotations.SerializedName;
+
+@SuppressWarnings("unused")
 public class Datum {
-    String startId;
-
-    public String getStartId() {
-        return startId;
-    }
-
-    public void setStartId(String startId) {
-        this.startId = startId;
-    }
 
     @SerializedName("created_at")
     private String mCreatedAt;

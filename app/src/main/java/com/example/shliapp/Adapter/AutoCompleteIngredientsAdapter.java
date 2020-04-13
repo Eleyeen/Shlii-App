@@ -54,12 +54,9 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
 
 
             textViewName.setText(countryItem.getItemTitle());
-            textViewName.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    itemID.groceryItem(countryItem.getId());
-                    return false;
-                }
+            textViewName.setOnTouchListener((v, event) -> {
+                itemID.groceryItem(countryItem.getId());
+                return false;
             });
 
 //            SharedPreferences sharedPreferences = context.getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);

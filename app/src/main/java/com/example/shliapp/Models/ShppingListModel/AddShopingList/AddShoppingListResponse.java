@@ -3,7 +3,8 @@ package com.example.shliapp.Models.ShppingListModel.AddShopingList;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AddShopingListModel {
+@SuppressWarnings("unused")
+public class AddShoppingListResponse {
 
     @SerializedName("code")
     private Long mCode;
