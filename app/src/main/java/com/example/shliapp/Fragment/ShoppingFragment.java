@@ -79,14 +79,6 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         progressDialog.setMessage("Wait");
         progressDialog.show();
 
-        String strStores = GeneralUtills.getSharedPreferences(getContext()).getString("itemTitle", "");
-
-//        if (strStores.equals("")) {
-//            tvFindFood.setText("No Near by Store ");
-//
-//        } else {
-//            tvFindFood.setText(strStores);
-//        }
         addLocation();
         getItem();
 

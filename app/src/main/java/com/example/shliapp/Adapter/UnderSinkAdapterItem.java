@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Activities.UnderSinkActivity;
 import com.example.shliapp.Models.DatumUnderSink;
 import com.example.shliapp.Models.DeleteModel;
@@ -202,7 +203,6 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         addItem.enqueue(new Callback<AddShoppingListResponse>() {
             @Override
             public void onResponse(Call<AddShoppingListResponse> call, Response<AddShoppingListResponse> response) {
-
                 if (response.body() == null) {
                     Toast.makeText(context, "something went wrong", Toast.LENGTH_SHORT).show();
 
@@ -210,7 +210,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     i = i + 1;
                     if (i == _counter) {
-                        context.startActivity(new Intent(context, UnderSinkActivity.class));
+                        context.startActivity(new Intent(context, StartBottomActivity.class));
                         _counter = 0;
 
                     }

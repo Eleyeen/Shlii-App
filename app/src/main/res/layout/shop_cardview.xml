@@ -10,29 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:mode="normal"
         app:dragEdge="right"
-        >
+        app:mode="normal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
+            android:orientation="horizontal"
             android:paddingTop="28dp"
-            android:paddingBottom="28dp"
-            android:orientation="horizontal">
+            android:paddingBottom="28dp">
 
             <TextView
+                android:id="@+id/tvDelete"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:background="#F40E3D"
-                android:textColor="@android:color/white"
-                android:text="Delete"
                 android:fontFamily="@font/roboto_bolditalic"
-                android:textStyle="bold"
-                android:id="@+id/tvDelete"
-                android:onClick="deleteOnClick"/>
+                android:gravity="center"
+                android:onClick="deleteOnClick"
+                android:text="Delete"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <FrameLayout
@@ -46,111 +45,107 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                android:id="@+id/card1"
-                android:layout_marginTop="5dp"
-                app:cardCornerRadius="25dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:background="@color/colorWhite"
-                    android:layout_width="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:layout_height="wrap_content">
-                    <RelativeLayout
-                        android:background="#F12D55"
-                        android:layout_width="match_parent"
-                        android:id="@+id/relative1"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:fontFamily="@font/roboto_bolditalic"
-                            android:layout_marginLeft="20dp"
-                            android:layout_width="250dp"
-                            android:layout_height="wrap_content"
-                            android:text="Broccoli"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="20dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:padding="7dp"
-                            android:textStyle="bold"
-                            android:id="@+id/tvItems"
-                            />
-
-                        <TextView
-
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:fontFamily="@font/roboto_bolditalic"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:padding="7dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="center"
-                            android:text="39"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="17dp"
-                            android:textStyle="bold"
-                            android:id="@+id/tvQuantity"
-                            />
-
-                    </RelativeLayout>
+                    android:id="@+id/card1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="25dp">
 
                     <RelativeLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/relative2"
-                        android:paddingLeft="30dp"
-                        android:layout_below="@+id/relative1"
-                        >
+                        android:background="@color/colorWhite"
+                        android:paddingBottom="10dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:id="@+id/relative1"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="item Locuation"
-                            android:fontFamily="@font/roboto_bolditalic"
-                            android:id="@+id/itemLocution"
-                            android:textSize="17dp"
-                            android:textColor="@color/colorText"
-                            />
+                            android:background="#F12D55">
 
-                        <TextView
-                            android:layout_below="@+id/itemLocution"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/tvItems"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:fontFamily="@font/roboto_bolditalic"
+                                android:padding="7dp"
+                                android:text="Broccoli"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:id="@+id/tvQuantity"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:fontFamily="@font/roboto_bolditalic"
+                                android:gravity="center"
+                                android:padding="7dp"
+                                android:text="39"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="17dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/relative2"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Row 5: Vegetable Row"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/roboto_bolditalic"
-                            android:textColor="@color/colorBlack"
-                            android:id="@+id/tvRow"
+                            android:layout_below="@+id/relative1"
                             android:layout_marginTop="10dp"
-                            />
+                            android:paddingLeft="30dp">
 
-                        <TextView
-                            android:layout_below="@+id/tvRow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bolditalic"
-                            android:text="Third Column"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-                            />
+                            <TextView
+                                android:id="@+id/itemLocution"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bolditalic"
+                                android:text="item Locuation"
+                                android:textColor="@color/colorText"
+                                android:textSize="17dp" />
 
+                            <TextView
+                                android:id="@+id/tvRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/itemLocution"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/roboto_bolditalic"
+                                android:text="Row 5: Vegetable Row"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvRow"
+                                android:fontFamily="@font/roboto_bolditalic"
+                                android:text="Third Column"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
                     </RelativeLayout>
-                </RelativeLayout>
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
             </RelativeLayout>
 
 
         </FrameLayout>
 
     </com.chauthai.swipereveallayout.SwipeRevealLayout>
-
 
 
 </RelativeLayout>
