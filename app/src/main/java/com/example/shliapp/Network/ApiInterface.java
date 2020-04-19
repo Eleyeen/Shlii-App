@@ -73,6 +73,7 @@ public interface ApiInterface {
             @Field("item_id") String item_id,
             @Field("user_id") String user_id,
             @Field("quantity") String quantity);
+
     @FormUrlEncoded
     @POST("GenerateShopping")
     Call<AddShopingListModel> AddShopListPost(
@@ -117,7 +118,5 @@ public interface ApiInterface {
 
     @GET("getStores")
     Call<GetStoresModel> getStores();
-
-
 
 }
