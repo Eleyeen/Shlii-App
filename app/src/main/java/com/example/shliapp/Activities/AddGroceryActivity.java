@@ -42,13 +42,14 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
     @BindView(R.id.spItemAddGrocery)
     AutoCompleteTextView dynamicSpinner;
-    @BindView(R.id.etQtyAddGrocery)
-    EditText etQtyAddGrocery;
+//    @BindView(R.id.etQtyAddGrocery)
+//    EditText etQtyAddGrocery;
 
     @BindView(R.id.btnAddGrocery)
     Button btnAddGrocery;
     private boolean valid = false;
-    private String strItemAddGrocery, strQtyAddGrocery, strUserID, strQuality;
+    String strQtyAddGrocery = "1";
+    private String strItemAddGrocery,  strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
     ArrayList<Datum> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
@@ -129,7 +130,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<AddGroceryResponse> call, Response<AddGroceryResponse> response) {
 
                 if (response.body() == null) {
-                    Toast.makeText(AddGroceryActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddGroceryActivity.this, "something went wrong == null", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddGroceryActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -160,23 +161,26 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
 
 //        strItemAddGrocery = ids;
-        strQtyAddGrocery = etQtyAddGrocery.getText().toString();
+//        String etQtyAddGrocery = "1";
+//        strQtyAddGrocery = etQtyAddGrocery;
 
 
         if (strItemAddGrocery.isEmpty() && strQtyAddGrocery.isEmpty()) {
 //            spItemAddGrocery.setError("enter a Storage  ");
-            etQtyAddGrocery.setError("enter a Tagline");
+//            etQtyAddGrocery.setError("enter a Tagline");
             valid = false;
         } else if (strItemAddGrocery.isEmpty()) {
 //            spItemAddGrocery.setError("enter a Storage  ");
             valid = false;
         } else if (strQtyAddGrocery.isEmpty()) {
-            etQtyAddGrocery.setError("enter a TagLine  ");
+            Toast.makeText(this, "null strQty", Toast.LENGTH_SHORT).show();
+//            etQtyAddGrocery.setError("enter a TagLine  ");
             valid = false;
         } else {
 //            spItemAddGrocery.setError(null);
-            etQtyAddGrocery.setError(null);
+//            etQtyAddGrocery.setError(null);
         }
+//        4604
         return valid;
     }
 
