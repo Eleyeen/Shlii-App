@@ -106,6 +106,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
