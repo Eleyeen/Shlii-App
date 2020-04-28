@@ -134,7 +134,6 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
                 }
-
             }
 
             @Override

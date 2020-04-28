@@ -155,7 +155,6 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
         super.onDestroy();
 
     }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void detectArrays(List<String> mTitles, List<String> mQuantities) {

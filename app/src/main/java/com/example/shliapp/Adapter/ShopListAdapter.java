@@ -66,8 +66,6 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
             @Override
             public void onClick(View v) {
                 DeleteItem(item.getId());
-                Intent intent = new Intent(context, StartBottomActivity.class);
-                context.startActivity(intent);
             }
         });
 
@@ -106,7 +104,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
             public void onResponse(Call<DeleteShopList> call, Response<DeleteShopList> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
-
+                    notifyDataSetChanged();
 
                 }
 
