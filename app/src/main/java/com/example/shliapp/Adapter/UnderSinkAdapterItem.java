@@ -28,7 +28,11 @@ import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingLis
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.interfaces.SinkItemDetector;
+import com.example.shliapp.utils.AppRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,12 +50,19 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     private List<DatumUnderSink> modelListP;
     private List<DatumUnderSink> listItemsP;
     private Context mContext;
+    private SinkItemDetector sinkItemDetector;
     int i = 0;
+    private HashMap<String, Integer> hashMap = new HashMap<>();
+    private String lastItemName;
+    private List<String> itemTitle = new ArrayList<>();
+    private List<String> itemQuantity = new ArrayList<>();
+    private List<String> itemPosition = new ArrayList<>();
 
-    public UnderSinkAdapterItem(Context context, List<DatumUnderSink> modelListP) {
+    public UnderSinkAdapterItem(Context context, List<DatumUnderSink> modelListP, SinkItemDetector mSinkItemDetector) {
         this.context = context;
         this.listItemsP = modelListP;
         this.modelListP = modelListP;
+        this.sinkItemDetector = mSinkItemDetector;
     }
 
 
@@ -72,7 +83,6 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         return new UnderSinkAdapterItem.MyviewHolder(view);
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull UnderSinkAdapterItem.MyviewHolder myViewHolder, int position) {
@@ -80,46 +90,62 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         final DatumUnderSink item = modelListP.get(position);
 
         myViewHolder.tvItemName.setText(item.getMitemTitle());
-//        myViewHolder.tvQuantity.setText(item.getQuantity());
-        String stritemName = item.getMitemTitle();
 
         viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getItemId());
 
         myViewHolder.tvDelete.setOnClickListener(v -> DeleteItem(item.getId()));
-
-
         myViewHolder.ivPlus.setOnClickListener(v -> {
-            _counter++;
+            if (!itemTitle.contains(item.getMitemTitle())) {
+                _counter = 0;
+                _counter++;
+                itemPosition.add(item.getId());
+                itemTitle.add(item.getMitemTitle());
+                itemQuantity.add(String.valueOf(_counter));
+
+            } else {
+
+
+                _counter = Integer.parseInt(myViewHolder.tvValue.getText().toString());
+                _counter++;
+                for (int i = 0; i<itemTitle.size(); i++){
+                    if (itemTitle.get(i).equals(item.getMitemTitle())){
+                        itemQuantity.set(i, String.valueOf(_counter));
+                    }
+                }
+            }
+
+            sinkItemDetector.detectArrays(itemTitle, itemQuantity);
             _stringVal = Integer.toString(_counter);
             myViewHolder.tvValue.setText(_stringVal);
-            new CountDownTimer(5000, 500) {
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-
-                    AddShopList(item.getMitemTitle());
-                }
-            }.start();
-
+//
         });
 
         myViewHolder.ivMinus.setOnClickListener(v -> {
-            _counter--;
+            if (!itemTitle.contains(item.getMitemTitle())) {
+                _counter = 0;
+                if (_counter>0) {
+                    _counter--;
+                }
+                itemPosition.add(item.getId());
+                itemTitle.add(item.getMitemTitle());
+                itemQuantity.add(String.valueOf(_counter));
+
+            } else {
+                _counter = Integer.parseInt(myViewHolder.tvValue.getText().toString());
+                if (_counter>0) {
+                    _counter--;
+                }
+                for (int i = 0; i<itemTitle.size(); i++){
+                    if (itemTitle.get(i).equals(item.getMitemTitle())){
+                        itemQuantity.set(i, String.valueOf(_counter));
+                    }
+                }
+            }
+
+            sinkItemDetector.detectArrays(itemTitle, itemQuantity);
+            Log.d("zma arrays", itemTitle.toString()+ itemQuantity.toString());
             _stringVal = Integer.toString(_counter);
             myViewHolder.tvValue.setText(_stringVal);
-            new CountDownTimer(5000, 500) {
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    AddShopList(item.getMitemTitle());
-
-                }
-            }.start();
-
 
         });
 
@@ -178,60 +204,6 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         });
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void AddShopList(String strItem) {
-
-//        final Dialog dialog = new Dialog(this);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setCancelable(false);
-//        dialog.setContentView(R.layout.custoom_alertdialog);
-//        ImageView ivPlus = dialog.findViewById(R.id.ivPlusShopList);
-//        ImageView ivMinus = dialog.findViewById(R.id.ivMinusShopList);
-//        TextView tvItemName = dialog.findViewById(R.id.tvItemName);
-//        TextView tvValue =dialog.findViewById(R.id.tvValue);
-//
-//        tvItemName.setText(strItem);
-//        Button btnAddShopList = dialog.findViewById(R.id.btnShopList);
-//
-        String strUserID = GeneralUtills.getSharedPreferences(context).getString("userId", "");
-
-
-        ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddShoppingListResponse> addItem = services.AddShopListPost(
-                strUserID, strItem, _stringVal);
-        addItem.enqueue(new Callback<AddShoppingListResponse>() {
-            @Override
-            public void onResponse(Call<AddShoppingListResponse> call, Response<AddShoppingListResponse> response) {
-                if (response.body() == null) {
-                    Toast.makeText(context, "something went wrong", Toast.LENGTH_SHORT).show();
-
-                } else if (response.body().getStatus()) {
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    i = i + 1;
-                    if (i == _counter) {
-                        context.startActivity(new Intent(context, StartBottomActivity.class));
-                        _counter = 0;
-
-                    }
-                    Log.d("zma counter", String.valueOf(_counter));
-
-                } else {
-                    Toast.makeText(context, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AddShoppingListResponse> call, Throwable t) {
-                Log.d("response", "error " + t.getMessage());
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void onClick(View v) {
-
-    }
 
 
 }

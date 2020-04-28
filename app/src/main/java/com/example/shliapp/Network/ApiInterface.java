@@ -17,6 +17,8 @@ import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -75,11 +77,11 @@ public interface ApiInterface {
             @Field("quantity") String quantity);
 
     @FormUrlEncoded
-    @POST("GenerateShopping")
-    Call<AddShoppingListResponse> AddShopListPost(
-            @Field("user_id") String user_id,
-            @Field("item_title") String item_title,
-            @Field("quantity") String quantity);
+    @POST("makeShoppingList")
+    Call<AddShoppingListResponse> addShoppingList(@Field("user_id") String userID,
+                                   @Field("items[0][item_title]") List<String> itemsList,
+                                   @Field("items[0][quantity]") List<String> quantityList);
+
 
     @FormUrlEncoded
     @POST("location")
