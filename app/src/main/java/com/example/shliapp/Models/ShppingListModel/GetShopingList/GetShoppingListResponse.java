@@ -2,11 +2,10 @@
 package com.example.shliapp.Models.ShppingListModel.GetShopingList;
 
 import java.util.List;
-
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
 import com.google.gson.annotations.SerializedName;
 
-public class GetShoppingList {
+@SuppressWarnings("unused")
+public class GetShoppingListResponse {
 
     @SerializedName("code")
     private Long mCode;

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -49,7 +48,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     Button btnAddGrocery;
     private boolean valid = false;
     String strQtyAddGrocery = "1";
-    private String strItemAddGrocery,  strUserID, strQuality;
+    private String strItemAddGrocery, strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
     ArrayList<Datum> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
@@ -82,11 +81,10 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.btnAddGrocery:
-                progressDialog = new ProgressDialog(AddGroceryActivity.this);
-                progressDialog.setTitle("Loading...");
-                progressDialog.setMessage("Wait");
-                progressDialog.show();
-
+//                progressDialog = new ProgressDialog(AddGroceryActivity.this);
+//                progressDialog.setTitle("Loading...");
+//                progressDialog.setMessage("Wait");
+//                progressDialog.show();
                 if (validate()) {
                     apiAddGrocery();
 
@@ -155,30 +153,12 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
     private boolean validate() {
         valid = true;
-//        SharedPreferences sharedPreferences = getSharedPreferences("addGroceryItem", Context.MODE_PRIVATE);
-//        String ids = sharedPreferences.getString("itemID", "");
-//        Toast.makeText(this, "text :::" + ids, Toast.LENGTH_LONG).show();
-
-
-//        strItemAddGrocery = ids;
-//        String etQtyAddGrocery = "1";
-//        strQtyAddGrocery = etQtyAddGrocery;
-
-
-        if (strItemAddGrocery.isEmpty() && strQtyAddGrocery.isEmpty()) {
-//            spItemAddGrocery.setError("enter a Storage  ");
-//            etQtyAddGrocery.setError("enter a Tagline");
+        if (strItemAddGrocery.isEmpty()) {
             valid = false;
-        } else if (strItemAddGrocery.isEmpty()) {
-//            spItemAddGrocery.setError("enter a Storage  ");
-            valid = false;
-        } else if (strQtyAddGrocery.isEmpty()) {
+        }
+        if (strQtyAddGrocery.isEmpty()) {
             Toast.makeText(this, "null strQty", Toast.LENGTH_SHORT).show();
-//            etQtyAddGrocery.setError("enter a TagLine  ");
             valid = false;
-        } else {
-//            spItemAddGrocery.setError(null);
-//            etQtyAddGrocery.setError(null);
         }
 //        4604
         return valid;
@@ -188,9 +168,6 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-//        Intent intent = new Intent(AddGroceryActivity.this, UnderSinkActivity.class);
-//        startActivity(intent);
     }
 
     @Override

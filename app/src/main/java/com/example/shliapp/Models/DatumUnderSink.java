@@ -3,6 +3,8 @@ package com.example.shliapp.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import okhttp3.Interceptor;
+
 public class DatumUnderSink {
 
     @SerializedName("created_at")
@@ -19,6 +21,16 @@ public class DatumUnderSink {
     private String mUpdatedAt;
     @SerializedName("user_id")
     private String mUserId;
+
+    public Integer getCounter() {
+        return counter;
+    }
+
+    public void setCounter(Integer counter) {
+        this.counter = counter;
+    }
+
+    private Integer counter;
 
     public String getCreatedAt() {
         return mCreatedAt;

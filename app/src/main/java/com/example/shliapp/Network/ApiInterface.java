@@ -11,11 +11,13 @@ import com.example.shliapp.Models.ItemRespones;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
-import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShopingListModel;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingList;
+import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingListResponse;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -75,11 +77,11 @@ public interface ApiInterface {
             @Field("quantity") String quantity);
 
     @FormUrlEncoded
-    @POST("GenerateShopping")
-    Call<AddShopingListModel> AddShopListPost(
-            @Field("user_id") String user_id,
-            @Field("item_title") String item_title,
-            @Field("quantity") String quantity);
+    @POST("makeShoppingList")
+    Call<AddShoppingListResponse> addShoppingList(@Field("user_id") String userID,
+                                   @Field("items[0][item_title]") List<String> itemsList,
+                                   @Field("items[0][quantity]") List<String> quantityList);
+
 
     @FormUrlEncoded
     @POST("location")
@@ -113,7 +115,7 @@ public interface ApiInterface {
     Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
     @GET("getShoppingList/{id}")
-    Call<GetShoppingList> getShoppingList(@Path("id") String groupId);
+    Call<GetShoppingListResponse> getShoppingList(@Path("id") String groupId);
 
 
     @GET("getStores")
