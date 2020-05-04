@@ -12,6 +12,7 @@ import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;
 import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingListResponse;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.GetShoppingListNew;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
@@ -114,8 +115,8 @@ public interface ApiInterface {
     @GET("getProfile/{id}")
     Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
-    @GET("getShoppingList/{id}")
-    Call<GetShoppingListResponse> getShoppingList(@Path("id") String groupId);
+    @GET("getList")
+    Call<GetShoppingListNew> getShoppingList();
 
 
     @GET("getStores")

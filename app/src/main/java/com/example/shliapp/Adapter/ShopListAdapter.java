@@ -20,6 +20,7 @@ import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Models.DeleteModel;
 import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Item;
 import com.example.shliapp.R;
 
 import java.util.List;
@@ -34,12 +35,10 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     View view;
     private Context context;
-    private List<Datum> modelListP ;
-    private List<Datum>  listItemsP;
+    private List<Item> modelListP ;
     private  Context mContext;
-    public ShopListAdapter(Context context, List<Datum> modelListP) {
+    public ShopListAdapter(Context context, List<Item> modelListP) {
         this.context = context;
-        this.listItemsP = modelListP;
         this.modelListP = modelListP;
     }
 
@@ -48,7 +47,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     @Override
     public ShopListAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_cardview, parent , false) ;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shoppinglistcardview, parent , false) ;
 
 
         return new ShopListAdapter.MyviewHolder(view);    }
@@ -57,17 +56,20 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     @Override
     public void onBindViewHolder(@NonNull ShopListAdapter.MyviewHolder myViewHolder, int position) {
 
-        final Datum item = modelListP.get(position);
+        final Item item = modelListP.get(position);
 
         myViewHolder.tvItemName.setText(item.getItemTitle());
-        myViewHolder.tvQuantity.setText(item.getQuantity());
-        viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getId());
-        myViewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteItem(item.getId());
-            }
-        });
+        myViewHolder.tvQuantity.setText(item.getItemNumber());
+        String rowNumber = item.getRowNumber();
+        if (item.getRowNumber() != rowNumber) {
+            myViewHolder.tvRowNumber.setText("Row " + item.getRowNumber());
+        }
+//        myViewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DeleteItem(item.getId());
+//            }
+//        });
 
     }
 
@@ -78,20 +80,17 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.Myview
     }
 
     public class MyviewHolder extends RecyclerView.ViewHolder {
-        private TextView tvQuantity;
+        private TextView tvQuantity, tvItemName, tvRowNumber;
         private SwipeRevealLayout swipeRevealLayout;
-        private TextView tvItemName;
-        private TextView tvDelete;
 
 
 
 
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
-            swipeRevealLayout=itemView.findViewById(R.id.swipe_layout_1);
-            tvItemName =itemView.findViewById(R.id.tvItems);
-            tvQuantity=itemView.findViewById(R.id.tvQuantity);
-            tvDelete=itemView.findViewById(R.id.tvDelete);
+            tvItemName =itemView.findViewById(R.id.shopingListItemName);
+            tvRowNumber = itemView.findViewById(R.id.tvshopingListRoomName);
+            tvQuantity=itemView.findViewById(R.id.shopingListItemValue);
 
         }
     }

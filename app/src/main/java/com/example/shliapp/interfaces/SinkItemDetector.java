@@ -4,5 +4,5 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface SinkItemDetector {
-    void detectArrays(List<String> mTitles, List<String> mQuantities);
+    void detectArrays(List<String> mId, List<String> mQuantities);
 }

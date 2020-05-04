@@ -6,40 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/colorScreen"
     tools:context=".Fragment.ShoppingFragment">
-<RelativeLayout
-    android:id="@+id/shopingListRelative"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/shopingListRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/tvShopping"
-        android:fontFamily="@font/roboto_bolditalic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Shopping List "
-        android:textColor="#344356"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvShopping"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/cvFindFood"
-        android:background="@color/colorWhite"
-        app:cardCornerRadius="20dp">
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tvShopping"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Shopping List "
+            android:textColor="#344356"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFindFood"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvShopping"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:background="@color/colorWhite"
-            android:padding="5dp">
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:background="@color/colorWhite"
+                android:padding="5dp">
 
                 <ImageView
                     android:id="@+id/ivFindFood"
@@ -50,131 +51,125 @@
 
 
                 <RelativeLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="60dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="5dp">
 
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:id="@+id/tvFindFood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_bolditalic"
                         android:text="find Foods"
                         android:textColor="@color/colorBlack"
                         android:textSize="20dp"
-                        android:id="@+id/tvFindFood"
-                        android:fontFamily="@font/roboto_bolditalic"
                         android:textStyle="bold"
                         tools:ignore="Suspicious0dp" />
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvGateWay"-->
-<!--                        android:layout_below="@id/tvFindFood"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="5766 Mario Gateway"-->
-<!--                        android:textColor="#808A98"-->
-<!--                        android:fontFamily="@font/roboto_bolditalic"-->
-<!--                        android:textSize="16dp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        tools:ignore="Suspicious0dp" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/tvGateWay"-->
+                    <!--                        android:layout_below="@id/tvFindFood"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="5766 Mario Gateway"-->
+                    <!--                        android:textColor="#808A98"-->
+                    <!--                        android:fontFamily="@font/roboto_bolditalic"-->
+                    <!--                        android:textSize="16dp"-->
+                    <!--                        android:textStyle="bold"-->
+                    <!--                        tools:ignore="Suspicious0dp" />-->
 
                 </RelativeLayout>
 
 
                 <ImageView
-                    android:layout_marginTop="15dp"
                     android:layout_width="40dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
                     android:padding="10dp"
                     android:src="@mipmap/sync" />
 
 
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cvFindFood"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorWhite"
-        app:cardCornerRadius="20dp"
-
-        >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorScreen"
+            android:layout_below="@+id/cvFindFood"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="18dp"
+            android:background="@color/colorWhite"
+            app:cardCornerRadius="20dp"
+
             >
 
-
             <RelativeLayout
-                android:id="@+id/relative3"
-                android:background="@color/colorWhite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="items"
-                android:textColor="#858E9A"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto_bolditalic"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:textStyle="bold"
-                android:id="@+id/tvItemsUnderSink"
-                />
+                android:background="@color/colorScreen">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:fontFamily="@font/roboto_bolditalic"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="Quantity"
-                android:textColor="#858E9A"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:id="@+id/tvQuantityUnderSink"
-                />
+
+                <RelativeLayout
+                    android:id="@+id/relative3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/tvItemsUnderSink"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_bolditalic"
+                        android:padding="5dp"
+                        android:text="items"
+                        android:textColor="#858E9A"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvQuantityUnderSink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_bolditalic"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Quantity"
+                        android:textColor="#858E9A"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/vViewUnderSink"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/relative3"
+                    android:background="#E2EBF6" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvShoppingList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vViewUnderSink"
+                    android:layout_marginBottom="15dp" />
+
             </RelativeLayout>
 
-            <View
-                android:layout_below="@+id/relative3"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#E2EBF6"
-                android:id="@+id/vViewUnderSink"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rvShoppingList"
-                android:layout_below="@+id/vViewUnderSink"
-                android:layout_marginBottom="15dp"
-                />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
-
-</RelativeLayout>
+    </RelativeLayout>
 </ScrollView>

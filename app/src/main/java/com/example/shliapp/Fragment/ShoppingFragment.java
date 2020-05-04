@@ -20,11 +20,15 @@ import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.GetShoppingListNew;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Item;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     RecyclerView rvShoppingList;
     ApiInterface services;
     ProgressDialog progressDialog;
+    List<Item> itemList = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -123,21 +128,23 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<GetShoppingListResponse> call = services.getShoppingList(AppRepository.mUserID(getActivity()));
+        Call<GetShoppingListNew> call = services.getShoppingList();
 
-        call.enqueue(new Callback<GetShoppingListResponse>() {
+        call.enqueue(new Callback<GetShoppingListNew>() {
             @Override
-            public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
+            public void onResponse(Call<GetShoppingListNew> call, Response<GetShoppingListNew> response) {
                 if (response.isSuccessful()) {
-                    GetShoppingListResponse jobDataModels = response.body();
-                    ShopListAdapter adapter = new ShopListAdapter(getActivity(), jobDataModels.getData());
+                    for (int i = 0; i< response.body().getData().size(); i++) {
+                        itemList.addAll(response.body().getData().get(i).getItems());
+                    }
+                    ShopListAdapter adapter = new ShopListAdapter(getActivity(),itemList);
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
                 }
             }
 
             @Override
-            public void onFailure(Call<GetShoppingListResponse> call, Throwable t) {
+            public void onFailure(Call<GetShoppingListNew> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });
