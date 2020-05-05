@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ShopListAdapter;
+import com.example.shliapp.Adapter.ShoppingListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Datum;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.GetShoppingListNew;
@@ -137,11 +138,11 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<GetShoppingListNew> call, Response<GetShoppingListNew> response) {
                 if (response.isSuccessful()) {
 
-                    datumList.addAll(response.body().getData());
+//                    datumList.addAll(response.body().getData());
                     for (int i = 0; i< response.body().getData().size(); i++) {
                         itemList.addAll(response.body().getData().get(i).getItems());
                     }
-                    ShopListAdapter adapter = new ShopListAdapter(getActivity(),itemList, datumList);
+                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(),itemList);
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
                 }
