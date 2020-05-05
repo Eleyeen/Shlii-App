@@ -20,6 +20,7 @@ import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Datum;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.GetShoppingListNew;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Item;
 import com.example.shliapp.Network.ApiClienTh;
@@ -53,6 +54,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     ApiInterface services;
     ProgressDialog progressDialog;
     List<Item> itemList = new ArrayList<>();
+    List<Datum> datumList = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -134,10 +136,12 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<GetShoppingListNew> call, Response<GetShoppingListNew> response) {
                 if (response.isSuccessful()) {
+
+                    datumList.addAll(response.body().getData());
                     for (int i = 0; i< response.body().getData().size(); i++) {
                         itemList.addAll(response.body().getData().get(i).getItems());
                     }
-                    ShopListAdapter adapter = new ShopListAdapter(getActivity(),itemList);
+                    ShopListAdapter adapter = new ShopListAdapter(getActivity(),itemList, datumList);
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
                 }

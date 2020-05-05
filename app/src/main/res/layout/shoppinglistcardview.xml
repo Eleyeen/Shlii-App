@@ -11,25 +11,6 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvshopingListRoomName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Room Name"
-            android:textColor="@color/colorBlack"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/relative32"
-            android:background="#E2EBF6" />
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,20 +22,20 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bolditalic"
                 android:padding="10dp"
-                android:text="row Number :"
                 android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/shopingListItemValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/roboto_bolditalic"
                 android:padding="10dp"
-                android:text="5"
+                android:gravity="end"
+
                 android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:textStyle="bold" />
