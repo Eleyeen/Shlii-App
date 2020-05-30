@@ -17,13 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shliapp.Activities.ChooseStoreActivity;
-import com.example.shliapp.Activities.GeneralUtills;
-import com.example.shliapp.Adapter.ShopListAdapter;
 import com.example.shliapp.Adapter.ShoppingListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Datum;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.GetShoppingListNew;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Item;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.ContentItem;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Header;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Item;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.ListItem;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -56,7 +57,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     ProgressDialog progressDialog;
     List<Item> itemList = new ArrayList<>();
     List<Datum> datumList = new ArrayList<>();
-
+    List<List<ListItem>> arraylist;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -105,7 +106,6 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                     tvFindFood.setText(response.body().getStores().get(0).getStoreName());
                     progressDialog.dismiss();
                 }
-
             }
 
             @Override
@@ -127,29 +127,43 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<GetShoppingListNew> call = services.getShoppingList();
+        Call<GetShoppingListResponse> call = services.getShoppingList();
 
-        call.enqueue(new Callback<GetShoppingListNew>() {
+        call.enqueue(new Callback<GetShoppingListResponse>() {
             @Override
-            public void onResponse(Call<GetShoppingListNew> call, Response<GetShoppingListNew> response) {
+            public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
                 if (response.isSuccessful()) {
+                    ArrayList<ListItem> arrayList = new ArrayList<>();
+                    for(int j = 0; j < response.body().getData().size(); j++) {
+                        Header header = new Header();
+                        header.setHeader(response.body().getData().get(j).getRowName());
+                        arrayList.add(header);
+                        for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
+                            ContentItem item = new ContentItem();
+                            item.setRollnumber(response.body().getData().get(j).getItems().get(i).getItemNumber());
+                            item.setName(response.body().getData().get(j).getItems().get(i).getItemTitle());
+                            arrayList.add(item);
+                        }
+                    }
+
+
 
 //                    datumList.addAll(response.body().getData());
-                    for (int i = 0; i< response.body().getData().size(); i++) {
-                        itemList.addAll(response.body().getData().get(i).getItems());
-                    }
-                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(),itemList);
+//
+//                    for (int i = 0; i < response.body().getData().size(); i++) {
+//                        itemList.addAll(response.body().getData().get(i).getItems());
+//                    }
+                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
                 }
             }
 
             @Override
-            public void onFailure(Call<GetShoppingListNew> call, Throwable t) {
+            public void onFailure(Call<GetShoppingListResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });

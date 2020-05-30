@@ -1,38 +1,39 @@
 
 package com.example.shliapp.Models.ShppingListModel.GetShopingList;
 
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
 public class Datum {
 
-    @SerializedName("created_at")
-    private String mCreatedAt;
     @SerializedName("id")
-    private String mId;
+    private Long mId;
+    @SerializedName("item_number")
+    private String mItemNumber;
     @SerializedName("item_title")
     private String mItemTitle;
-    @SerializedName("quantity")
-    private String mQuantity;
-    @SerializedName("updated_at")
-    private String mUpdatedAt;
-    @SerializedName("user_id")
-    private String mUserId;
+    @SerializedName("items")
+    private List<Item> mItems;
+    @SerializedName("row_name")
+    private String mRowName;
+    @SerializedName("row_number")
+    private String mRowNumber;
 
-    public String getCreatedAt() {
-        return mCreatedAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        mCreatedAt = createdAt;
-    }
-
-    public String getId() {
+    public Long getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         mId = id;
+    }
+
+    public String getItemNumber() {
+        return mItemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        mItemNumber = itemNumber;
     }
 
     public String getItemTitle() {
@@ -43,28 +44,28 @@ public class Datum {
         mItemTitle = itemTitle;
     }
 
-    public String getQuantity() {
-        return mQuantity;
+    public List<Item> getItems() {
+        return mItems;
     }
 
-    public void setQuantity(String quantity) {
-        mQuantity = quantity;
+    public void setItems(List<Item> items) {
+        mItems = items;
     }
 
-    public String getUpdatedAt() {
-        return mUpdatedAt;
+    public String getRowName() {
+        return mRowName;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        mUpdatedAt = updatedAt;
+    public void setRowName(String rowName) {
+        mRowName = rowName;
     }
 
-    public String getUserId() {
-        return mUserId;
+    public String getRowNumber() {
+        return mRowNumber;
     }
 
-    public void setUserId(String userId) {
-        mUserId = userId;
+    public void setRowNumber(String rowNumber) {
+        mRowNumber = rowNumber;
     }
 
 }

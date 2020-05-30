@@ -1,5 +1,5 @@
 
-package com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew;
+package com.example.shliapp.Models.ShppingListModel.GetShopingList;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class Item {
 
     @SerializedName("id")
-    private String mId;
+    private Long mId;
     @SerializedName("item_number")
     private String mItemNumber;
     @SerializedName("item_title")
@@ -17,11 +17,11 @@ public class Item {
     @SerializedName("row_number")
     private String mRowNumber;
 
-    public String getId() {
+    public Long getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         mId = id;
     }
 

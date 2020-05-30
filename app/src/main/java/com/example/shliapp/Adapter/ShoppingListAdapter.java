@@ -1,7 +1,6 @@
 package com.example.shliapp.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,71 +10,96 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListNew.Item;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.ContentItem;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Header;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.Item;
+import com.example.shliapp.Models.ShppingListModel.GetShopingList.ListItem;
 import com.example.shliapp.R;
 
 import java.util.List;
 
-public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder> {
-    final int VIEW_TYPE_ROW_NUMBER = 0;
-    final int VIEW_TYPE_ROW_ITEMS = 1;
+public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     View view;
     private Context context;
-    private List<Item> rowItemList;
+    List<ListItem> list;
     private Context mContext;
     String previousPosition;
 
-    public ShoppingListAdapter(Context context, List<Item> rowItemList) {
+    public ShoppingListAdapter(Context context, List<ListItem> headerItems) {
         this.context = context;
-        this.rowItemList = rowItemList;
+        this.list = headerItems;
     }
 
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.shoppinglistcardview, parent, false);
-        return new ShoppingListAdapter.MyViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE_HEADER) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.row_number_layout, parent, false);
+            return new ShoppingListAdapter.VHHeader(view);
+        } else if (viewType == TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.shoppinglistcardview, parent, false);
+            return new ShoppingListAdapter.VHItem(view);
+        }
+        throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        Item item = rowItemList.get(position);
-        myViewHolder.tvItemName.setText(item.getItemTitle());
-        myViewHolder.tvQuantity.setText(item.getItemNumber());
-        if (position > 0) {
-            previousPosition = rowItemList.get(position - 1).getRowNumber();
-            Log.d("zma previous", previousPosition);
-            if (previousPosition.equals(item.getItemTitle())) {
-                myViewHolder.tvRowNumber.setVisibility(View.GONE);
-            } else {
-                myViewHolder.tvRowNumber.setVisibility(View.GONE);
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position))
+            return TYPE_HEADER;
+        return TYPE_ITEM;
+    }
 
-                myViewHolder.tvRowNumber.setText(item.getRowNumber());
-            }
+    private boolean isPositionHeader(int position) {
+        return list.get(position) instanceof Header;
+    }
+
+    private String getItem(int position) {
+        return list.get(position - 1).getName();
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof VHItem) {
+            VHItem vhItem = (VHItem) holder;
+            ContentItem currentItem = (ContentItem) list.get(position);
+            vhItem.tvItemName.setText(currentItem.getName());
+            ((VHItem) holder).tvQuantity.setText(currentItem.getRollnumber());
+        } else if (holder instanceof VHHeader) {
+            Header  currentItem = (Header) list.get(position);
+            VHHeader vhHeader = (VHHeader) holder;
+            vhHeader.tvRowNumber.setText(currentItem.getHeader());
         }
-
-
-
-
     }
 
     @Override
     public int getItemCount() {
-        return rowItemList.size();
+        return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvQuantity, tvItemName, tvRowNumber;
-
-
-        public MyViewHolder(@NonNull View itemView) {
+    public class VHItem extends RecyclerView.ViewHolder {
+        private TextView tvQuantity, tvItemName;
+        public VHItem(@NonNull View itemView) {
             super(itemView);
-            tvRowNumber = itemView.findViewById(R.id.tvshopingListRoomName);
             tvItemName = itemView.findViewById(R.id.shopingListItemName);
             tvQuantity = itemView.findViewById(R.id.shopingListItemValue);
         }
     }
+    public class VHHeader extends RecyclerView.ViewHolder {
+        TextView tvRowNumber;
+
+        public VHHeader(@NonNull View itemView) {
+            super(itemView);
+            tvRowNumber = itemView.findViewById(R.id.tvshopingListRoomName);
+
+        }
+    }
 }
+
