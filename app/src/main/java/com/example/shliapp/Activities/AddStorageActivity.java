@@ -18,6 +18,7 @@ import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +65,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             case R.id.btnAddStorage:
                 if (validate()) {
                     apiAddStorage();
-                    progressDialog  = new ProgressDialog(AddStorageActivity.this);
+                    progressDialog = new ProgressDialog(AddStorageActivity.this);
                     progressDialog.setTitle("Loading...");
                     progressDialog.setMessage("Wait");
                     progressDialog.show();
@@ -78,23 +79,23 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     private void apiAddStorage() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
         Call<AddStorageModel> addStorage = services.AddStoragePost(strStorageName,
-                strTagLinee);
+                AppRepository.mUserID(this));
         addStorage.enqueue(new Callback<AddStorageModel>() {
             @Override
             public void onResponse(Call<AddStorageModel> call, Response<AddStorageModel> response) {
 
                 if (response.body() == null) {
                     Toast.makeText(AddStorageActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
-progressDialog.dismiss();
+                    progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddStorageActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(AddStorageActivity.this, StartBottomActivity.class));
-progressDialog.dismiss();
+                    progressDialog.dismiss();
 
                 } else {
                     Toast.makeText(AddStorageActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -112,17 +113,12 @@ progressDialog.dismiss();
         valid = true;
 
         strStorageName = etStorageName.getText().toString();
-         strTagLinee= GeneralUtills.getSharedPreferences(AddStorageActivity.this).getString("userId" , "");
+//        strTagLinee = GeneralUtills.getSharedPreferences(AddStorageActivity.this).getString("userId", "");
 
 
-
-
-        if (strStorageName.isEmpty() ) {
+        if (strStorageName.isEmpty()) {
             etStorageName.setError("enter a Storage  ");
 //            etTagLine.setError("enter a Tagline");
-            valid = false;
-        } else if (strStorageName.isEmpty()) {
-            etStorageName.setError("enter a Storage  ");
             valid = false;
         } else {
             etStorageName.setError(null);

@@ -4,8 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
@@ -16,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ChangePassActivity"></activity>
+        <activity android:name=".Activities.SecondIntroActivity"
+            android:theme="@style/Theme.Intro"/>
+<!--        <activity android:name=".Activities.FirstIntroActivity" />-->
+        <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.VerifyActivity" />
         <activity android:name=".Activities.ForGotPasswordActivity" />
         <activity android:name=".Activities.CongratulationActivity" />
@@ -29,7 +33,7 @@
         <activity android:name=".Activities.StartBottomActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.FirstIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

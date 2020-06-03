@@ -1,6 +1,10 @@
 package com.example.shliapp.Activities;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,7 +52,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     Button btnAddGrocery;
     private boolean valid = false;
     String strQtyAddGrocery = "1";
-    private String strItemAddGrocery, strUserID, strQuality;
+    private String strItemAddGrocery = "", strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
     ArrayList<Datum> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
@@ -88,6 +92,17 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                 if (validate()) {
                     apiAddGrocery();
 
+                }else {
+                    AlertDialog dialog = new AlertDialog.Builder(this).create();
+                    dialog.setTitle("No Grocery Selected");
+                    dialog.setMessage("Please select a grocery item from the suggestions. ");
+                    dialog.setButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 }
         }
 
@@ -153,6 +168,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
 
     private boolean validate() {
         valid = true;
+//        strItemAddGrocery = dynamicSpinner.getText().toString();
         if (strItemAddGrocery.isEmpty()) {
             valid = false;
         }

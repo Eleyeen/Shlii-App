@@ -61,4 +61,7 @@ public class AppRepository {
     public static boolean isProUser(Context context) {
         return mGetValue(context).getBoolean("isPro", false);
     }
+    public static boolean isFirstOpen(Context context) {
+        return mGetValue(context).getBoolean("isFirstOpen", false);
+    }
 }

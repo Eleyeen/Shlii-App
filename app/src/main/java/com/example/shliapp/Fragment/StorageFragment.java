@@ -164,7 +164,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
 
 
-        Call<GetStorageModel> call = services.getStorage(GeneralUtills.getSharedPreferences(getContext()).getString("userId", ""));
+        Call<GetStorageModel> call = services.getStorage(AppRepository.mUserID(getActivity()));
 
         call.enqueue(new Callback<GetStorageModel>() {
             @Override

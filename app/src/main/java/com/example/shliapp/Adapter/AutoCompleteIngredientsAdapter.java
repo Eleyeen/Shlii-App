@@ -1,6 +1,7 @@
 package com.example.shliapp.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +57,7 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
             textViewName.setText(countryItem.getItemTitle());
             textViewName.setOnTouchListener((v, event) -> {
                 itemID.groceryItem(countryItem.getId());
+                Log.d("zma item id", countryItem.getId());
                 return false;
             });
 

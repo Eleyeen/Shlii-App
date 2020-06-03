@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.flywaydb:flyway-core:3.2.1'
+    implementation 'org.flywaydb:flyway-core:3.2.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -75,6 +75,7 @@ dependencies {
 
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation 'com.karumi:dexter:5.0.0'
+    implementation 'io.github.dreierf:material-intro-screen:0.0.6'
 
 
 

@@ -4,4 +4,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shli">SHLI</string>
+    <string name="this_app">"This app requires a quicl set-up when \nused for the first time. Please do this \nbefore creating your first shopping \nlist. "</string>
+    <string name="auto">You will automatically enter the \nstorage area of the App first</string>
+    <string name="here_you">"Here you will recreate all of the \nstorage areas in your house including \ncupboards, fridge, freezer, under \nsink, under stair, bathroom, larder, \nutility room etc. "</string>
+    <string name="when_you_create">"When you create a storage you then \nneed to add all possible items you \nstore in that area. "</string>
+    <string name="this_list_will_remind">This list will remind you of everything you might need on your next shopping trip. Particularly those items that are missing, and you forget to add to the list.</string>
+    <string name="once_you_have_created_your_storage_you_can_then_create_a_shopping_list_easily_and_quickly_by_adding_the_number_of_each_item_you_need">Once you have created your storage you can then create a shopping list easily and quickly by adding the number of each item you need.</string>
+    <string name="when_you_arrive_at_the_store_of_your_choice_all_items_with_0_will_be_removed_and_the_shopping_list_will_display_in_the_order_of_the_store_you_are_in">When you arrive at the store of your choice all items with ‘0’ will be removed and the shopping list will display in the order of the store you are in.</string>
 </resources>

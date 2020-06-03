@@ -90,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/vView"
+                    android:visibility="gone"
                     android:layout_margin="13dp"
                     android:backgroundTint="@color/colorWhite"
                     android:fontFamily="@font/roboto"

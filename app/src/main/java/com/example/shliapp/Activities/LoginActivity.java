@@ -23,6 +23,11 @@ import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -136,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (response.isSuccessful()) {
                     LoginResponse loginResponse = response.body();
-                    if (loginResponse.getMessage().equals("User Successfully Login")) {
+                    if (response.body().getStatus()) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         Boolean statusLocked = prefs.edit().putBoolean("locked", true).commit();
                         prefs.edit().putBoolean("locked", true).apply();
@@ -146,14 +151,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         GeneralUtills.putStringValueInEditor(LoginActivity.this, "userId", response.body().getData().getId().toString());
 //                        Log.d("abcd", "abc" + response.body().getData().getId());
 
-
                         Intent intent = new Intent(LoginActivity.this, StartBottomActivity.class);
                         startActivity(intent);
-                        Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         finishAffinity();
 
                     } else {
-                        Toast.makeText(LoginActivity.this, "incorrect", Toast.LENGTH_SHORT).show();
+//                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            Toast.makeText(LoginActivity.this, "Invalid Username Or Password!", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
 

@@ -23,6 +23,11 @@ import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -179,7 +184,7 @@ onBackPressed();
 
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
-                        Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(SignUpActivity.this, "Empty", Toast.LENGTH_SHORT).show();
@@ -187,7 +192,14 @@ onBackPressed();
                     }
 
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(SignUpActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     progressDialog.dismiss();
                 }
             }
