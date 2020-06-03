@@ -41,7 +41,7 @@ public class SecondIntroActivity extends MaterialIntroActivity {
     @Override
     public void onFinish() {
         super.onFinish();
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, HomeScreenActivity.class));
         finish();
     }
 }

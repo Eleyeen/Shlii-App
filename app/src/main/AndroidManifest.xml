@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Activities.SecondIntroActivity"
             android:theme="@style/Theme.Intro"/>
-<!--        <activity android:name=".Activities.FirstIntroActivity" />-->
+        <activity android:name=".Activities.FirstIntroActivity" />
         <activity android:name=".Activities.ChangePassActivity" />
         <activity android:name=".Activities.VerifyActivity" />
         <activity android:name=".Activities.ForGotPasswordActivity" />
@@ -33,7 +33,7 @@
         <activity android:name=".Activities.StartBottomActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.FirstIntroActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

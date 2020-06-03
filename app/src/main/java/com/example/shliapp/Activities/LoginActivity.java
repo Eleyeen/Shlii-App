@@ -142,14 +142,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful()) {
                     LoginResponse loginResponse = response.body();
                     if (response.body().getStatus()) {
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                        Boolean statusLocked = prefs.edit().putBoolean("locked", true).commit();
-                        prefs.edit().putBoolean("locked", true).apply();
 
-                        response.body().getData().getId();
+                        AppRepository.mPutValue(LoginActivity.this).putBoolean("loggedIn", true).commit();
                         AppRepository.mPutValue(LoginActivity.this).putString("userID", response.body().getData().getId()).commit();
                         GeneralUtills.putStringValueInEditor(LoginActivity.this, "userId", response.body().getData().getId().toString());
-//                        Log.d("abcd", "abc" + response.body().getData().getId());
 
                         Intent intent = new Intent(LoginActivity.this, StartBottomActivity.class);
                         startActivity(intent);

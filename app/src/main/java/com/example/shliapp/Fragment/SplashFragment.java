@@ -1,24 +1,21 @@
 package com.example.shliapp.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.shliapp.Activities.FirstIntroActivity;
 import com.example.shliapp.Activities.HomeScreenActivity;
-import com.example.shliapp.Activities.LoginActivity;
 import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
+
 public class SplashFragment extends Fragment {
 
     View parentView;
@@ -47,23 +44,13 @@ public class SplashFragment extends Fragment {
 
             public void onFinish() {
 
-
-                SharedPreferences prefsd = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                Boolean yourLock = prefsd.getBoolean("lockedP", false);
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                Boolean yourLocked = prefs.getBoolean("locked", false);
-                if(yourLocked){
-                    Intent intent = new Intent(getActivity(), StartBottomActivity
-                            .class);
+                if (AppRepository.isLoggedIn(getActivity())) {
+                    Intent intent = new Intent(getActivity(), StartBottomActivity.class);
                     startActivity(intent);
 
-                }else if(yourLock){
-                    Intent intent = new Intent(getActivity(), StartBottomActivity
-                            .class);
-                    startActivity(intent);
-
-                }else{
+                } else if (!AppRepository.isFirstOpen(getActivity())) {
+                    startActivity(new Intent(getActivity(), FirstIntroActivity.class));
+                } else {
                     Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
                     startActivity(intent);
 
