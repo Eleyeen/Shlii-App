@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="shli">SHLI</string>
+    <string name="shli">ShLi</string>
     <string name="this_app">"This app requires a quicl set-up when \nused for the first time. Please do this \nbefore creating your first shopping \nlist. "</string>
     <string name="auto">You will automatically enter the \nstorage area of the App first</string>
     <string name="here_you">"Here you will recreate all of the \nstorage areas in your house including \ncupboards, fridge, freezer, under \nsink, under stair, bathroom, larder, \nutility room etc. "</string>

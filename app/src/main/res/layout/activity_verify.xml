@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
-        android:text="we've sent you the codeon the Emailyou provide,please verify yourself"
+        android:text="We have sent the code to your email, please enter that code below. "
         android:layout_below="@id/verify"
         android:textAllCaps="false"
         android:textColor="#808A98"

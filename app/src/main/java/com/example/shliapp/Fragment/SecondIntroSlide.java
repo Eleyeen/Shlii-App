@@ -12,13 +12,13 @@ import com.example.shliapp.R;
 
 import agency.tango.materialintroscreen.SlideFragment;
 
-public class CustomSlide extends SlideFragment {
+public class SecondIntroSlide extends SlideFragment {
     private CheckBox checkBox;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.second_intro_dialog, container, false);
+        final View view = inflater.inflate(R.layout.second_custom_slide_layout, container, false);
 
         return view;
     }

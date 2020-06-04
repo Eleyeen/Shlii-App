@@ -12,7 +12,7 @@ import com.example.shliapp.R;
 
 import agency.tango.materialintroscreen.SlideFragment;
 
-public class ThirdCustomSlide extends SlideFragment {
+public class ThirdIntroSlide extends SlideFragment {
     private CheckBox checkBox;
 
     @Nullable

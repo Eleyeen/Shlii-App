@@ -1,22 +1,16 @@
 package com.example.shliapp.Activities;
 
 import androidx.annotation.FloatRange;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.shliapp.Fragment.CustomSlide;
-import com.example.shliapp.Fragment.SecondCustomSlide;
-import com.example.shliapp.Fragment.ThirdCustomSlide;
-import com.example.shliapp.R;
+import com.example.shliapp.Fragment.FirstIntroSlide;
+import com.example.shliapp.Fragment.SecondIntroSlide;
+import com.example.shliapp.Fragment.ThirdIntroSlide;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.MessageButtonBehaviour;
-import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 
 public class SecondIntroActivity extends MaterialIntroActivity {
@@ -33,10 +27,10 @@ public class SecondIntroActivity extends MaterialIntroActivity {
                         view.setAlpha(percentage);
                     }
                 });
-        addSlide(new CustomSlide());
+        addSlide(new FirstIntroSlide());
 
-        addSlide(new SecondCustomSlide());
-        addSlide(new ThirdCustomSlide());
+        addSlide(new SecondIntroSlide());
+        addSlide(new ThirdIntroSlide());
     }
     @Override
     public void onFinish() {

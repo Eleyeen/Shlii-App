@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful()) {
                     LoginResponse loginResponse = response.body();
                     if (response.body().getStatus()) {
-
+                        AppRepository.mPutValue(LoginActivity.this).putBoolean("isFirstOpen", true).commit();
                         AppRepository.mPutValue(LoginActivity.this).putBoolean("loggedIn", true).commit();
                         AppRepository.mPutValue(LoginActivity.this).putString("userID", response.body().getData().getId()).commit();
                         GeneralUtills.putStringValueInEditor(LoginActivity.this, "userId", response.body().getData().getId().toString());

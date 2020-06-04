@@ -34,7 +34,6 @@ public class FirstIntroActivity extends AppCompatActivity {
         TextView tvOK = dialogView.findViewById(R.id.tvOK);
         tvOK.setOnClickListener(v -> {
             dialog.dismiss();
-            AppRepository.mPutValue(this).putBoolean("isFirstOpen", true).commit();
             startActivity(new Intent(this, SecondIntroActivity.class));
             finish();
         });

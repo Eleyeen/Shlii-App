@@ -23,6 +23,7 @@ import com.example.shliapp.Models.ProfileModels.GetProfileModel;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import java.util.ArrayList;
 
@@ -133,11 +134,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void LOGOUT() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefs.edit().putBoolean("locked", false).apply();
-
-        SharedPreferences prefsd = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefsd.edit().putBoolean("lockedP", false).apply();
+        AppRepository.mPutValue(getActivity()).putBoolean("loggedIn", false).commit();
+        AppRepository.mPutValue(getActivity()).putBoolean("isFirstOpen", false).commit();
 
         getActivity().finishAffinity();
 

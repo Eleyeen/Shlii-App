@@ -12,13 +12,13 @@ import com.example.shliapp.R;
 
 import agency.tango.materialintroscreen.SlideFragment;
 
-public class SecondCustomSlide extends SlideFragment {
+public class FirstIntroSlide extends SlideFragment {
     private CheckBox checkBox;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.second_custom_slide_layout, container, false);
+        final View view = inflater.inflate(R.layout.first_intro_slide, container, false);
 
         return view;
     }
@@ -32,6 +32,8 @@ public class SecondCustomSlide extends SlideFragment {
     public int buttonsColor() {
         return R.color.colorPrimary;
     }
+
+
 
 
     @Override
