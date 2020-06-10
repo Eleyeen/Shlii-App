@@ -106,6 +106,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
@@ -142,12 +143,12 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        addShopList();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        finish();
     }
 
     @Override

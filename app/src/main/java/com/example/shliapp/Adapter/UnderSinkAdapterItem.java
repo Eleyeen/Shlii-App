@@ -195,6 +195,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
                     Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, UnderSinkActivity.class);
                     context.startActivity(intent);
+
                 }
             }
 

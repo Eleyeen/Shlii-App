@@ -1,10 +1,6 @@
 package com.example.shliapp.Activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -17,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Network.ApiClienTh;
@@ -34,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends AppCompatActivity  implements View.OnClickListener {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.ivBackArrowSignUp)
     ImageView ivBackArrow;
@@ -48,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     EditText etLastName;
 
     @BindView(R.id.tvSkip)
-    TextView  tvSkip;
+    TextView tvSkip;
 
     @BindView(R.id.etConfirmPasswordLogin)
     EditText etConfirmPassword;
@@ -64,12 +63,12 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         initUI();
     }
 
-    private void initUI(){
+    private void initUI() {
         ButterKnife.bind(this);
         ivBackArrow.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
         tvSkip.setOnClickListener(this);
-        progressDialog  = new ProgressDialog(SignUpActivity.this);
+        progressDialog = new ProgressDialog(SignUpActivity.this);
 
     }
 
@@ -77,10 +76,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.ivBackArrowSignUp:
-onBackPressed();
+                onBackPressed();
                 break;
             case R.id.btnContinueSignUp:
                 progressDialog.setTitle("Loading...");
@@ -104,13 +102,13 @@ onBackPressed();
 //                SharedPreferences.Editor editorPass = pass.edit();
 //                editorPass.putString("Password", userEmail);
 //                editorPass.apply();
-                if (validateLogin( userFirstName, userLastName,userEmail,  userPassword ,userConfirmPassword)){
-                    doLogin(userFirstName, userLastName,userEmail,  userPassword ,  userConfirmPassword);
+                if (validateLogin(userFirstName, userLastName, userEmail, userPassword, userConfirmPassword)) {
+                    doLogin(userFirstName, userLastName, userEmail, userPassword, userConfirmPassword);
                 }
 
                 break;
-            case    R.id.tvSkip:
-                Intent intent = new Intent(SignUpActivity.this,StartBottomActivity.class);
+            case R.id.tvSkip:
+                Intent intent = new Intent(SignUpActivity.this, StartBottomActivity.class);
                 startActivity(intent);
                 progressDialog.setTitle("Loading...");
                 progressDialog.setMessage("Wait");
@@ -119,9 +117,9 @@ onBackPressed();
                 break;
         }
     }
-    private boolean validateLogin(String userFirstName,String userLastName,String userEmail, String userPassword , String userConfirmPassword) {
-        boolean valid = true;
 
+    private boolean validateLogin(String userFirstName, String userLastName, String userEmail, String userPassword, String userConfirmPassword) {
+        boolean valid = true;
 
         if (userEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
             etEmail.setError("enter a valid email address");
@@ -131,8 +129,8 @@ onBackPressed();
             etEmail.setError(null);
         }
 
-        if (userPassword.isEmpty() || userPassword.length() < 4 || userPassword.length() > 10) {
-            etPassword.setError("between 4 and 10 alphanumeric characters");
+        if (userPassword.isEmpty() || userPassword.length() < 6) {
+            etPassword.setError("Password should be more than 6 characters");
             progressDialog.dismiss();
 
             valid = false;
@@ -140,35 +138,34 @@ onBackPressed();
             etPassword.setError(null);
         }
 
-        if (userConfirmPassword.isEmpty() || userConfirmPassword.length() < 4 || userConfirmPassword.length() > 10) {
-            etPassword.setError("between 4 and 10 alphanumeric characters");
+        if (userConfirmPassword.isEmpty() || !userConfirmPassword.matches(userPassword)) {
+            etConfirmPassword.setError("Password doesn't match");
             progressDialog.dismiss();
 
             valid = false;
         } else {
             etPassword.setError(null);
         }
-
 
 
         if (userFirstName == null || userFirstName.trim().length() == 0) {
             Toast.makeText(this, "User First Name is Required", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
-            return false;
+            return valid;
         }
         if (userLastName == null || userLastName.trim().length() == 0) {
             progressDialog.dismiss();
             Toast.makeText(this, "User Last Name is Required", Toast.LENGTH_SHORT).show();
-            return false;
+            return valid;
         }
 
-        return true;
+        return valid;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void doLogin(String userFirstName,String userLastName,String userEmail, String userPassword , String userConfirmPassword) {
+    private void doLogin(String userFirstName, String userLastName, String userEmail, String userPassword, String userConfirmPassword) {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        final Call<LoginResponse> registration = services.createUser(userFirstName, userLastName,userEmail,  userPassword ,  userConfirmPassword);
+        final Call<LoginResponse> registration = services.createUser(userFirstName, userLastName, userEmail, userPassword, userConfirmPassword);
         registration.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -179,7 +176,7 @@ onBackPressed();
                     if (loginResponse.getMessage().equals("Acount Created Successfully")) {
 
                         SharedPreferences prefsd = PreferenceManager.getDefaultSharedPreferences(SignUpActivity.this);
-                        Boolean statusLockedP= prefsd.edit().putBoolean("lockedP", true).commit();
+                        Boolean statusLockedP = prefsd.edit().putBoolean("lockedP", true).commit();
                         prefsd.edit().putBoolean("lockedP", true).apply();
 
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -207,7 +204,7 @@ onBackPressed();
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
 
-                Log.d("response","error "+t.getMessage());
+                Log.d("response", "error " + t.getMessage());
 
                 Toast.makeText(SignUpActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
