@@ -47,17 +47,11 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     CardView cvFindFood;
     @BindView(R.id.tvFindFood)
     TextView tvFindFood;
-//
-//    @BindView(R.id.tvGateWay)
-//    TextView tvGateWay;
-
     @BindView(R.id.rvShoppingList)
     RecyclerView rvShoppingList;
     ApiInterface services;
     ProgressDialog progressDialog;
-    List<Item> itemList = new ArrayList<>();
-    List<Datum> datumList = new ArrayList<>();
-    List<List<ListItem>> arraylist;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -140,6 +134,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                     for(int j = 0; j < response.body().getData().size(); j++) {
                         Header header = new Header();
                         header.setHeader(response.body().getData().get(j).getRowName());
+                        header.setId(response.body().getData().get(j).getId());
                         arrayList.add(header);
                         for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
                             ContentItem item = new ContentItem();

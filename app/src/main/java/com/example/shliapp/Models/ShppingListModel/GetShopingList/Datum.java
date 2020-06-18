@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class Datum {
 
     @SerializedName("id")
-    private Long mId;
+    private Integer mId;
     @SerializedName("item_number")
     private String mItemNumber;
     @SerializedName("item_title")
@@ -20,11 +20,11 @@ public class Datum {
     @SerializedName("row_number")
     private String mRowNumber;
 
-    public Long getId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         mId = id;
     }
 

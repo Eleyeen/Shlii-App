@@ -89,7 +89,6 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onResponse(Call<GetGroceryModel> call, Response<GetGroceryModel> response) {
                 if (response.isSuccessful()) {
-
                     itemModels.addAll(response.body().getData());
                     adapter = new UnderSinkAdapterItem(UnderSinkActivity.this, itemModels, UnderSinkActivity.this::detectArrays);
                     rvUnderSink.setAdapter(adapter);
@@ -143,6 +142,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        addShopList();
     }
 
     @Override
