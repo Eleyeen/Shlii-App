@@ -90,7 +90,6 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onFailure(Call<VerifyResponseModel> call, Throwable t) {
 //                alertDialog.dismiss();
-                Toast.makeText(VerifyActivity.this,"OnFailure"+ t.getMessage(), Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
             }
         });

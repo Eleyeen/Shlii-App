@@ -79,13 +79,19 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             VHItem vhItem = (VHItem) holder;
             ContentItem currentItem = (ContentItem) list.get(position);
             vhItem.tvItemName.setText(currentItem.getName());
-            ((VHItem) holder).tvQuantity.setText(currentItem.getRollnumber());
+            ((VHItem) holder).tvQuantity.setText(currentItem.getQuantity());
         } else if (holder instanceof VHHeader) {
             Header currentItem = (Header) list.get(position);
             VHHeader vhHeader = (VHHeader) holder;
             vhHeader.tvRowNumber.setText(currentItem.getHeader());
             viewBinderHelper.bind(vhHeader.swipeRevealLayout, String.valueOf(currentItem.getId()));
-            vhHeader.tvDelete.setOnClickListener(v -> DeleteItem(String.valueOf(currentItem.getId())));
+            vhHeader.tvDelete.setOnClickListener(v -> {
+                DeleteItem(String.valueOf(currentItem.getId()));
+                list.remove(position);
+
+                notifyDataSetChanged();
+
+            });
 
 
         }
@@ -137,13 +143,11 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             public void onResponse(Call<DeleteShopList> call, Response<DeleteShopList> response) {
                 if (response.body().getStatus()) {
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    list.remove(id);
                     notifyDataSetChanged();
 //                    Intent intent = new Intent(context, UnderSinkActivity.class);
 //                    context.startActivity(intent);
 
-                }else {
+                } else {
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 }

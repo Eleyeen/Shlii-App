@@ -20,18 +20,17 @@ import com.example.shliapp.Activities.ChooseStoreActivity;
 import com.example.shliapp.Adapter.ShoppingListAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.ContentItem;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.Datum;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.Header;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.Item;
 import com.example.shliapp.Models.ShppingListModel.GetShopingList.ListItem;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
+import com.example.shliapp.Network.BaseNetworking;
 import com.example.shliapp.R;
+import com.example.shliapp.shoppingRackModels.ShoppingRackResponse;
 import com.example.shliapp.utils.AppRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +51,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
     ApiInterface services;
     ProgressDialog progressDialog;
 
+    private int storeID;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -83,7 +83,8 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         progressDialog.show();
 
         addLocation();
-        getItem();
+//        getItem();
+        rack();
 
     }
 
@@ -98,6 +99,8 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
                 if (response.isSuccessful()) {
                     tvFindFood.setText(response.body().getStores().get(0).getStoreName());
+                    storeID = response.body().getStores().get(0).getStoreID();
+
                     progressDialog.dismiss();
                 }
             }
@@ -121,6 +124,7 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
@@ -131,19 +135,14 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
                 if (response.isSuccessful()) {
                     ArrayList<ListItem> arrayList = new ArrayList<>();
-                    for(int j = 0; j < response.body().getData().size(); j++) {
+                    for (int j = 0; j < response.body().getData().size(); j++) {
                         Header header = new Header();
                         header.setHeader(response.body().getData().get(j).getRowName());
                         header.setId(response.body().getData().get(j).getId());
                         arrayList.add(header);
-                        for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
-                            ContentItem item = new ContentItem();
-                            item.setRollnumber(response.body().getData().get(j).getItems().get(i).getItemNumber());
-                            item.setName(response.body().getData().get(j).getItems().get(i).getItemTitle());
-                            arrayList.add(item);
-                        }
-                    }
 
+
+                    }
 
 
 //                    datumList.addAll(response.body().getData());
@@ -163,6 +162,39 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+    }
+
+    private void rack() {
+        Call<ShoppingRackResponse> rackResponseCall = BaseNetworking.services.rack(Integer.parseInt(AppRepository.mUserID(getActivity())), 1);
+        rackResponseCall.enqueue(new Callback<ShoppingRackResponse>() {
+            @Override
+            public void onResponse(Call<ShoppingRackResponse> call, Response<ShoppingRackResponse> response) {
+                if (response.isSuccessful()) {
+                    ArrayList<ListItem> arrayList = new ArrayList<>();
+                    for (int j = 0; j < response.body().getData().size(); j++) {
+                        Header header = new Header();
+                        header.setHeader(response.body().getData().get(j).getRowNumber());
+                        header.setId(response.body().getData().get(j).getId());
+                        arrayList.add(header);
+                        for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
+                            ContentItem item = new ContentItem();
+                            item.setQuatity(response.body().getData().get(j).getItems().get(i).getQuantity());
+                            item.setName(response.body().getData().get(j).getItems().get(i).getItemTitle());
+                            arrayList.add(item);
+                        }
+
+                    }
+                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
+                    rvShoppingList.setAdapter(adapter);
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShoppingRackResponse> call, Throwable t) {
+
+            }
+        });
     }
 
 }

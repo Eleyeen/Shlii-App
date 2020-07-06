@@ -102,7 +102,6 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onFailure(Call<AddStorageModel> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
-                Toast.makeText(AddStorageActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

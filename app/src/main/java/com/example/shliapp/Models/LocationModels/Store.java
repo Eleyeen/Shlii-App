@@ -5,6 +5,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Store {
 
+    public Integer getStoreID() {
+        return storeID;
+    }
+
+    public void setStoreID(Integer storeID) {
+        this.storeID = storeID;
+    }
+
+    @SerializedName("id")
+    private Integer storeID;
     @SerializedName("distance")
     private String mDistance;
     @SerializedName("latitude")

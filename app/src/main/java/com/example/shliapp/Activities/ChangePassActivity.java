@@ -107,7 +107,6 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onFailure(Call<ChangePasswordModel> call, Throwable t) {
-                Toast.makeText(ChangePassActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
             }
         });

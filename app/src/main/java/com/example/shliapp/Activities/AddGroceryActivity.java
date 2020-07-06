@@ -160,7 +160,6 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onFailure(Call<AddGroceryResponse> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
-                Toast.makeText(AddGroceryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

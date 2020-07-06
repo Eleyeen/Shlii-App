@@ -12,14 +12,14 @@ public class ContentItem extends ListItem {
     }
 
     private String name;
-    private String rollnumber;
+    private String quantity;
 
 
-    public String getRollnumber() {
-        return rollnumber;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setRollnumber(String rollnumber) {
-        this.rollnumber = rollnumber;
+    public void setQuatity(String rollnumber) {
+        this.quantity = rollnumber;
     }
 }

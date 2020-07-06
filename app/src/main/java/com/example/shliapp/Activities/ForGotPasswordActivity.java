@@ -95,7 +95,6 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
             @Override
             public void onFailure(Call<ForgotPasswordModel> call, Throwable t) {
                 Log.d("response","error "+t.getMessage());
-                Toast.makeText(ForGotPasswordActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

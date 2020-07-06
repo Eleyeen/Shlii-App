@@ -16,12 +16,14 @@ import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingLis
 import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
+import com.example.shliapp.shoppingRackModels.ShoppingRackResponse;
 
-import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -76,11 +78,10 @@ public interface ApiInterface {
             @Field("user_id") String user_id,
             @Field("quantity") String quantity);
 
+
     @FormUrlEncoded
     @POST("makeShoppingList")
-    Call<AddShoppingListResponse> addShoppingList(@Field("user_id") String userID,
-                                   @Field("items[0][item_title]") List<String> itemsList,
-                                   @Field("items[0][quantity]") List<String> quantityList);
+    Call<AddShoppingListResponse> addShoppingList(@FieldMap Map<String, String> params);
 
 
     @FormUrlEncoded
@@ -89,7 +90,6 @@ public interface ApiInterface {
             @Field("user_id") String user_id,
             @Field("latitude") String latitude,
             @Field("longitude") String longitude);
-
 
 
     @GET("ItemsList")
@@ -117,8 +117,12 @@ public interface ApiInterface {
     @GET("getList")
     Call<GetShoppingListResponse> getShoppingList();
 
-
     @GET("getStores")
     Call<GetStoresModel> getStores();
+
+    @FormUrlEncoded
+    @POST("list")
+    Call<ShoppingRackResponse> rack(@Field("user_id") int userID,
+                                    @Field("store_id") int storeID);
 
 }

@@ -77,6 +77,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
     private void initListeners() {
         ButterKnife.bind(this, view);
         getUpdatedLocation();
+        Log.d("zma user id", AppRepository.mUserID(getActivity()));
     }
 
     private void getUpdatedLocation() {

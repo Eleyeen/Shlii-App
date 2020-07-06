@@ -26,7 +26,8 @@ import com.example.shliapp.interfaces.SinkItemDetector;
 import com.example.shliapp.utils.AppRepository;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,8 +50,8 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     UnderSinkAdapterItem adapter;
     ArrayList<DatumUnderSink> itemModels;
     ProgressDialog progressDialog;
-    private List<String> itemTitle = new ArrayList<>();
-    private List<String> itemQuantity = new ArrayList<>();
+    private ArrayList<String> itemTitle = new ArrayList<>();
+    private ArrayList<String> itemQuantity = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -82,9 +83,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-
-        String strUserID = GeneralUtills.getSharedPreferences(UnderSinkActivity.this).getString("userId", "");
-        Call<GetGroceryModel> call = services.getAddGrocery(strUserID);
+        Call<GetGroceryModel> call = services.getAddGrocery(AppRepository.mUserID(this));
         call.enqueue(new Callback<GetGroceryModel>() {
             @Override
             public void onResponse(Call<GetGroceryModel> call, Response<GetGroceryModel> response) {
@@ -103,7 +102,6 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
             }
         });
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -156,9 +154,10 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
         super.onDestroy();
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void detectArrays(List<String> mTitles, List<String> mQuantities) {
+    public void detectArrays(ArrayList<String> mTitles, ArrayList<String> mQuantities) {
         Log.d("zma detect arrays", mTitles.toString() + mQuantities.toString());
         itemTitle = mTitles;
         itemQuantity = mQuantities;
@@ -166,8 +165,16 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addShopList() {
+        Map<String, String> requestMap = new HashMap<String, String>();
+        requestMap.put("user_id", AppRepository.mUserID(this));
+        for (int i = 0; i < itemTitle.size(); i++) {
+            String itemkey = "items[" + i + "][item_title]";
+            requestMap.put(itemkey, itemTitle.get(i));
+            String quantitykey = "items[" + i + "][quantity]";
+            requestMap.put(quantitykey, itemQuantity.get(i));
+        }
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddShoppingListResponse> addItem = services.addShoppingList(AppRepository.mUserID(UnderSinkActivity.this), itemTitle, itemQuantity);
+        Call<AddShoppingListResponse> addItem = services.addShoppingList(requestMap);
         addItem.enqueue(new Callback<AddShoppingListResponse>() {
             @Override
             public void onResponse(Call<AddShoppingListResponse> call, Response<AddShoppingListResponse> response) {
@@ -179,7 +186,6 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFailure(Call<AddShoppingListResponse> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
-                Toast.makeText(UnderSinkActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

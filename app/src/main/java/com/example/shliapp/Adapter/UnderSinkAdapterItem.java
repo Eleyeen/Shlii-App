@@ -54,8 +54,8 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     int i = 0;
     private HashMap<String, Integer> hashMap = new HashMap<>();
     private String lastItemName;
-    private List<String> itemTitle = new ArrayList<>();
-    private List<String> itemQuantity = new ArrayList<>();
+    private ArrayList<String> itemTitle = new ArrayList<>();
+    private ArrayList<String> itemQuantity = new ArrayList<>();
     private List<String> itemPosition = new ArrayList<>();
 
     public UnderSinkAdapterItem(Context context, List<DatumUnderSink> modelListP, SinkItemDetector mSinkItemDetector) {
