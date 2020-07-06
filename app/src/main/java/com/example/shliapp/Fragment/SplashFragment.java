@@ -2,7 +2,7 @@ package com.example.shliapp.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,36 +29,22 @@ public class SplashFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         parentView = inflater.inflate(R.layout.fragment_splash, container, false);
-        pbSplashScreen = parentView.findViewById(R.id.pb_splash);
+        new Handler().postDelayed(() -> {
+            if (AppRepository.isLoggedIn(getActivity())) {
+                Intent intent = new Intent(getActivity(), StartBottomActivity.class);
+                startActivity(intent);
 
-
-        new CountDownTimer(500, 100) {
-
-            public void onTick(long millisUntilFinished) {
-
-
-                i = i + 1;
-                pbSplashScreen.setProgress(i);
-
-            }
-
-            public void onFinish() {
-
-                if (AppRepository.isLoggedIn(getActivity())) {
-                    Intent intent = new Intent(getActivity(), StartBottomActivity.class);
-                    startActivity(intent);
-
-                } else if (!AppRepository.isFirstOpen(getActivity())) {
-                    startActivity(new Intent(getActivity(), FirstIntroActivity.class));
-                } else {
-                    Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
-                    startActivity(intent);
-
-                }
+            } else if (!AppRepository.isFirstOpen(getActivity())) {
+                startActivity(new Intent(getActivity(), FirstIntroActivity.class));
+            } else {
+                Intent intent = new Intent(getActivity(), HomeScreenActivity.class);
+                startActivity(intent);
 
             }
+            getActivity().finish();
 
-        }.start();
+        }, 1000);
+
 
         return parentView;
     }
