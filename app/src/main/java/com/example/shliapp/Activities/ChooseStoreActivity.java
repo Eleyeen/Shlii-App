@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,8 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
     RecyclerView rvChoseStore;
     ArrayList<Store> listModels = new ArrayList<>();
     ChosseStoreAdapter adapter;
+    @BindView(R.id.tvNoStores)
+    TextView tvNoStores;
     //    int PERMISSION_ID = 44;
     ProgressDialog progressDialog;
 //    FusedLocationProviderClient mFusedLocationClient;
@@ -125,9 +128,14 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
             public void onResponse(Call<LocationNearStoreModels> call, Response<LocationNearStoreModels> response) {
 
                 if (response.isSuccessful()) {
-                    listModels.addAll(response.body().getStores());
-                    adapter = new ChosseStoreAdapter(ChooseStoreActivity.this, listModels);
-                    rvChoseStore.setAdapter(adapter);
+                    if (response.body().getStores().size() > 0) {
+                        listModels.addAll(response.body().getStores());
+                        adapter = new ChosseStoreAdapter(ChooseStoreActivity.this, listModels);
+                        rvChoseStore.setAdapter(adapter);
+                        tvNoStores.setVisibility(View.GONE);
+                    } else {
+                        tvNoStores.setVisibility(View.VISIBLE);
+                    }
 //                    alertDialog.dismiss();
                     progressDialog.dismiss();
                 }
