@@ -28,6 +28,10 @@ import com.example.shliapp.R;
 import com.example.shliapp.interfaces.GroceryItemID;
 import com.example.shliapp.utils.AppRepository;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -143,8 +147,14 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<AddGroceryResponse> call, Response<AddGroceryResponse> response) {
                 progressDialog.dismiss();
                 if (response.body() == null) {
-                    Toast.makeText(AddGroceryActivity.this, "something went wrong == null", Toast.LENGTH_SHORT).show();
-
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(AddGroceryActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddGroceryActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     onBackPressed();

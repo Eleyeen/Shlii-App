@@ -20,6 +20,11 @@ import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -85,7 +90,14 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<AddStorageModel> call, Response<AddStorageModel> response) {
 
                 if (response.body() == null) {
-                    Toast.makeText(AddStorageActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(AddStorageActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     progressDialog.dismiss();
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddStorageActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
