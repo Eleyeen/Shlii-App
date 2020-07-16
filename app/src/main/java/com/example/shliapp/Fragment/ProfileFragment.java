@@ -1,11 +1,10 @@
 package com.example.shliapp.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -143,4 +143,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);
 
     }
+
 }

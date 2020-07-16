@@ -76,22 +76,22 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
 
         String strStorage = GeneralUtills.getSharedPreferences(this).getString("storageItem", "");
         tvTitle.setText(strStorage);
-        getItem();
+
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<GetGroceryModel> call = services.getAddGrocery(AppRepository.mUserID(this));
+        Call<GetGroceryModel> call = services.getGrocery(AppRepository.mUserID(this), AppRepository.mStorageId(this));
         call.enqueue(new Callback<GetGroceryModel>() {
             @Override
             public void onResponse(Call<GetGroceryModel> call, Response<GetGroceryModel> response) {
+                progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     itemModels.addAll(response.body().getData());
                     adapter = new UnderSinkAdapterItem(UnderSinkActivity.this, itemModels, UnderSinkActivity.this::detectArrays);
                     rvUnderSink.setAdapter(adapter);
-                    progressDialog.dismiss();
                 }
 
             }
@@ -103,6 +103,14 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        itemModels.clear();
+        getItem();
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -146,7 +154,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+
     }
 
     @Override

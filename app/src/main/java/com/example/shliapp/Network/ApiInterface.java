@@ -28,6 +28,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     @FormUrlEncoded
@@ -76,7 +77,8 @@ public interface ApiInterface {
     Call<AddGroceryResponse> AddGroceryPost(
             @Field("item_id") String item_id,
             @Field("user_id") String user_id,
-            @Field("quantity") String quantity);
+            @Field("quantity") String quantity,
+            @Field("storage_id") String storageID);
 
 
     @FormUrlEncoded
@@ -108,8 +110,8 @@ public interface ApiInterface {
     @GET("getStorages/{id}")
     Call<GetStorageModel> getStorage(@Path("id") String groupId);
 
-    @GET("getGrocerry/{id}")
-    Call<GetGroceryModel> getAddGrocery(@Path("id") String groupId);
+    @GET("getGrocerry?")
+    Call<GetGroceryModel> getGrocery(@Query("user_id") String groupId, @Query("storage_id") String storageID);
 
     @GET("getProfile/{id}")
     Call<GetProfileModel> getProfile(@Path("id") String groupId);

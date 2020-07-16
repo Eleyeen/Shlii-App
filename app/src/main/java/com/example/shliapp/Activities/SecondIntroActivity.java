@@ -29,8 +29,9 @@ public class SecondIntroActivity extends MaterialIntroActivity {
                 });
         addSlide(new FirstIntroSlide());
 
-        addSlide(new SecondIntroSlide());
+
         addSlide(new ThirdIntroSlide());
+        addSlide(new SecondIntroSlide());
     }
     @Override
     public void onFinish() {

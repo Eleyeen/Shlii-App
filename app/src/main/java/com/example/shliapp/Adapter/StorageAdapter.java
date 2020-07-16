@@ -18,6 +18,7 @@ import com.example.shliapp.Activities.UnderSinkActivity;
 
 import com.example.shliapp.Models.StorageModelss.DatumStorage;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
 
         myViewHolder.cvStorage.setOnClickListener(v -> {
             GeneralUtills.putStringValueInEditor(context, "storageItem", item.getStorageName());
+            AppRepository.mPutValue(context).putString("storageId", String.valueOf(item.getId())).commit();
             Intent  intent = new Intent(context, UnderSinkActivity.class);
             context.startActivity(intent);
         });

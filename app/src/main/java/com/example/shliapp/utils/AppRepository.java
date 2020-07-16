@@ -28,6 +28,9 @@ public class AppRepository {
     public static String mDeviceToken(Context context) {
         return mGetValue(context).getString("device_token", "");
     }
+    public static String mStorageId(Context context){
+        return mGetValue(context).getString("storageId", "");
+    }
     public static String mServiceTimePeriod(Context context) {
         return mGetValue(context).getString("serviceTime", "");
     }

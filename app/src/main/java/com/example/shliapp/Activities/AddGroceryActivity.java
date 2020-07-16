@@ -85,10 +85,10 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.btnAddGrocery:
-//                progressDialog = new ProgressDialog(AddGroceryActivity.this);
-//                progressDialog.setTitle("Loading...");
-//                progressDialog.setMessage("Wait");
-//                progressDialog.show();
+                progressDialog = new ProgressDialog(AddGroceryActivity.this);
+                progressDialog.setTitle("Loading...");
+                progressDialog.setMessage("Wait");
+                progressDialog.show();
                 if (validate()) {
                     apiAddGrocery();
 
@@ -137,23 +137,19 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddGrocery() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddGroceryResponse> addGrocery = services.AddGroceryPost(strItemAddGrocery, AppRepository.mUserID(this), strQtyAddGrocery);
+        Call<AddGroceryResponse> addGrocery = services.AddGroceryPost(strItemAddGrocery, AppRepository.mUserID(this), strQtyAddGrocery, AppRepository.mStorageId(this));
         addGrocery.enqueue(new Callback<AddGroceryResponse>() {
             @Override
             public void onResponse(Call<AddGroceryResponse> call, Response<AddGroceryResponse> response) {
-
+                progressDialog.dismiss();
                 if (response.body() == null) {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong == null", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+
                 } else if (response.body().getStatus()) {
                     Toast.makeText(AddGroceryActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(AddGroceryActivity.this, UnderSinkActivity.class));
-                    progressDialog.dismiss();
-
+                    onBackPressed();
                 } else {
                     Toast.makeText(AddGroceryActivity.this, "something went wrong please try again with valid email", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                 }
             }
 
