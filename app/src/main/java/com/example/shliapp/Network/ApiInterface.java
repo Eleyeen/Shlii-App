@@ -17,6 +17,7 @@ import com.example.shliapp.Models.StorageModelss.AddStorageModel;
 import com.example.shliapp.Models.VerifyResponseModel;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
 import com.example.shliapp.Models.deleteStorageModel.DeleteStorageResponse;
+import com.example.shliapp.Models.getShoppingList.GetShoppingResponse;
 import com.example.shliapp.shoppingRackModels.ShoppingRackResponse;
 
 import java.util.Map;
@@ -105,8 +106,7 @@ public interface ApiInterface {
 
     @DELETE("deleteShoppingList/{id}")
     Call<DeleteShopList> deleteShopingList(
-            @Path("id") String groupId
-    );
+            @Path("id") String groupId);
 
     @GET("getStorages/{id}")
     Call<GetStorageModel> getStorage(@Path("id") String groupId);
@@ -118,7 +118,7 @@ public interface ApiInterface {
     Call<GetProfileModel> getProfile(@Path("id") String groupId);
 
     @GET("getList")
-    Call<GetShoppingListResponse> getShoppingList();
+    Call<GetShoppingResponse> getShoppingList();
 
     @GET("getStores")
     Call<GetStoresModel> getStores();
@@ -127,6 +127,7 @@ public interface ApiInterface {
     @POST("list")
     Call<ShoppingRackResponse> rack(@Field("user_id") int userID,
                                     @Field("store_id") int storeID);
+
     @DELETE("deleteStorage/{id}")
     Call<DeleteStorageResponse> deleteStorage(@Path("id") String id);
 

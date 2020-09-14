@@ -1,23 +1,26 @@
 package com.example.shliapp.Adapter;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.ContentItem;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.Header;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.ListItem;
+import com.example.shliapp.Activities.GeneralUtills;
+import com.example.shliapp.Activities.UnderSinkActivity;
+import com.example.shliapp.Models.StorageModelss.DatumStorage;
+import com.example.shliapp.Models.deleteStorageModel.DeleteStorageResponse;
 import com.example.shliapp.R;
+import com.example.shliapp.utils.AppRepository;
 
 import java.util.List;
 
@@ -27,121 +30,83 @@ import retrofit2.Response;
 
 import static com.example.shliapp.Network.BaseNetworking.services;
 
-public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
-    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
-    View view;
+public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.MyViewHolder> {
     private Context context;
-    List<ListItem> list;
-    private Context mContext;
-    String previousPosition;
+    private List<DatumStorage> modelList ;
+    private List<DatumStorage>  listItems;
+    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
-    public ShoppingListAdapter(Context context, List<ListItem> headerItems) {
+
+    public ShoppingListAdapter(Context context, List<DatumStorage> modelList) {
         this.context = context;
-        this.list = headerItems;
+        this.listItems = modelList;
+        this.modelList = modelList;
     }
 
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_HEADER) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.row_number_layout, parent, false);
-            return new ShoppingListAdapter.VHHeader(view);
-        } else if (viewType == TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.shoppinglistcardview, parent, false);
-            return new ShoppingListAdapter.VHItem(view);
-        }
-        throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.shopping_row_layout , parent , false) ;
+        return new ShoppingListAdapter.MyViewHolder(view);
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return TYPE_HEADER;
-        return TYPE_ITEM;
-    }
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+        DatumStorage item = modelList.get(position);
+        myViewHolder.tvStorageName.setText(item.getStorageName());
 
-    private boolean isPositionHeader(int position) {
-        return list.get(position) instanceof Header;
-    }
+        //        Glide.with(context).load(item.getImageStorage()).into(myViewHolder.civStorage);
 
-    private String getItem(int position) {
-        return list.get(position - 1).getName();
-    }
+        myViewHolder.cvStorage.setOnClickListener(v -> {
+            GeneralUtills.putStringValueInEditor(context, "storageItem", item.getStorageName());
+            AppRepository.mPutValue(context).putString("storageId", String.valueOf(item.getId())).commit();
+            Intent  intent = new Intent(context, UnderSinkActivity.class);
+            context.startActivity(intent);
+        });
+        viewBinderHelper.bind(myViewHolder.swipeRevealLayout, String.valueOf(item.getId()));
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof VHItem) {
-            VHItem vhItem = (VHItem) holder;
-            ContentItem currentItem = (ContentItem) list.get(position);
-            vhItem.tvItemName.setText(currentItem.getName());
-            ((VHItem) holder).tvQuantity.setText(currentItem.getQuantity());
-        } else if (holder instanceof VHHeader) {
-            Header currentItem = (Header) list.get(position);
-            VHHeader vhHeader = (VHHeader) holder;
-            vhHeader.tvRowNumber.setText(currentItem.getHeader());
-            viewBinderHelper.bind(vhHeader.swipeRevealLayout, String.valueOf(currentItem.getId()));
-            vhHeader.tvDelete.setOnClickListener(v -> {
-                DeleteItem(String.valueOf(currentItem.getId()));
-                list.remove(position);
+        myViewHolder.tvDelete.setOnClickListener(v -> {
+            DeleteItem(String.valueOf(item.getId()));
+            modelList.remove(position);
 
-                notifyDataSetChanged();
+            notifyDataSetChanged();
 
-            });
-
-
-        }
+        });
 
     }
-
-    public void saveStates(Bundle outState) {
-        viewBinderHelper.saveStates(outState);
-    }
-
-    public void restoreStates(Bundle inState) {
-        viewBinderHelper.restoreStates(inState);
-    }
-
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return modelList.size();
     }
 
-    public class VHItem extends RecyclerView.ViewHolder {
-        private TextView tvQuantity, tvItemName;
-
-        public VHItem(@NonNull View itemView) {
-            super(itemView);
-            tvItemName = itemView.findViewById(R.id.shopingListItemName);
-            tvQuantity = itemView.findViewById(R.id.shopingListItemValue);
-        }
-    }
-
-    public class VHHeader extends RecyclerView.ViewHolder {
-        TextView tvRowNumber;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        private ImageView civStorage;
+        private CardView cvStorage;
+        private TextView tvStorageItem;
+        private  TextView tvStorageName;
         private SwipeRevealLayout swipeRevealLayout;
         private TextView tvDelete;
 
 
-        public VHHeader(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvRowNumber = itemView.findViewById(R.id.tvshopingListRoomName);
+            civStorage = itemView.findViewById(R.id.civCardView);
+            tvStorageName = itemView.findViewById(R.id.tvCardViewName);
+            cvStorage=itemView.findViewById(R.id.cvStorage);
             swipeRevealLayout = itemView.findViewById(R.id.swipe_layout_1);
             tvDelete = itemView.findViewById(R.id.tvDelete);
 
         }
     }
-
     private void DeleteItem(String id) {
-        Call<DeleteShopList> call = services.deleteShopingList(id);
-        call.enqueue(new Callback<DeleteShopList>() {
+        Call<DeleteStorageResponse> call = services.deleteStorage(id);
+        call.enqueue(new Callback<DeleteStorageResponse>() {
             @Override
-            public void onResponse(Call<DeleteShopList> call, Response<DeleteShopList> response) {
+            public void onResponse(Call<DeleteStorageResponse> call, Response<DeleteStorageResponse> response) {
                 if (response.body().getStatus()) {
                     notifyDataSetChanged();
 //                    Intent intent = new Intent(context, UnderSinkActivity.class);
@@ -154,10 +119,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             @Override
-            public void onFailure(Call<DeleteShopList> call, Throwable t) {
+            public void onFailure(Call<DeleteStorageResponse> call, Throwable t) {
             }
         });
     }
 
 }
-

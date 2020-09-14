@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -103,9 +103,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="18dp"
             android:background="@color/colorWhite"
-            app:cardCornerRadius="20dp"
-
-            >
+            app:cardCornerRadius="20dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -168,4 +166,4 @@
 
 
     </RelativeLayout>
-</ScrollView>
+</RelativeLayout>

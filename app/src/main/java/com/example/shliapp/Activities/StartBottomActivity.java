@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.example.shliapp.Fragment.ProfileFragment;
 import com.example.shliapp.Fragment.ShoppingFragment;
-import com.example.shliapp.Fragment.SplashFragment;
 import com.example.shliapp.Fragment.StorageFragment;
 import com.example.shliapp.R;
 
@@ -31,7 +30,7 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.ivProfile)
     ImageView ivProfile;
 
-    @BindView(R.id.ivNotification)
+    @BindView(R.id.ivShopping)
     ImageView ivNotification;
     ProgressDialog progressDialog;
     @Override
@@ -39,6 +38,19 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_bottom);
         initUI();
+
+        if (GeneralUtills.getSharedPreferences(this).getBoolean("change_store",false)){
+            GeneralUtills.putBooleanValueInEditor(this, "change_store", false);
+            ivProfile.setImageResource(R.mipmap.profile);
+            ivHome.setImageResource(R.mipmap.home);
+            ivNotification.setImageResource(R.mipmap.backgroundunion);
+
+            Fragment fragmentw = new ShoppingFragment();
+            setFragment(fragmentw);
+
+
+
+        }
     }
     private void initUI() {
         ButterKnife.bind(this);
@@ -49,6 +61,7 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
         progressDialog  = new ProgressDialog(StartBottomActivity.this);
 
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -88,7 +101,7 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
                 setFragment(fragment);
                 break;
 
-            case R.id.ivNotification:
+            case R.id.ivShopping:
 
                 ivProfile.setImageResource(R.mipmap.profile);
                 ivHome.setImageResource(R.mipmap.home);

@@ -17,20 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shliapp.Activities.ChooseStoreActivity;
-import com.example.shliapp.Adapter.ShoppingListAdapter;
+import com.example.shliapp.Adapter.ShoppingAdapter;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.ContentItem;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.Header;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.ListItem;
+import com.example.shliapp.Models.getShoppingList.GetShoppingResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
-import com.example.shliapp.Network.BaseNetworking;
 import com.example.shliapp.R;
-import com.example.shliapp.shoppingRackModels.ShoppingRackResponse;
 import com.example.shliapp.utils.AppRepository;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,8 +76,9 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
         progressDialog.show();
 
         addLocation();
-//        getItem();
-        rack();
+        getItem();
+//        ApiCallShoppingList();
+
 
     }
 
@@ -100,6 +94,8 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
                 if (response.isSuccessful()) {
                     tvFindFood.setText(response.body().getStores().get(0).getStoreName());
                     storeID = response.body().getStores().get(0).getStoreID();
+
+
 
                     progressDialog.dismiss();
                 }
@@ -127,74 +123,99 @@ public class ShoppingFragment extends Fragment implements View.OnClickListener {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
+
+        progressDialog.show();
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<GetShoppingListResponse> call = services.getShoppingList();
-
-        call.enqueue(new Callback<GetShoppingListResponse>() {
+        Call<GetShoppingResponse> getShoppingResponseCall = services.getShoppingList();
+        getShoppingResponseCall.enqueue(new Callback<GetShoppingResponse>() {
             @Override
-            public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
+            public void onResponse(Call<GetShoppingResponse> call, Response<GetShoppingResponse> response) {
+
                 if (response.isSuccessful()) {
-                    ArrayList<ListItem> arrayList = new ArrayList<>();
-                    for (int j = 0; j < response.body().getData().size(); j++) {
-                        Header header = new Header();
-                        header.setHeader(response.body().getData().get(j).getRowName());
-                        header.setId(response.body().getData().get(j).getId());
-                        arrayList.add(header);
-
-
-                    }
-
-
-//                    datumList.addAll(response.body().getData());
-//
-//                    for (int i = 0; i < response.body().getData().size(); i++) {
-//                        itemList.addAll(response.body().getData().get(i).getItems());
-//                    }
-                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
+                    ShoppingAdapter adapter = new ShoppingAdapter(getActivity(), response.body().getData());
                     rvShoppingList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                     progressDialog.dismiss();
                 }
+
             }
 
             @Override
-            public void onFailure(Call<GetShoppingListResponse> call, Throwable t) {
+            public void onFailure(Call<GetShoppingResponse> call, Throwable t) {
                 progressDialog.dismiss();
-            }
-        });
-
-    }
-
-    private void rack() {
-        Call<ShoppingRackResponse> rackResponseCall = BaseNetworking.services.rack(Integer.parseInt(AppRepository.mUserID(getActivity())), 1);
-        rackResponseCall.enqueue(new Callback<ShoppingRackResponse>() {
-            @Override
-            public void onResponse(Call<ShoppingRackResponse> call, Response<ShoppingRackResponse> response) {
-                if (response.isSuccessful()) {
-                    ArrayList<ListItem> arrayList = new ArrayList<>();
-                    for (int j = 0; j < response.body().getData().size(); j++) {
-                        Header header = new Header();
-                        header.setHeader(response.body().getData().get(j).getRowNumber());
-                        header.setId(response.body().getData().get(j).getId());
-                        arrayList.add(header);
-                        for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
-                            ContentItem item = new ContentItem();
-                            item.setQuatity(response.body().getData().get(j).getItems().get(i).getQuantity());
-                            item.setName(response.body().getData().get(j).getItems().get(i).getItemTitle());
-                            arrayList.add(item);
-                        }
-
-                    }
-                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
-                    rvShoppingList.setAdapter(adapter);
-                    progressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ShoppingRackResponse> call, Throwable t) {
 
             }
         });
+
+
+//        services = ApiClienTh.getApiClient().create(ApiInterface.class);
+//        Call<GetShoppingListResponse> call = services.getShoppingList();
+//
+//        call.enqueue(new Callback<GetShoppingListResponse>() {
+//            @Override
+//            public void onResponse(Call<GetShoppingListResponse> call, Response<GetShoppingListResponse> response) {
+//                if (response.isSuccessful()) {
+//                    ArrayList<ListItem> arrayList = new ArrayList<>();
+//                    for (int j = 0; j < response.body().getData().size(); j++) {
+//                        Header header = new Header();
+//                        header.setHeader(response.body().getData().get(j).getRowName());
+//                        header.setId(response.body().getData().get(j).getId());
+//                        arrayList.add(header);
+//
+//
+//                    }
+//
+//
+////                    datumList.addAll(response.body().getData());
+////
+////                    for (int i = 0; i < response.body().getData().size(); i++) {
+////                        itemList.addAll(response.body().getData().get(i).getItems());
+////                    }
+//                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
+//                    rvShoppingList.setAdapter(adapter);
+//                    progressDialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetShoppingListResponse> call, Throwable t) {
+//                progressDialog.dismiss();
+//            }
+//        });
+
     }
+//
+//    private void ApiCallShoppingList() {
+//        Call<ShoppingRackResponse> rackResponseCall = BaseNetworking.services.rack(Integer.parseInt(AppRepository.mUserID(getActivity())), 1);
+//        rackResponseCall.enqueue(new Callback<ShoppingRackResponse>() {
+//            @Override
+//            public void onResponse(Call<ShoppingRackResponse> call, Response<ShoppingRackResponse> response) {
+//                if (response.isSuccessful()) {
+//                    ArrayList<ListItem> arrayList = new ArrayList<>();
+//                    for (int j = 0; j < response.body().getData().size(); j++) {
+//                        Header header = new Header();
+//                        header.setHeader(response.body().getData().get(j).getRowNumber());
+//                        header.setId(response.body().getData().get(j).getId());
+//                        arrayList.add(header);
+//                        for (int i = 0; i < response.body().getData().get(j).getItems().size(); i++) {
+//                            ContentItem item = new ContentItem();
+//                            item.setQuatity(response.body().getData().get(j).getItems().get(i).getQuantity());
+//                            item.setName(response.body().getData().get(j).getItems().get(i).getItemTitle());
+//                            arrayList.add(item);
+//                        }
+//
+//                    }
+//                    ShoppingListAdapter adapter = new ShoppingListAdapter(getActivity(), arrayList);
+//                    rvShoppingList.setAdapter(adapter);
+//                    progressDialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ShoppingRackResponse> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 }

@@ -57,6 +57,7 @@ public class ChosseStoreAdapter extends RecyclerView.Adapter<ChosseStoreAdapter.
             @Override
             public void onClick(View v) {
                 GeneralUtills.putStringValueInEditor(context, "itemTitle", item.getStoreName());
+                GeneralUtills.putBooleanValueInEditor(context, "change_store", true);
                 Intent  intent= new Intent(context, StartBottomActivity.class);
                 context.startActivity(intent);
             }
