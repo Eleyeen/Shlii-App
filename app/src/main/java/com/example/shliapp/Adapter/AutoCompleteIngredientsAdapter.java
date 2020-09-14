@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.shliapp.Models.ItemModel.ItemDataModel;
 import com.example.shliapp.Models.addGroceries.Datum;
 import com.example.shliapp.R;
 import com.example.shliapp.interfaces.GroceryItemID;
@@ -21,12 +22,12 @@ import com.example.shliapp.interfaces.GroceryItemID;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
-    private List<Datum> ingredientsListFull;
+public class AutoCompleteIngredientsAdapter extends ArrayAdapter<ItemDataModel> {
+    private List<ItemDataModel> ingredientsListFull;
     GroceryItemID itemID;
     Context context;
 
-    public AutoCompleteIngredientsAdapter(@NonNull Context context, @NonNull List<Datum> ingridientsList, GroceryItemID groceryItemID) {
+    public AutoCompleteIngredientsAdapter(@NonNull Context context, @NonNull List<ItemDataModel> ingridientsList, GroceryItemID groceryItemID) {
         super(context, 0, ingridientsList);
         ingredientsListFull = new ArrayList<>(ingridientsList);
         this.context = context;
@@ -50,11 +51,11 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
         TextView textViewName = convertView.findViewById(R.id.tv_autocoplete_item_name);
         LinearLayout linearrow = convertView.findViewById(R.id.linearrow);
 
-        Datum countryItem = getItem(position);
+        ItemDataModel countryItem = getItem(position);
         if (countryItem != null) {
 
 
-            textViewName.setText(countryItem.getItemTitle());
+            textViewName.setText(countryItem.getItemName());
             textViewName.setOnTouchListener((v, event) -> {
                 itemID.groceryItem(countryItem.getId());
                 Log.d("zma item id", countryItem.getId());
@@ -76,13 +77,13 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<Datum> suggestions = new ArrayList<>();
+            List<ItemDataModel> suggestions = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
                 suggestions.addAll(ingredientsListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Datum item : ingredientsListFull) {
-                    if (item.getItemTitle().toLowerCase().contains(filterPattern)) {
+                for (ItemDataModel item : ingredientsListFull) {
+                    if (item.getItemName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(item);
 
                     }
@@ -102,7 +103,7 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<Datum> {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((Datum) resultValue).getItemTitle();
+            return ((ItemDataModel) resultValue).getItemName();
 
 
         }

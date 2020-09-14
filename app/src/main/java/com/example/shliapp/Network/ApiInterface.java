@@ -7,7 +7,7 @@ import com.example.shliapp.Models.ForgotPasswordModel;
 import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.GetStorageModel;
 import com.example.shliapp.Models.GetStoresModels.GetStoresModel;
-import com.example.shliapp.Models.ItemRespones;
+import com.example.shliapp.Models.ItemModel.ItemRespones;
 import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
 import com.example.shliapp.Models.LoginResponse;
 import com.example.shliapp.Models.ProfileModels.GetProfileModel;

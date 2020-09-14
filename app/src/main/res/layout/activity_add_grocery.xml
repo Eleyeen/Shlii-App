@@ -22,13 +22,13 @@
 
         <TextView
             android:id="@+id/tvAddGrocery"
-            android:fontFamily="@font/roboto_bolditalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
             android:text="Add Grocery"
             android:textColor="#344356"
+            android:fontFamily="@font/roboto_regular"
             android:textSize="25dp"
             android:textStyle="bold" />
 

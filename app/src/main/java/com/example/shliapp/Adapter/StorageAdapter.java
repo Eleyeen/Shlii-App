@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +88,7 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private CircleImageView civStorage;
+        private ImageView civStorage;
         private CardView cvStorage;
         private TextView tvStorageItem;
         private  TextView tvStorageName;

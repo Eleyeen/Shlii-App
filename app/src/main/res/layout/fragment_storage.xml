@@ -8,17 +8,15 @@
 
 
     <TextView
-        android:fontFamily="@font/roboto_bolditalic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Storage"
         android:textSize="30dp"
         android:textColor="#344356"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:id="@+id/tvStorage"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="90dp"
@@ -26,15 +24,13 @@
         android:src="@mipmap/plusicon"
         android:layout_alignParentRight="true"
         android:id="@+id/ivPlusIconStorage"
-        android:layout_marginTop="25dp"
-        />
+        android:layout_marginTop="15dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:id="@+id/rvStorage"
-        android:layout_below="@id/tvStorage"
-        />
+        android:layout_below="@id/tvStorage" />
 
 </RelativeLayout>

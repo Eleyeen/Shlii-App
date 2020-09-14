@@ -1,11 +1,8 @@
 package com.example.shliapp.Activities;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +16,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shliapp.Adapter.AutoCompleteIngredientsAdapter;
-import com.example.shliapp.Models.ItemRespones;
+import com.example.shliapp.Models.ItemModel.ItemDataModel;
+import com.example.shliapp.Models.ItemModel.ItemRespones;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
 import com.example.shliapp.Models.addGroceries.Datum;
 import com.example.shliapp.Network.ApiClienTh;
@@ -58,7 +56,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     String strQtyAddGrocery = "1";
     private String strItemAddGrocery = "", strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
-    ArrayList<Datum> listModels = new ArrayList<>();
+    ArrayList<ItemDataModel> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)

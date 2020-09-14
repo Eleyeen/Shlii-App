@@ -44,7 +44,6 @@
                 android:padding="10dp"
                 android:text="Row Number"
                 android:textColor="@color/colorBlack"
-                android:textSize="25dp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.chauthai.swipereveallayout.SwipeRevealLayout>
