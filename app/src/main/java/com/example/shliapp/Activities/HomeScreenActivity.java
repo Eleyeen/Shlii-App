@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
+import com.example.shliapp.utils.CheckLocation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +45,11 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ButterKnife.bind(this);
         cvSignIn.setOnClickListener(this);
         cvSignUp.setOnClickListener(this);
-        checkPermission();
+        if (CheckLocation.isLocationEnabled(this)) {
+            checkPermission();
+        } else {
+            Toast.makeText(this, "Turn on your location", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -146,7 +152,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             return;
         }
         Location location = locationManager.getLastKnownLocation(providerName);
-        if(location != null) {
+        if (location != null) {
             Log.i("zma Latitude", "" + location.getLatitude());
             Log.i("zma Longitude", "" + location.getLongitude());
             AppRepository.mPutValue(this).putString("lat", String.valueOf(location.getLatitude())).commit();

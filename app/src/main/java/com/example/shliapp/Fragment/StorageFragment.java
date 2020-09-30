@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -32,6 +33,7 @@ import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
+import com.example.shliapp.utils.CheckLocation;
 import com.example.shliapp.utils.GPSTracker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -76,7 +78,11 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
 
     private void initListeners() {
         ButterKnife.bind(this, view);
-        getUpdatedLocation();
+        if (CheckLocation.isLocationEnabled(getActivity())){
+            getUpdatedLocation();
+        }else {
+            Toast.makeText(getActivity(), "Turn on your location", Toast.LENGTH_SHORT).show();
+        }
         Log.d("zma user id", AppRepository.mUserID(getActivity()));
     }
 
