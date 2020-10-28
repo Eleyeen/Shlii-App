@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shliapp.Models.ForgotPasswordModel;
+import com.example.shliapp.Models.ForgotPasswordResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -70,10 +70,10 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
         progressDialog.show();
 
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<ForgotPasswordModel> userLogin = services.resetPassword(strEmail);
-        userLogin.enqueue(new Callback<ForgotPasswordModel>() {
+        Call<ForgotPasswordResponse> userLogin = services.resetPassword(strEmail);
+        userLogin.enqueue(new Callback<ForgotPasswordResponse>() {
             @Override
-            public void onResponse(Call<ForgotPasswordModel> call, Response<ForgotPasswordModel> response) {
+            public void onResponse(Call<ForgotPasswordResponse> call, Response<ForgotPasswordResponse> response) {
 
                 if (response.body() == null) {
                     Toast.makeText(ForGotPasswordActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
@@ -93,7 +93,7 @@ public class ForGotPasswordActivity extends AppCompatActivity implements View.On
             }
 
             @Override
-            public void onFailure(Call<ForgotPasswordModel> call, Throwable t) {
+            public void onFailure(Call<ForgotPasswordResponse> call, Throwable t) {
                 Log.d("response","error "+t.getMessage());
                 progressDialog.dismiss();
             }

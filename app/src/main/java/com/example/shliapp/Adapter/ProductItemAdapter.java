@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Models.DeleteModel;
-import com.example.shliapp.Models.addGroceries.Datum;
+import com.example.shliapp.Models.DeleteResponse;
 import com.example.shliapp.R;
+import com.example.shliapp.shoppingRackModels.Datum;
 
 import java.util.List;
 
@@ -65,17 +65,17 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
 
         myViewHolder.tvItemName.setText(item.getItemTitle());
         myViewHolder.tvQuantity.setText(item.getQuantity());
-        viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getId());
+        viewBinderHelper.bind(myViewHolder.swipeRevealLayout, String.valueOf(item.getId()));
 
         myViewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteItem(item.getId());
+                DeleteItem(String.valueOf(item.getId()));
             }
         });
         SharedPreferences sharedPreferences = context.getSharedPreferences("deleteItem", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("deleteitemId", item.getId());
+        editor.putString("deleteitemId", String.valueOf(item.getId()));
         editor.apply();
     }
 
@@ -105,10 +105,10 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
 
     private void DeleteItem(String id) {
 
-        Call<DeleteModel> call = services.deleteItem(id);
-        call.enqueue(new Callback<DeleteModel>() {
+        Call<DeleteResponse> call = services.deleteItem(id);
+        call.enqueue(new Callback<DeleteResponse>() {
             @Override
-            public void onResponse(Call<DeleteModel> call, Response<DeleteModel> response) {
+            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
 
@@ -118,7 +118,7 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
             }
 
             @Override
-            public void onFailure(Call<DeleteModel> call, Throwable t) {
+            public void onFailure(Call<DeleteResponse> call, Throwable t) {
 
             }
         });

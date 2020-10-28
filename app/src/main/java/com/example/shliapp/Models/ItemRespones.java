@@ -3,7 +3,7 @@ package com.example.shliapp.Models;
 
 import java.util.List;
 
-import com.example.shliapp.Models.addGroceries.Datum;
+import com.example.shliapp.Models.GetStoresModels.GetStoreDataModel;
 import com.google.gson.annotations.SerializedName;
 
 public class ItemRespones {
@@ -11,7 +11,7 @@ public class ItemRespones {
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<Datum> mData;
+    private List<GetStoreDataModel> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -25,11 +25,11 @@ public class ItemRespones {
         mCode = code;
     }
 
-    public List<Datum> getData() {
+    public List<GetStoreDataModel> getData() {
         return mData;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<GetStoreDataModel> data) {
         mData = data;
     }
 

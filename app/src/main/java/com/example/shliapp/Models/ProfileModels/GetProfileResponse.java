@@ -1,11 +1,10 @@
-package com.example.shliapp.Models.StorageModelss;
+
+package com.example.shliapp.Models.ProfileModels;
 
 import java.util.List;
-
-import com.example.shliapp.Models.addGroceries.Datum;
 import com.google.gson.annotations.SerializedName;
 
-public class AddStorageModel {
+public class GetProfileResponse {
 
     @SerializedName("code")
     private Long mCode;

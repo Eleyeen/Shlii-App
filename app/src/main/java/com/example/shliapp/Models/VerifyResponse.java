@@ -2,7 +2,8 @@
 package com.example.shliapp.Models;
 
 import com.google.gson.annotations.SerializedName;
-public class ForgotPasswordModel {
+
+public class VerifyResponse {
 
     @SerializedName("code")
     private Long mCode;

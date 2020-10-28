@@ -4,12 +4,12 @@ package com.example.shliapp.Models.GetStoresModels;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class GetStoresModel {
+public class GetStoresResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<Datum> mData;
+    private List<GetStoreDataModel> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -23,11 +23,11 @@ public class GetStoresModel {
         mCode = code;
     }
 
-    public List<Datum> getData() {
+    public List<GetStoreDataModel> getData() {
         return mData;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<GetStoreDataModel> data) {
         mData = data;
     }
 

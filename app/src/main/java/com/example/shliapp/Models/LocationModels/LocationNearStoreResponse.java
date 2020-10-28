@@ -4,7 +4,7 @@ package com.example.shliapp.Models.LocationModels;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LocationNearStoreModels {
+public class LocationNearStoreResponse {
 
     @SerializedName("msg")
     private String mMsg;

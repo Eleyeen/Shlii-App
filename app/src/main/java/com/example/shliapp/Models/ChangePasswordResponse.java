@@ -1,14 +1,15 @@
 
 package com.example.shliapp.Models;
 
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class VerifyResponseModel {
+public class ChangePasswordResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private String mData;
+    private List<Object> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -22,11 +23,11 @@ public class VerifyResponseModel {
         mCode = code;
     }
 
-    public String getData() {
+    public List<Object> getData() {
         return mData;
     }
 
-    public void setData(String data) {
+    public void setData(List<Object> data) {
         mData = data;
     }
 

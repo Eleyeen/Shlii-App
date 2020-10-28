@@ -7,24 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Models.getShoppingList.GetShoppingDataModel;
-import com.example.shliapp.Models.getShoppingList.Item;
+import com.example.shliapp.Models.getUserSelctedItem.SelectedItem;
 import com.example.shliapp.R;
 
 import java.util.List;
 
 public class ShoppingItemAdapter extends RecyclerView.Adapter<ShoppingItemAdapter.MyViewHolder> {
     private Context context;
-    private List<Item> modelList;
-    private List<Item> items;
+    private List<SelectedItem> modelList;
+    private List<SelectedItem> items;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
 
-    public ShoppingItemAdapter(Context context, List<Item> modelList) {
+    public ShoppingItemAdapter(Context context, List<SelectedItem> modelList) {
         this.context = context;
 //        this.listItems = modelList;
         this.modelList = modelList;
@@ -41,12 +39,9 @@ public class ShoppingItemAdapter extends RecyclerView.Adapter<ShoppingItemAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        Item item = modelList.get(position);
+        SelectedItem item = modelList.get(position);
         myViewHolder.tvDownItemName.setText(item.getItemTitle());
-        myViewHolder.tvRowQuantity.setText(item.getItemNumber());
-
-
-
+        myViewHolder.tvRowQuantity.setText(item.getQuantity());
 
 
     }
@@ -59,8 +54,7 @@ public class ShoppingItemAdapter extends RecyclerView.Adapter<ShoppingItemAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-
-        private TextView tvDownItemName,tvRowQuantity;
+        private TextView tvDownItemName, tvRowQuantity;
 
 
         public MyViewHolder(@NonNull View itemView) {

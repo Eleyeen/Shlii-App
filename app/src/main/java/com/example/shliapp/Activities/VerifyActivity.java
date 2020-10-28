@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shliapp.Models.VerifyResponseModel;
+import com.example.shliapp.Models.VerifyResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -67,10 +67,10 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.show();
 
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<VerifyResponseModel> userVerify = services.userVerification(strVerifycode,strForgotEmail);
-        userVerify.enqueue(new Callback<VerifyResponseModel>() {
+        Call<VerifyResponse> userVerify = services.userVerification(strVerifycode,strForgotEmail);
+        userVerify.enqueue(new Callback<VerifyResponse>() {
             @Override
-            public void onResponse(Call<VerifyResponseModel> call, Response<VerifyResponseModel> response) {
+            public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
 
                 if (response.body() == null) {
                     try {
@@ -88,7 +88,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<VerifyResponseModel> call, Throwable t) {
+            public void onFailure(Call<VerifyResponse> call, Throwable t) {
 //                alertDialog.dismiss();
             progressDialog.dismiss();
             }

@@ -1,15 +1,17 @@
 
-package com.example.shliapp.Models.ProfileModels;
+package com.example.shliapp.Models.allItems;
 
-import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GetProfileModel {
+import java.util.List;
+
+public class AllItemsResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<Datum> mData;
+    private List<AllItemsDataModel> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -23,11 +25,11 @@ public class GetProfileModel {
         mCode = code;
     }
 
-    public List<Datum> getData() {
+    public List<AllItemsDataModel> getData() {
         return mData;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<AllItemsDataModel> data) {
         mData = data;
     }
 

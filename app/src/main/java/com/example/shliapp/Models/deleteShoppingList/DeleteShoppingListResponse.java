@@ -1,15 +1,15 @@
 
-package com.example.shliapp.Models;
+package com.example.shliapp.Models.deleteShoppingList;
 
-import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GetGroceryModel {
+public class DeleteShoppingListResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<DatumUnderSink> mData;
+    private Data mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -23,11 +23,11 @@ public class GetGroceryModel {
         mCode = code;
     }
 
-    public List<DatumUnderSink> getData() {
+    public Data getData() {
         return mData;
     }
 
-    public void setData(List<DatumUnderSink> data) {
+    public void setData(Data data) {
         mData = data;
     }
 

@@ -1,14 +1,13 @@
 
-package com.example.shliapp.Models.DeleteShoppingList;
+package com.example.shliapp.Models;
 
 import com.google.gson.annotations.SerializedName;
-
-public class DeleteShopList {
+public class ForgotPasswordResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private Data mData;
+    private String mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -22,11 +21,11 @@ public class DeleteShopList {
         mCode = code;
     }
 
-    public Data getData() {
+    public String getData() {
         return mData;
     }
 
-    public void setData(Data data) {
+    public void setData(String data) {
         mData = data;
     }
 

@@ -1,15 +1,17 @@
 
-package com.example.shliapp.Models;
+package com.example.shliapp.Models.getUserSelctedItem;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ChangePasswordModel {
+
+public class UserSelctedResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<Object> mData;
+    private List<UserSectedDataModel> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -23,11 +25,11 @@ public class ChangePasswordModel {
         mCode = code;
     }
 
-    public List<Object> getData() {
+    public List<UserSectedDataModel> getData() {
         return mData;
     }
 
-    public void setData(List<Object> data) {
+    public void setData(List<UserSectedDataModel> data) {
         mData = data;
     }
 

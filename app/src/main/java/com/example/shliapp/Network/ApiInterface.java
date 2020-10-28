@@ -1,24 +1,24 @@
 package com.example.shliapp.Network;
 
-import com.example.shliapp.Models.ChangePasswordModel;
-import com.example.shliapp.Models.DeleteModel;
-import com.example.shliapp.Models.DeleteShoppingList.DeleteShopList;
-import com.example.shliapp.Models.ForgotPasswordModel;
-import com.example.shliapp.Models.GetGroceryModel;
-import com.example.shliapp.Models.GetStorageModel;
-import com.example.shliapp.Models.GetStoresModels.GetStoresModel;
-import com.example.shliapp.Models.ItemModel.ItemRespones;
-import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
+import com.example.shliapp.Models.ChangePasswordResponse;
+import com.example.shliapp.Models.DeleteResponse;
+import com.example.shliapp.Models.ForgotPasswordResponse;
+import com.example.shliapp.Models.GetStorageResponse;
+import com.example.shliapp.Models.GetStoresModels.GetStoresResponse;
+import com.example.shliapp.Models.ItemModel.ItemResonse;
+import com.example.shliapp.Models.LocationModels.LocationNearStoreResponse;
 import com.example.shliapp.Models.LoginResponse;
-import com.example.shliapp.Models.ProfileModels.GetProfileModel;
+import com.example.shliapp.Models.ProfileModels.GetProfileResponse;
 import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingListResponse;
-import com.example.shliapp.Models.ShppingListModel.GetShopingList.GetShoppingListResponse;
-import com.example.shliapp.Models.StorageModelss.AddStorageModel;
-import com.example.shliapp.Models.VerifyResponseModel;
+import com.example.shliapp.Models.StorageModelss.AddStorageResponse;
+import com.example.shliapp.Models.VerifyResponse;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
+import com.example.shliapp.Models.allItems.AllItemsResponse;
+import com.example.shliapp.Models.deleteShoppingList.DeleteShoppingListResponse;
 import com.example.shliapp.Models.deleteStorageModel.DeleteStorageResponse;
 import com.example.shliapp.Models.getShoppingList.GetShoppingResponse;
-import com.example.shliapp.shoppingRackModels.ShoppingRackResponse;
+import com.example.shliapp.Models.getUserSelctedItem.UserSelctedResponse;
+import com.example.shliapp.Models.groceryModel.GroceryResponse;
 
 import java.util.Map;
 
@@ -36,7 +36,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("signup")
     Call<LoginResponse> createUser(
-
             @Field("first_name") String useFirstName,
             @Field("last_name") String userLastName,
             @Field("email") String userEmail,
@@ -52,25 +51,24 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("reset")
-    Call<ForgotPasswordModel> resetPassword(@Field("email") String email);
+    Call<ForgotPasswordResponse> resetPassword(@Field("email") String email);
 
     @FormUrlEncoded
     @POST("checkCode")
-    Call<VerifyResponseModel> userVerification(
+    Call<VerifyResponse> userVerification(
             @Field("code") String code,
-            @Field("email") String email
-    );
+            @Field("email") String email);
 
 
     @FormUrlEncoded
     @POST("ChangePassword")
-    Call<ChangePasswordModel> changePassword(
+    Call<ChangePasswordResponse> changePassword(
             @Field("email") String email,
             @Field("newPassword") String code);
 
     @FormUrlEncoded
     @POST("AddStorage")
-    Call<AddStorageModel> AddStoragePost(
+    Call<AddStorageResponse> AddStoragePost(
             @Field("storage_name") String strStorageName,
             @Field("user_id") String userID);
 
@@ -90,45 +88,57 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("location")
-    Call<LocationNearStoreModels> AddLocation(
+    Call<LocationNearStoreResponse> AddLocation(
             @Field("user_id") String user_id,
             @Field("latitude") String latitude,
             @Field("longitude") String longitude);
 
 
     @GET("ItemsList")
-    Call<ItemRespones> getItem();
+    Call<ItemResonse> getItem();
 
     @DELETE("deleteGrocerry/{id}")
-    Call<DeleteModel> deleteItem(
-            @Path("id") String groupId
-    );
+    Call<DeleteResponse> deleteItem(
+            @Path("id") String groupId);
+
 
     @DELETE("deleteShoppingList/{id}")
-    Call<DeleteShopList> deleteShopingList(
+    Call<DeleteShoppingListResponse> deleteShoppingItem(
+            @Path("id") String groupId);
+
+    @DELETE("deleteShoppingList/{id}")
+    Call<DeleteShoppingListResponse> deleteShopingList(
             @Path("id") String groupId);
 
     @GET("getStorages/{id}")
-    Call<GetStorageModel> getStorage(@Path("id") String groupId);
+    Call<GetStorageResponse> getStorage(@Path("id") String groupId);
 
     @GET("getGrocerry?")
-    Call<GetGroceryModel> getGrocery(@Query("user_id") String groupId, @Query("storage_id") String storageID);
+    Call<GroceryResponse> getGrocery(@Query("user_id") String groupId,
+                                     @Query("storage_id") String storageID);
 
     @GET("getProfile/{id}")
-    Call<GetProfileModel> getProfile(@Path("id") String groupId);
+    Call<GetProfileResponse> getProfile(@Path("id") String groupId);
 
     @GET("getList")
     Call<GetShoppingResponse> getShoppingList();
 
     @GET("getStores")
-    Call<GetStoresModel> getStores();
+    Call<GetStoresResponse> getStores();
+
 
     @FormUrlEncoded
-    @POST("list")
-    Call<ShoppingRackResponse> rack(@Field("user_id") int userID,
-                                    @Field("store_id") int storeID);
+    @POST("userSeletedItems")
+    Call<UserSelctedResponse> getUserSelectedItems(
+            @Field("user_id") String userID,
+            @Field("store_id") String storeID);
 
     @DELETE("deleteStorage/{id}")
     Call<DeleteStorageResponse> deleteStorage(@Path("id") String id);
+
+
+    @GET("allItems")
+    Call<AllItemsResponse> getAllItems();
+
 
 }

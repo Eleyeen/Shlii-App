@@ -2,15 +2,16 @@
 package com.example.shliapp.Models;
 
 import java.util.List;
+
+import com.example.shliapp.Models.StorageModelss.DatumStorage;
 import com.google.gson.annotations.SerializedName;
 
-
-public class DeleteModel {
+public class GetStorageResponse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<Object> mData;
+    private List<DatumStorage> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -24,11 +25,11 @@ public class DeleteModel {
         mCode = code;
     }
 
-    public List<Object> getData() {
+    public List<DatumStorage> getData() {
         return mData;
     }
 
-    public void setData(List<Object> data) {
+    public void setData(List<DatumStorage> data) {
         mData = data;
     }
 

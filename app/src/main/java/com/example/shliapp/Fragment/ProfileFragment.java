@@ -1,7 +1,6 @@
 package com.example.shliapp.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,13 +17,12 @@ import com.example.shliapp.Activities.ForGotPasswordActivity;
 import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Activities.HomeScreenActivity;
 import com.example.shliapp.Models.ProfileModels.Datum;
-import com.example.shliapp.Models.ProfileModels.GetProfileModel;
+import com.example.shliapp.Models.ProfileModels.GetProfileResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
 import com.example.shliapp.utils.AppRepository;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -102,11 +100,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         String strUserID = GeneralUtills.getSharedPreferences(getContext()).getString("userId", "");
 
 
-        Call<GetProfileModel> call = services.getProfile(strUserID);
+        Call<GetProfileResponse> call = services.getProfile(strUserID);
 
-        call.enqueue(new Callback<GetProfileModel>() {
+        call.enqueue(new Callback<GetProfileResponse>() {
             @Override
-            public void onResponse(Call<GetProfileModel> call, Response<GetProfileModel> response) {
+            public void onResponse(Call<GetProfileResponse> call, Response<GetProfileResponse> response) {
                 if (response.isSuccessful()) {
 
                     itemModels.addAll(response.body().getData());
@@ -124,7 +122,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<GetProfileModel> call, Throwable t) {
+            public void onFailure(Call<GetProfileResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });

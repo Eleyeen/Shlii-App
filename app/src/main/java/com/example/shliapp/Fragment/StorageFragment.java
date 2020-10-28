@@ -25,9 +25,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shliapp.Activities.AddStorageActivity;
-import com.example.shliapp.Activities.GeneralUtills;
 import com.example.shliapp.Adapter.StorageAdapter;
-import com.example.shliapp.Models.GetStorageModel;
+import com.example.shliapp.Models.GetStorageResponse;
 import com.example.shliapp.Models.StorageModelss.DatumStorage;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
@@ -171,14 +170,13 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
 
 
-        Call<GetStorageModel> call = services.getStorage(AppRepository.mUserID(getActivity()));
+        Call<GetStorageResponse> call = services.getStorage(AppRepository.mUserID(getActivity()));
 
-        call.enqueue(new Callback<GetStorageModel>() {
+        call.enqueue(new Callback<GetStorageResponse>() {
             @Override
-            public void onResponse(Call<GetStorageModel> call, Response<GetStorageModel> response) {
+            public void onResponse(Call<GetStorageResponse> call, Response<GetStorageResponse> response) {
                 if (response.isSuccessful()) {
                     itemLists.addAll(response.body().getData());
-
                     StorageAdapter adapter = new StorageAdapter(getContext(), itemLists);
                     rvShoppingList.setAdapter(adapter);
                     progressDialog.dismiss();
@@ -187,7 +185,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener, A
             }
 
             @Override
-            public void onFailure(Call<GetStorageModel> call, Throwable t) {
+            public void onFailure(Call<GetStorageResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });

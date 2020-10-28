@@ -3,7 +3,6 @@ package com.example.shliapp.Adapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,22 +13,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.shliapp.Models.ItemModel.ItemDataModel;
-import com.example.shliapp.Models.addGroceries.Datum;
+import com.example.shliapp.Models.allItems.AllItemsDataModel;
 import com.example.shliapp.R;
 import com.example.shliapp.interfaces.GroceryItemID;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoCompleteIngredientsAdapter extends ArrayAdapter<ItemDataModel> {
-    private List<ItemDataModel> ingredientsListFull;
+public class AutoCompleteIngredientsAdapter extends ArrayAdapter<AllItemsDataModel> {
+    private List<AllItemsDataModel> allItemsDataModels;
     GroceryItemID itemID;
     Context context;
 
-    public AutoCompleteIngredientsAdapter(@NonNull Context context, @NonNull List<ItemDataModel> ingridientsList, GroceryItemID groceryItemID) {
-        super(context, 0, ingridientsList);
-        ingredientsListFull = new ArrayList<>(ingridientsList);
+    public AutoCompleteIngredientsAdapter(@NonNull Context context, @NonNull List<AllItemsDataModel> allItemsDataModels, GroceryItemID groceryItemID) {
+        super(context, 0, allItemsDataModels);
+        this.allItemsDataModels = new ArrayList<>(allItemsDataModels);
         this.context = context;
         this.itemID = groceryItemID;
     }
@@ -51,14 +49,14 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<ItemDataModel> 
         TextView textViewName = convertView.findViewById(R.id.tv_autocoplete_item_name);
         LinearLayout linearrow = convertView.findViewById(R.id.linearrow);
 
-        ItemDataModel countryItem = getItem(position);
+        AllItemsDataModel countryItem = getItem(position);
         if (countryItem != null) {
 
 
-            textViewName.setText(countryItem.getItemName());
+            textViewName.setText(countryItem.getItemTitle());
             textViewName.setOnTouchListener((v, event) -> {
-                itemID.groceryItem(countryItem.getId());
-                Log.d("zma item id", countryItem.getId());
+                itemID.groceryItem(String.valueOf(countryItem.getId()));
+                Log.d("zma item id", String.valueOf(countryItem.getId()));
                 return false;
             });
 
@@ -77,13 +75,13 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<ItemDataModel> 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<ItemDataModel> suggestions = new ArrayList<>();
+            List<AllItemsDataModel> suggestions = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(ingredientsListFull);
+                suggestions.addAll(allItemsDataModels);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (ItemDataModel item : ingredientsListFull) {
-                    if (item.getItemName().toLowerCase().contains(filterPattern)) {
+                for (AllItemsDataModel item : allItemsDataModels) {
+                    if (item.getItemTitle().toLowerCase().contains(filterPattern)) {
                         suggestions.add(item);
 
                     }
@@ -103,7 +101,7 @@ public class AutoCompleteIngredientsAdapter extends ArrayAdapter<ItemDataModel> 
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((ItemDataModel) resultValue).getItemName();
+            return ((AllItemsDataModel) resultValue).getItemTitle();
 
 
         }

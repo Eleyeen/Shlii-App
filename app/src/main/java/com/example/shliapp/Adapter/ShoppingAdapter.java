@@ -11,23 +11,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Models.StorageModelss.DatumStorage;
-import com.example.shliapp.Models.getShoppingList.GetShoppingDataModel;
-import com.example.shliapp.Models.getShoppingList.Item;
+import com.example.shliapp.Models.getUserSelctedItem.SelectedItem;
+import com.example.shliapp.Models.getUserSelctedItem.UserSectedDataModel;
 import com.example.shliapp.R;
 
 import java.util.List;
 
 public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyViewHolder> {
     private Context context;
-    private List<GetShoppingDataModel> modelList;
-    private List<Item> items;
+    private List<UserSectedDataModel> modelList;
+    private List<SelectedItem> items;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
 
-    public ShoppingAdapter(Context context, List<GetShoppingDataModel> modelList) {
+    public ShoppingAdapter(Context context, List<UserSectedDataModel> modelList) {
         this.context = context;
-//        this.listItems = modelList;
         this.modelList = modelList;
     }
 
@@ -42,9 +40,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        GetShoppingDataModel item = modelList.get(position);
-        myViewHolder.tvItemName.setText(item.getItemTitle());
-        myViewHolder.tvRowName.setText(item.getRowName());
+        UserSectedDataModel item = modelList.get(position);
+        myViewHolder.tvItemName.setText(item.getRowNumber());
         myViewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         myViewHolder.recyclerView.setHasFixedSize(true);
 

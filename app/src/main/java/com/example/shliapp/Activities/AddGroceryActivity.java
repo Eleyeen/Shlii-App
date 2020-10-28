@@ -16,10 +16,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shliapp.Adapter.AutoCompleteIngredientsAdapter;
+
 import com.example.shliapp.Models.ItemModel.ItemDataModel;
-import com.example.shliapp.Models.ItemModel.ItemRespones;
 import com.example.shliapp.Models.addGroceries.AddGroceryResponse;
-import com.example.shliapp.Models.addGroceries.Datum;
+import com.example.shliapp.Models.allItems.AllItemsDataModel;
+import com.example.shliapp.Models.allItems.AllItemsResponse;
+import com.example.shliapp.Models.groceryModel.GroceryDataModel;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -56,7 +58,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
     String strQtyAddGrocery = "1";
     private String strItemAddGrocery = "", strUserID, strQuality;
     AutoCompleteIngredientsAdapter adapter;
-    ArrayList<ItemDataModel> listModels = new ArrayList<>();
+    ArrayList<AllItemsDataModel> listModels = new ArrayList<>();
     ProgressDialog progressDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -115,11 +117,11 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
 
 
-        Call<ItemRespones> call = services.getItem();
+        Call<AllItemsResponse> call = services.getAllItems();
 
-        call.enqueue(new Callback<ItemRespones>() {
+        call.enqueue(new Callback<AllItemsResponse>() {
             @Override
-            public void onResponse(Call<ItemRespones> call, Response<ItemRespones> response) {
+            public void onResponse(Call<AllItemsResponse> call, Response<AllItemsResponse> response) {
                 if (response.isSuccessful()) {
                     listModels.addAll(response.body().getData());
                     adapter = new AutoCompleteIngredientsAdapter(AddGroceryActivity.this, listModels, AddGroceryActivity.this);
@@ -129,7 +131,7 @@ public class AddGroceryActivity extends AppCompatActivity implements View.OnClic
             }
 
             @Override
-            public void onFailure(Call<ItemRespones> call, Throwable t) {
+            public void onFailure(Call<AllItemsResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });

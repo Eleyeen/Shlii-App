@@ -3,8 +3,7 @@ package com.example.shliapp.Models.addGroceries;
 
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
-public class Datum {
+public class AddGroceryDataModel {
 
     @SerializedName("id")
     private String mId;

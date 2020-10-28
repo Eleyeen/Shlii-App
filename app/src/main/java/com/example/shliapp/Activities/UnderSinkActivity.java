@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shliapp.Adapter.UnderSinkAdapterItem;
-import com.example.shliapp.Models.DatumUnderSink;
-import com.example.shliapp.Models.GetGroceryModel;
 import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingListResponse;
+import com.example.shliapp.Models.groceryModel.GroceryDataModel;
+import com.example.shliapp.Models.groceryModel.GroceryResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -48,7 +48,8 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @BindView(R.id.rvUnderSink)
     RecyclerView rvUnderSink;
     UnderSinkAdapterItem adapter;
-    ArrayList<DatumUnderSink> itemModels;
+    ArrayList<GroceryDataModel> itemModels = new ArrayList<GroceryDataModel>();
+    ;
     ProgressDialog progressDialog;
     private ArrayList<String> itemTitle = new ArrayList<>();
     private ArrayList<String> itemQuantity = new ArrayList<>();
@@ -68,7 +69,6 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
         ivPlusIcon.setOnClickListener(this);
         rvUnderSink.setLayoutManager(new LinearLayoutManager(this));
         rvUnderSink.setHasFixedSize(true);
-        itemModels = new ArrayList<DatumUnderSink>();
         progressDialog = new ProgressDialog(UnderSinkActivity.this);
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Wait");
@@ -77,27 +77,32 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
         String strStorage = GeneralUtills.getSharedPreferences(this).getString("storageItem", "");
         tvTitle.setText(strStorage);
 
+        adapter = new UnderSinkAdapterItem(UnderSinkActivity.this, itemModels, UnderSinkActivity.this::detectArrays);
+        rvUnderSink.setAdapter(adapter);
+
+
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getItem() {
+        itemModels.clear();
         services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<GetGroceryModel> call = services.getGrocery(AppRepository.mUserID(this), AppRepository.mStorageId(this));
-        call.enqueue(new Callback<GetGroceryModel>() {
+        Call<GroceryResponse> call = services.getGrocery(AppRepository.mUserID(this), AppRepository.mStorageId(this));
+        call.enqueue(new Callback<GroceryResponse>() {
             @Override
-            public void onResponse(Call<GetGroceryModel> call, Response<GetGroceryModel> response) {
+            public void onResponse(Call<GroceryResponse> call, Response<GroceryResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     itemModels.addAll(response.body().getData());
-                    adapter = new UnderSinkAdapterItem(UnderSinkActivity.this, itemModels, UnderSinkActivity.this::detectArrays);
-                    rvUnderSink.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
                 }
 
             }
 
             @Override
-            public void onFailure(Call<GetGroceryModel> call, Throwable t) {
+            public void onFailure(Call<GroceryResponse> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });
@@ -107,8 +112,10 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        itemModels.clear();
+
+
         getItem();
+
 
     }
 
@@ -181,6 +188,7 @@ public class UnderSinkActivity extends AppCompatActivity implements View.OnClick
             String quantitykey = "items[" + i + "][quantity]";
             requestMap.put(quantitykey, itemQuantity.get(i));
         }
+
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
         Call<AddShoppingListResponse> addItem = services.addShoppingList(requestMap);
         addItem.enqueue(new Callback<AddShoppingListResponse>() {

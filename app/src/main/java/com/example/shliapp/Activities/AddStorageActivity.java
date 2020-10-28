@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shliapp.Models.StorageModelss.AddStorageModel;
+import com.example.shliapp.Models.StorageModelss.AddStorageResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -83,11 +83,11 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiAddStorage() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<AddStorageModel> addStorage = services.AddStoragePost(strStorageName,
+        Call<AddStorageResponse> addStorage = services.AddStoragePost(strStorageName,
                 AppRepository.mUserID(this));
-        addStorage.enqueue(new Callback<AddStorageModel>() {
+        addStorage.enqueue(new Callback<AddStorageResponse>() {
             @Override
-            public void onResponse(Call<AddStorageModel> call, Response<AddStorageModel> response) {
+            public void onResponse(Call<AddStorageResponse> call, Response<AddStorageResponse> response) {
 
                 if (response.body() == null) {
                     try {
@@ -112,7 +112,7 @@ public class AddStorageActivity extends AppCompatActivity implements View.OnClic
             }
 
             @Override
-            public void onFailure(Call<AddStorageModel> call, Throwable t) {
+            public void onFailure(Call<AddStorageResponse> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
                 progressDialog.dismiss();
             }

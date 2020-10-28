@@ -1,17 +1,17 @@
 
-package com.example.shliapp.Models.addGroceries;
+package com.example.shliapp.Models.ItemModel;
 
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AddGroceryResponse {
+public class ItemResonse {
 
     @SerializedName("code")
     private Long mCode;
     @SerializedName("data")
-    private List<AddGroceryDataModel> mData;
+    private List<ItemDataModel> mData;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -25,11 +25,11 @@ public class AddGroceryResponse {
         mCode = code;
     }
 
-    public List<AddGroceryDataModel> getData() {
+    public List<ItemDataModel> getData() {
         return mData;
     }
 
-    public void setData(List<AddGroceryDataModel> data) {
+    public void setData(List<ItemDataModel> data) {
         mData = data;
     }
 

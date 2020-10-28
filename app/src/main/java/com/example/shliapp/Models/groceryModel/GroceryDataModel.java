@@ -1,47 +1,30 @@
 
-package com.example.shliapp.Models;
+package com.example.shliapp.Models.groceryModel;
+
 
 import com.google.gson.annotations.SerializedName;
 
-import okhttp3.Interceptor;
-
-public class DatumUnderSink {
+public class GroceryDataModel {
 
     @SerializedName("created_at")
     private String mCreatedAt;
-    @SerializedName("item_title")
-    private String mitemTitle;
     @SerializedName("id")
     private String mId;
     @SerializedName("item_id")
     private String mItemId;
+    @SerializedName("item_title")
+    private String mItemTitle;
     @SerializedName("quantity")
     private String mQuantity;
+    @SerializedName("storage_id")
+    private String mStorageId;
     @SerializedName("updated_at")
     private String mUpdatedAt;
     @SerializedName("user_id")
     private String mUserId;
 
-    public Integer getCounter() {
-        return counter;
-    }
-
-    public void setCounter(Integer counter) {
-        this.counter = counter;
-    }
-
-    private Integer counter;
-
     public String getCreatedAt() {
         return mCreatedAt;
-    }
-
-    public String getMitemTitle() {
-        return mitemTitle;
-    }
-
-    public void setMitemTitle(String mitemTitle) {
-        this.mitemTitle = mitemTitle;
     }
 
     public void setCreatedAt(String createdAt) {
@@ -64,12 +47,28 @@ public class DatumUnderSink {
         mItemId = itemId;
     }
 
+    public String getItemTitle() {
+        return mItemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        mItemTitle = itemTitle;
+    }
+
     public String getQuantity() {
         return mQuantity;
     }
 
     public void setQuantity(String quantity) {
         mQuantity = quantity;
+    }
+
+    public String getStorageId() {
+        return mStorageId;
+    }
+
+    public void setStorageId(String storageId) {
+        mStorageId = storageId;
     }
 
     public String getUpdatedAt() {

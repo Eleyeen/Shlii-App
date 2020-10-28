@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
-import com.example.shliapp.Activities.GeneralUtills;
-import com.example.shliapp.Activities.StartBottomActivity;
 import com.example.shliapp.Activities.UnderSinkActivity;
-import com.example.shliapp.Models.DatumUnderSink;
-import com.example.shliapp.Models.DeleteModel;
-import com.example.shliapp.Models.ShppingListModel.AddShopingList.AddShoppingListResponse;
-import com.example.shliapp.Network.ApiClienTh;
-import com.example.shliapp.Network.ApiInterface;
+import com.example.shliapp.Models.DeleteResponse;
+import com.example.shliapp.Models.deleteShoppingList.DeleteShoppingListResponse;
+import com.example.shliapp.Models.groceryModel.GroceryDataModel;
 import com.example.shliapp.R;
 import com.example.shliapp.interfaces.SinkItemDetector;
-import com.example.shliapp.utils.AppRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,8 +41,8 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     private String _stringVal;
 
     private Context context;
-    private List<DatumUnderSink> modelListP;
-    private List<DatumUnderSink> listItemsP;
+    private List<GroceryDataModel> modelListP;
+    private List<GroceryDataModel> listItemsP;
     private Context mContext;
     private SinkItemDetector sinkItemDetector;
     int i = 0;
@@ -58,7 +52,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     private ArrayList<String> itemQuantity = new ArrayList<>();
     private List<String> itemPosition = new ArrayList<>();
 
-    public UnderSinkAdapterItem(Context context, List<DatumUnderSink> modelListP, SinkItemDetector mSinkItemDetector) {
+    public UnderSinkAdapterItem(Context context, List<GroceryDataModel> modelListP, SinkItemDetector mSinkItemDetector) {
         this.context = context;
         this.listItemsP = modelListP;
         this.modelListP = modelListP;
@@ -87,19 +81,19 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     @Override
     public void onBindViewHolder(@NonNull UnderSinkAdapterItem.MyviewHolder myViewHolder, int position) {
 
-        final DatumUnderSink item = modelListP.get(position);
+        final GroceryDataModel item = modelListP.get(position);
 
-        myViewHolder.tvItemName.setText(item.getMitemTitle());
+        myViewHolder.tvItemName.setText(item.getItemTitle());
 
         viewBinderHelper.bind(myViewHolder.swipeRevealLayout, item.getItemId());
 
         myViewHolder.tvDelete.setOnClickListener(v -> DeleteItem(item.getId()));
         myViewHolder.ivPlus.setOnClickListener(v -> {
-            if (!itemTitle.contains(item.getMitemTitle())) {
+            if (!itemTitle.contains(item.getItemTitle())) {
                 _counter = 0;
                 _counter++;
                 itemPosition.add(item.getId());
-                itemTitle.add(item.getMitemTitle());
+                itemTitle.add(item.getItemTitle());
                 itemQuantity.add(String.valueOf(_counter));
 
             } else {
@@ -108,7 +102,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
                 _counter = Integer.parseInt(myViewHolder.tvValue.getText().toString());
                 _counter++;
                 for (int i = 0; i<itemTitle.size(); i++){
-                    if (itemTitle.get(i).equals(item.getMitemTitle())){
+                    if (itemTitle.get(i).equals(item.getItemTitle())){
                         itemQuantity.set(i, String.valueOf(_counter));
                     }
                 }
@@ -121,13 +115,13 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
         });
 
         myViewHolder.ivMinus.setOnClickListener(v -> {
-            if (!itemTitle.contains(item.getMitemTitle())) {
+            if (!itemTitle.contains(item.getItemTitle())) {
                 _counter = 0;
                 if (_counter>0) {
                     _counter--;
                 }
                 itemPosition.add(item.getId());
-                itemTitle.add(item.getMitemTitle());
+                itemTitle.add(item.getItemTitle());
                 itemQuantity.add(String.valueOf(_counter));
 
             } else {
@@ -136,7 +130,7 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
                     _counter--;
                 }
                 for (int i = 0; i<itemTitle.size(); i++){
-                    if (itemTitle.get(i).equals(item.getMitemTitle())){
+                    if (itemTitle.get(i).equals(item.getItemTitle())){
                         itemQuantity.set(i, String.valueOf(_counter));
                     }
                 }
@@ -187,10 +181,10 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
     }
 
     private void DeleteItem(String id) {
-        Call<DeleteModel> call = services.deleteItem(id);
-        call.enqueue(new Callback<DeleteModel>() {
+        Call<DeleteShoppingListResponse> call = services.deleteShopingList(id);
+        call.enqueue(new Callback<DeleteShoppingListResponse>() {
             @Override
-            public void onResponse(Call<DeleteModel> call, Response<DeleteModel> response) {
+            public void onResponse(Call<DeleteShoppingListResponse> call, Response<DeleteShoppingListResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, "Item Delete", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, UnderSinkActivity.class);
@@ -200,11 +194,27 @@ public class UnderSinkAdapterItem extends RecyclerView.Adapter<UnderSinkAdapterI
             }
 
             @Override
-            public void onFailure(Call<DeleteModel> call, Throwable t) {
+            public void onFailure(Call<DeleteShoppingListResponse> call, Throwable t) {
+
             }
         });
-    }
 
+
+        Call<DeleteResponse> callList = services.deleteItem(id);
+        callList.enqueue(new Callback<DeleteResponse>() {
+            @Override
+            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<DeleteResponse> call, Throwable t) {
+
+            }
+        });
+
+
+    }
 
 
 }

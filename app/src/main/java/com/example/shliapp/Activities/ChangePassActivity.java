@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shliapp.Models.ChangePasswordModel;
+import com.example.shliapp.Models.ChangePasswordResponse;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
 import com.example.shliapp.R;
@@ -87,10 +87,10 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiCallChangePassword(String strEmail,String strNewPassword) {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<ChangePasswordModel> userLogin = services.changePassword(strEmail,strNewPassword);
-        userLogin.enqueue(new Callback<ChangePasswordModel>() {
+        Call<ChangePasswordResponse> userLogin = services.changePassword(strEmail,strNewPassword);
+        userLogin.enqueue(new Callback<ChangePasswordResponse>() {
             @Override
-            public void onResponse(Call<ChangePasswordModel> call, Response<ChangePasswordModel> response) {
+            public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
                 if (response.body() == null) {
                     Toast.makeText(ChangePassActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -106,7 +106,7 @@ public class ChangePassActivity extends AppCompatActivity implements View.OnClic
             }
 
             @Override
-            public void onFailure(Call<ChangePasswordModel> call, Throwable t) {
+            public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
             progressDialog.dismiss();
             }
         });

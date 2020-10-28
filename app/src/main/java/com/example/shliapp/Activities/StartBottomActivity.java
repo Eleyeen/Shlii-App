@@ -92,15 +92,6 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
                 break;
 
 
-            case R.id.ivProfile:
-
-                ivProfile.setImageResource(R.mipmap.backgroundprofile);
-                ivHome.setImageResource(R.mipmap.home);
-                ivNotification.setImageResource(R.mipmap.union);
-                Fragment fragment = new ProfileFragment();
-                setFragment(fragment);
-                break;
-
             case R.id.ivShopping:
 
                 ivProfile.setImageResource(R.mipmap.profile);
@@ -110,7 +101,14 @@ public class StartBottomActivity extends AppCompatActivity implements View.OnCli
                 Fragment fragmentw = new ShoppingFragment();
                 setFragment(fragmentw);
 
+                break;
+            case R.id.ivProfile:
 
+                ivProfile.setImageResource(R.mipmap.backgroundprofile);
+                ivHome.setImageResource(R.mipmap.home);
+                ivNotification.setImageResource(R.mipmap.union);
+                Fragment fragment = new ProfileFragment();
+                setFragment(fragment);
                 break;
         }
     }

@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shliapp.Adapter.ChosseStoreAdapter;
-import com.example.shliapp.Models.LocationModels.LocationNearStoreModels;
+import com.example.shliapp.Models.LocationModels.LocationNearStoreResponse;
 import com.example.shliapp.Models.LocationModels.Store;
 import com.example.shliapp.Network.ApiClienTh;
 import com.example.shliapp.Network.ApiInterface;
@@ -114,6 +114,8 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
         }
         Location location = locationManager.getLastKnownLocation(providerName);
         if (location != null) {
+
+
             AppRepository.mPutValue(this).putString("lat", String.valueOf(location.getLatitude())).commit();
             AppRepository.mPutValue(this).putString("lng", String.valueOf(location.getLongitude())).commit();
         }
@@ -122,10 +124,10 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addLocation() {
         ApiInterface services = ApiClienTh.getApiClient().create(ApiInterface.class);
-        Call<LocationNearStoreModels> addLocation = services.AddLocation(AppRepository.mUserID(this), AppRepository.mLat(this), AppRepository.mLng(this));
-        addLocation.enqueue(new Callback<LocationNearStoreModels>() {
+        Call<LocationNearStoreResponse> addLocation = services.AddLocation(AppRepository.mUserID(this), AppRepository.mLat(this), AppRepository.mLng(this));
+        addLocation.enqueue(new Callback<LocationNearStoreResponse>() {
             @Override
-            public void onResponse(Call<LocationNearStoreModels> call, Response<LocationNearStoreModels> response) {
+            public void onResponse(Call<LocationNearStoreResponse> call, Response<LocationNearStoreResponse> response) {
 
                 if (response.isSuccessful()) {
                     if (response.body().getStores().size() > 0) {
@@ -143,7 +145,7 @@ public class ChooseStoreActivity extends AppCompatActivity implements View.OnCli
             }
 
             @Override
-            public void onFailure(Call<LocationNearStoreModels> call, Throwable t) {
+            public void onFailure(Call<LocationNearStoreResponse> call, Throwable t) {
                 Log.d("response", "error " + t.getMessage());
                 progressDialog.dismiss();
             }
