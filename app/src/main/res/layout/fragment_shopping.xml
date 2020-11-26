@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorScreen"
-    tools:context=".Fragment.ShoppingFragment">
+    tools:context=".fragment.ShoppingFragment">
 
     <RelativeLayout
         android:id="@+id/shopingListRelative"
@@ -97,10 +97,34 @@
 
         <androidx.cardview.widget.CardView
             android:visibility="gone"
+            android:id="@+id/cvAds"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/cvFindFood"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="18dp"
+            android:background="@color/colorWhite"
+            android:animateLayoutChanges="true">
+
+            <ImageView
+                android:id="@+id/ivAds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/cvItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cvFindFood"
+            android:layout_below="@+id/cvAds"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="30dp"
@@ -175,7 +199,7 @@
             android:layout_below="@id/cvFindFood"
             android:layout_marginTop="70dp"
             android:gravity="center"
-            android:text="Items not available in this store"
+            android:text="Items not available in shopping list"
             android:textSize="20dp"
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold" />
